@@ -1,0 +1,200 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  name          String
+  phone         String?
+  avatarUrl     String?
+  role          String   @default("OWNER")
+  isVerified    Boolean  @default(false)
+  isPremium     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  pets             Pet[]
+  bookings         Booking[]           @relation("OwnerBookings")
+  walkerBookings   Booking[]           @relation("WalkerBookings")
+  specialistBookings Booking[]         @relation("SpecialistBookings")
+  reviews          Review[]
+  walkerProfile    WalkerProfile?
+  specialistProfile SpecialistProfile?
+  notifications    Notification[]
+  payments         Payment[]
+}
+
+model Pet {
+  id        String   @id @default(cuid())
+  name      String
+  species   String   @default("DOG")
+  breed     String?
+  age       Int?
+  weight    Float?
+  photoUrl  String?
+  notes     String?
+  ownerId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner    User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  bookings Booking[]
+}
+
+model WalkerProfile {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  bio            String?
+  experience     Int?
+  certifications String?
+  services       String   @default("WALKING")
+  ratePerWalk    Float    @default(15.0)
+  currency       String   @default("USD")
+  isAvailable    Boolean  @default(true)
+  latitude       Float?
+  longitude      Float?
+  serviceRadius  Float    @default(5.0)
+  totalWalks     Int      @default(0)
+  rating         Float    @default(0.0)
+  reviewCount    Int      @default(0)
+  isFeatured     Boolean  @default(false)
+  completedWalks Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  availabilities Availability[]
+  walkerPhotos   WalkerPhoto[]
+}
+
+model SpecialistProfile {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  bio           String?
+  credentials   String?
+  specialties   String   @default("BEHAVIOR")
+  ratePerSession Float   @default(50.0)
+  currency      String   @default("USD")
+  isAvailable   Boolean  @default(true)
+  totalSessions Int      @default(0)
+  rating        Float    @default(0.0)
+  reviewCount   Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Availability {
+  id          String  @id @default(cuid())
+  walkerId    String
+  dayOfWeek   Int
+  startTime   String
+  endTime     String
+  isAvailable Boolean @default(true)
+
+  walker WalkerProfile @relation(fields: [walkerId], references: [id], onDelete: Cascade)
+}
+
+model WalkerPhoto {
+  id       String  @id @default(cuid())
+  walkerId String
+  url      String
+  caption  String?
+
+  walker WalkerProfile @relation(fields: [walkerId], references: [id], onDelete: Cascade)
+}
+
+model Booking {
+  id                 String    @id @default(cuid())
+  ownerId            String
+  walkerId           String
+  petId              String
+  specialistId       String?
+  serviceType        String    @default("WALKING")
+  status             String    @default("PENDING")
+  scheduledAt        DateTime
+  duration           Int       @default(30)
+  pickupLocation     String?
+  dropoffLocation    String?
+  totalAmount        Float?
+  commission         Float?
+  notes              String?
+  latitude           Float?
+  longitude          Float?
+  startedAt          DateTime?
+  completedAt        DateTime?
+  cancelledAt        DateTime?
+  cancellationReason String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  owner       User          @relation("OwnerBookings", fields: [ownerId], references: [id])
+  walker      User          @relation("WalkerBookings", fields: [walkerId], references: [id])
+  pet         Pet           @relation(fields: [petId], references: [id])
+  specialist  User?         @relation("SpecialistBookings", fields: [specialistId], references: [id])
+  review      Review?
+  payment     Payment?
+  walkUpdates WalkUpdate[]
+}
+
+model WalkUpdate {
+  id        String   @id @default(cuid())
+  bookingId String
+  type      String   @default("LOCATION")
+  latitude  Float?
+  longitude Float?
+  photoUrl  String?
+  note      String?
+  createdAt DateTime @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  bookingId  String   @unique
+  rating     Int
+  comment    String?
+  reviewerId String
+  createdAt  DateTime @default(now())
+
+  booking  Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  reviewer User    @relation(fields: [reviewerId], references: [id])
+}
+
+model Payment {
+  id              String   @id @default(cuid())
+  bookingId       String   @unique
+  userId          String
+  amount          Float
+  currency        String   @default("USD")
+  status          String   @default("PENDING")
+  stripePaymentId String?
+  method          String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

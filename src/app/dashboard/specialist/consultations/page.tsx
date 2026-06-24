@@ -2,9 +2,11 @@ import { getServerTranslations } from "@/i18n/server"
 import { getCurrentUser } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
+import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
-import { CalendarDays, Stethoscope, Phone, Video } from "lucide-react"
+import { CalendarDays, Stethoscope, Phone, ArrowRight } from "lucide-react"
+import { WalkActions } from "@/components/walk/WalkActions"
 
 export default async function SpecialistConsultationsPage() {
   const { t } = await getServerTranslations()
@@ -40,14 +42,16 @@ export default async function SpecialistConsultationsPage() {
             <Card key={consult.id}>
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
-                  <div className="space-y-2">
+                  <div className="space-y-2 flex-1">
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center">
                         <Stethoscope className="h-5 w-5 text-amber-600" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900">{consult.pet?.name || t("common.pet")}</h3>
-                        <p className="text-sm text-gray-500">{t("specialistDash.ownerLabel")}: {consult.owner.name}</p>
+                        <Link href={`/dashboard/specialist/consultations/${consult.id}`} className="font-semibold text-gray-900 hover:text-emerald-600 flex items-center gap-1">
+                          {consult.pet?.name || t("common.pet")} <ArrowRight className="h-3.5 w-3.5" />
+                        </Link>
+                        <p className="text-sm text-gray-500">{consult.owner.name}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-4 text-sm text-gray-500 ml-13">
@@ -65,12 +69,15 @@ export default async function SpecialistConsultationsPage() {
                       </p>
                     )}
                   </div>
-                  <Badge variant={
-                    consult.status === "COMPLETED" ? "success" :
-                    consult.status === "CANCELLED" ? "danger" : "info"
-                  }>
-                    {consult.status.replace("_", " ")}
-                  </Badge>
+                  <div className="flex flex-col items-end gap-2">
+                    <Badge variant={
+                      consult.status === "COMPLETED" ? "success" :
+                      consult.status === "CANCELLED" ? "danger" : "info"
+                    }>
+                      {consult.status.replace("_", " ")}
+                    </Badge>
+                    <WalkActions bookingId={consult.id} status={consult.status} type="consultation" />
+                  </div>
                 </div>
               </CardContent>
             </Card>

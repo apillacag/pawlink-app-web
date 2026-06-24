@@ -4,7 +4,7 @@ import { getCurrentUser } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { Card, CardContent } from "@/components/ui/Card"
 import { Button } from "@/components/ui/Button"
-import { Star, DollarSign, Award } from "lucide-react"
+import { Star, Wallet, Award } from "lucide-react"
 import Link from "next/link"
 
 export default async function SpecialistsPage() {
@@ -64,8 +64,8 @@ export default async function SpecialistsPage() {
                       <p className="flex items-center gap-1"><Award className="h-4 w-4" /> {profile.credentials}</p>
                     )}
                     <p className="flex items-center gap-1">
-                      <DollarSign className="h-4 w-4" />
-                      <span className="font-medium text-gray-900">S/${profile?.ratePerSession.toFixed(2)}</span>
+                      <Wallet className="h-4 w-4" />
+                      <span className="font-medium text-gray-900">S/{profile?.ratePerSession.toFixed(2)}</span>
                       <span>{t("walkers.perSession")}</span>
                     </p>
                   </div>

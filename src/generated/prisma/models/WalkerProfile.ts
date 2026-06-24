@@ -1985,6 +1985,7 @@ export type WalkerProfileCreateManyArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many WalkerProfiles.
    */
   data: Prisma.WalkerProfileCreateManyInput | Prisma.WalkerProfileCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2003,6 +2004,7 @@ export type WalkerProfileCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * The data used to create many WalkerProfiles.
    */
   data: Prisma.WalkerProfileCreateManyInput | Prisma.WalkerProfileCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

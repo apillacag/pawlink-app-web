@@ -18,6 +18,7 @@ export default async function OwnerBookingsPage() {
     include: {
       pet: true,
       walker: { select: { name: true } },
+      specialist: { select: { name: true } },
     },
     orderBy: { scheduledAt: "desc" },
   })
@@ -75,7 +76,7 @@ export default async function OwnerBookingsPage() {
                       <span>{t("bookings.duration")}: {booking.duration}{t("bookings.min")}</span>
                     </div>
                     <p className="text-sm text-gray-600">
-                      {t("bookings.walker")}: <span className="font-medium">{booking.walker.name}</span>
+                      {booking.serviceType === "CONSULTATION" ? t("auth.specialist") : t("bookings.walker")}: <span className="font-medium">{booking.specialist?.name || booking.walker.name}</span>
                     </p>
                     {booking.pickupLocation && (
                       <p className="text-sm text-gray-500 flex items-center gap-1">
@@ -84,7 +85,7 @@ export default async function OwnerBookingsPage() {
                     )}
                     {booking.totalAmount && (
                       <p className="text-sm font-semibold text-emerald-600">
-                        S/${booking.totalAmount.toFixed(2)}
+                        S/{booking.totalAmount.toFixed(2)}
                       </p>
                     )}
                   </div>

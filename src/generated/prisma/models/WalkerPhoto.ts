@@ -356,6 +356,7 @@ export type WalkerPhotoCreateOrConnectWithoutWalkerInput = {
 
 export type WalkerPhotoCreateManyWalkerInputEnvelope = {
   data: Prisma.WalkerPhotoCreateManyWalkerInput | Prisma.WalkerPhotoCreateManyWalkerInput[]
+  skipDuplicates?: boolean
 }
 
 export type WalkerPhotoUpsertWithWhereUniqueWithoutWalkerInput = {
@@ -1124,6 +1125,7 @@ export type WalkerPhotoCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * The data used to create many WalkerPhotos.
    */
   data: Prisma.WalkerPhotoCreateManyInput | Prisma.WalkerPhotoCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1142,6 +1144,7 @@ export type WalkerPhotoCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * The data used to create many WalkerPhotos.
    */
   data: Prisma.WalkerPhotoCreateManyInput | Prisma.WalkerPhotoCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

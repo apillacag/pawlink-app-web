@@ -1428,6 +1428,7 @@ export type SpecialistProfileCreateManyArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many SpecialistProfiles.
    */
   data: Prisma.SpecialistProfileCreateManyInput | Prisma.SpecialistProfileCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1446,6 +1447,7 @@ export type SpecialistProfileCreateManyAndReturnArgs<ExtArgs extends runtime.Typ
    * The data used to create many SpecialistProfiles.
    */
   data: Prisma.SpecialistProfileCreateManyInput | Prisma.SpecialistProfileCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

@@ -1066,6 +1066,7 @@ export type BookingCreateOrConnectWithoutOwnerInput = {
 
 export type BookingCreateManyOwnerInputEnvelope = {
   data: Prisma.BookingCreateManyOwnerInput | Prisma.BookingCreateManyOwnerInput[]
+  skipDuplicates?: boolean
 }
 
 export type BookingCreateWithoutWalkerInput = {
@@ -1129,6 +1130,7 @@ export type BookingCreateOrConnectWithoutWalkerInput = {
 
 export type BookingCreateManyWalkerInputEnvelope = {
   data: Prisma.BookingCreateManyWalkerInput | Prisma.BookingCreateManyWalkerInput[]
+  skipDuplicates?: boolean
 }
 
 export type BookingCreateWithoutSpecialistInput = {
@@ -1192,6 +1194,7 @@ export type BookingCreateOrConnectWithoutSpecialistInput = {
 
 export type BookingCreateManySpecialistInputEnvelope = {
   data: Prisma.BookingCreateManySpecialistInput | Prisma.BookingCreateManySpecialistInput[]
+  skipDuplicates?: boolean
 }
 
 export type BookingUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -1331,6 +1334,7 @@ export type BookingCreateOrConnectWithoutPetInput = {
 
 export type BookingCreateManyPetInputEnvelope = {
   data: Prisma.BookingCreateManyPetInput | Prisma.BookingCreateManyPetInput[]
+  skipDuplicates?: boolean
 }
 
 export type BookingUpsertWithWhereUniqueWithoutPetInput = {
@@ -3020,6 +3024,7 @@ export type BookingCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * The data used to create many Bookings.
    */
   data: Prisma.BookingCreateManyInput | Prisma.BookingCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -3038,6 +3043,7 @@ export type BookingCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * The data used to create many Bookings.
    */
   data: Prisma.BookingCreateManyInput | Prisma.BookingCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

@@ -1,10 +1,22 @@
-"use client"
-import { useI18n } from "@/i18n/context"
+import { getServerTranslations } from "@/i18n/server"
+import { prisma } from "@/lib/prisma"
 import { Card, CardContent } from "@/components/ui/Card"
-import { Search } from "lucide-react"
+import { Star, Search } from "lucide-react"
+import { Button } from "@/components/ui/Button"
+import Link from "next/link"
 
-export default function WalkersPage() {
-  const { t } = useI18n()
+export default async function WalkersPage() {
+  const { t } = await getServerTranslations()
+
+  const walkers = await prisma.user.findMany({
+    where: {
+      role: "WALKER",
+      walkerProfile: { isAvailable: true },
+    },
+    include: {
+      walkerProfile: true,
+    },
+  })
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -15,13 +27,51 @@ export default function WalkersPage() {
         </div>
       </div>
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <Card>
-          <CardContent className="p-16 text-center">
-            <Search className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">{t("walkers.noWalkersPublic")}</h3>
-            <p className="text-gray-500">{t("walkers.checkBack")}</p>
-          </CardContent>
-        </Card>
+        {walkers.length === 0 ? (
+          <Card>
+            <CardContent className="p-16 text-center">
+              <Search className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">{t("walkers.noWalkersPublic")}</h3>
+              <p className="text-gray-500">{t("walkers.checkBack")}</p>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {walkers.map((walker) => {
+              const profile = walker.walkerProfile
+              return (
+                <Card key={walker.id}>
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-14 w-14 rounded-full bg-emerald-100 flex items-center justify-center text-xl font-medium text-emerald-700">
+                        {walker.name.charAt(0)}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900">{walker.name}</h3>
+                        <div className="flex items-center gap-1 text-sm">
+                          <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                          <span className="font-medium text-gray-700">{profile?.rating.toFixed(1) || "0.0"}</span>
+                          <span className="text-gray-400">({profile?.reviewCount || 0})</span>
+                        </div>
+                      </div>
+                    </div>
+                    {profile?.bio && (
+                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">{profile.bio}</p>
+                    )}
+                    <div className="flex items-center justify-between">
+                      <span className="text-lg font-bold text-emerald-600">
+                        S/{profile?.ratePerWalk.toFixed(2)} <span className="text-sm font-normal text-gray-500">{t("walkers.perWalk")}</span>
+                      </span>
+                      <Link href="/register">
+                        <Button size="sm">{t("walkers.book")}</Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+        )}
       </div>
     </div>
   )

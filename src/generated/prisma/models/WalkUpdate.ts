@@ -502,6 +502,7 @@ export type WalkUpdateCreateOrConnectWithoutBookingInput = {
 
 export type WalkUpdateCreateManyBookingInputEnvelope = {
   data: Prisma.WalkUpdateCreateManyBookingInput | Prisma.WalkUpdateCreateManyBookingInput[]
+  skipDuplicates?: boolean
 }
 
 export type WalkUpdateUpsertWithWhereUniqueWithoutBookingInput = {
@@ -1314,6 +1315,7 @@ export type WalkUpdateCreateManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * The data used to create many WalkUpdates.
    */
   data: Prisma.WalkUpdateCreateManyInput | Prisma.WalkUpdateCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1332,6 +1334,7 @@ export type WalkUpdateCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * The data used to create many WalkUpdates.
    */
   data: Prisma.WalkUpdateCreateManyInput | Prisma.WalkUpdateCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

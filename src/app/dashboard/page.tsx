@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
-import { CalendarDays, Dog, Users, DollarSign, Star, TrendingUp } from "lucide-react"
+import { CalendarDays, Dog, Users, Wallet, Star, TrendingUp } from "lucide-react"
 
 export default async function DashboardPage() {
   const { t } = await getServerTranslations()
@@ -34,7 +34,7 @@ export default async function DashboardPage() {
     stats = [
       { label: t("dashboard.totalWalks"), value: walkCount.toString(), icon: CalendarDays, color: "text-emerald-600" },
       { label: t("dashboard.completed"), value: completedCount.toString(), icon: Star, color: "text-blue-600" },
-      { label: t("dashboard.earnings"), value: `S/${earnings._sum.amount?.toFixed(0) || "0"}`, icon: DollarSign, color: "text-amber-600" },
+      { label: t("dashboard.earnings"), value: `S/${earnings._sum.amount?.toFixed(0) || "0"}`, icon: Wallet, color: "text-amber-600" },
     ]
   } else if (user.role === "SPECIALIST") {
     const sessionCount = await prisma.booking.count({ where: { specialistId: user.id } })

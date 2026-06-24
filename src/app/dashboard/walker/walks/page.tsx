@@ -2,9 +2,11 @@ import { getServerTranslations } from "@/i18n/server"
 import { getCurrentUser } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
+import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
-import { CalendarDays, Dog, MapPin } from "lucide-react"
+import { CalendarDays, Dog, MapPin, ArrowRight } from "lucide-react"
+import { WalkActions } from "@/components/walk/WalkActions"
 
 export default async function WalkerWalksPage() {
   const { t } = await getServerTranslations()
@@ -51,14 +53,16 @@ export default async function WalkerWalksPage() {
             <Card key={walk.id}>
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
-                  <div className="space-y-2">
+                  <div className="space-y-2 flex-1">
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-full bg-emerald-100 flex items-center justify-center">
                         <Dog className="h-5 w-5 text-emerald-600" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900">{walk.pet?.name || t("common.pet")}</h3>
-                        <p className="text-sm text-gray-500">{t("walker.ownerLabel")}: {walk.owner.name}</p>
+                        <Link href={`/dashboard/walker/walks/${walk.id}`} className="font-semibold text-gray-900 hover:text-emerald-600 flex items-center gap-1">
+                          {walk.pet?.name || t("common.pet")} <ArrowRight className="h-3.5 w-3.5" />
+                        </Link>
+                        <p className="text-sm text-gray-500">{walk.owner.name}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-4 text-sm text-gray-500 ml-13">
@@ -75,13 +79,13 @@ export default async function WalkerWalksPage() {
                         <MapPin className="h-4 w-4" /> {walk.pickupLocation}
                       </p>
                     )}
-                    {walk.owner.phone && (
-                      <p className="text-sm text-gray-500 ml-13">{t("walker.phoneLabel")}: {walk.owner.phone}</p>
-                    )}
                   </div>
-                  <Badge variant={statusVariant(walk.status)}>
-                    {walk.status.replace("_", " ")}
-                  </Badge>
+                  <div className="flex flex-col items-end gap-2">
+                    <Badge variant={statusVariant(walk.status)}>
+                      {walk.status.replace("_", " ")}
+                    </Badge>
+                    <WalkActions bookingId={walk.id} status={walk.status} />
+                  </div>
                 </div>
               </CardContent>
             </Card>

@@ -5,7 +5,7 @@ import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { Button } from "@/components/ui/Button"
-import { Star, MapPin, DollarSign } from "lucide-react"
+import { Star, MapPin, Wallet } from "lucide-react"
 import Link from "next/link"
 
 export default async function WalkersPage() {
@@ -64,8 +64,8 @@ export default async function WalkersPage() {
                   <div className="space-y-2 text-sm text-gray-500 mb-4">
                     {profile?.experience && <p>{t("walkers.experience")}: {profile.experience} {t("walkers.years")}</p>}
                     <div className="flex items-center gap-1">
-                      <DollarSign className="h-4 w-4" />
-                      <span className="font-medium text-gray-900">S/${profile?.ratePerWalk.toFixed(2)}</span>
+                      <Wallet className="h-4 w-4" />
+                      <span className="font-medium text-gray-900">S/{profile?.ratePerWalk.toFixed(2)}</span>
                       <span>{t("walkers.perWalk")}</span>
                     </div>
                   </div>

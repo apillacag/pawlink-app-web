@@ -618,6 +618,7 @@ export type PetCreateOrConnectWithoutOwnerInput = {
 
 export type PetCreateManyOwnerInputEnvelope = {
   data: Prisma.PetCreateManyOwnerInput | Prisma.PetCreateManyOwnerInput[]
+  skipDuplicates?: boolean
 }
 
 export type PetUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -1572,6 +1573,7 @@ export type PetCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * The data used to create many Pets.
    */
   data: Prisma.PetCreateManyInput | Prisma.PetCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1590,6 +1592,7 @@ export type PetCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.
    * The data used to create many Pets.
    */
   data: Prisma.PetCreateManyInput | Prisma.PetCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

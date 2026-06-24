@@ -278,7 +278,9 @@
     "sessionInfo": "Información de la Sesión",
     "duration": "Duración",
     "fee": "Honorario",
-    "sessionNotes": "Notas de la Sesión"
+    "sessionNotes": "Notas de la Sesión",
+    "addNote": "Agregar Nota",
+    "addNotePlaceholder": "Agregar nota de sesión..."
   },
   "admin": {
     "dashboard": "Panel de Administración",

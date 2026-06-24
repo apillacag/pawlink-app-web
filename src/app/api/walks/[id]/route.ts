@@ -4,7 +4,7 @@ import { getCurrentUser } from "@/lib/auth"
 
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const user = await getCurrentUser()
-  if (!user || user.role !== "WALKER") {
+  if (!user || (user.role !== "WALKER" && user.role !== "SPECIALIST")) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
@@ -12,7 +12,13 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   const body = await req.json()
 
   const booking = await prisma.booking.findUnique({ where: { id } })
-  if (!booking || booking.walkerId !== user.id) {
+  if (!booking) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 })
+  }
+
+  const isWalker = user.role === "WALKER"
+  const isSpecialist = user.role === "SPECIALIST"
+  if ((isWalker && booking.walkerId !== user.id) || (isSpecialist && booking.specialistId !== user.id)) {
     return NextResponse.json({ error: "Not found" }, { status: 404 })
   }
 

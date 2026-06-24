@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { verifyToken } from "@/lib/jwt"
 
-const publicPaths = ["/", "/login", "/register", "/api/auth/login", "/api/auth/register", "/api/auth/logout"]
+const publicPaths = ["/", "/login", "/register", "/walkers", "/specialists", "/about", "/api/auth/login", "/api/auth/register", "/api/auth/logout"]
 const authPaths = ["/login", "/register"]
 
 export function proxy(request: NextRequest) {

@@ -1,6 +1,5 @@
 "use client"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { PawPrint } from "lucide-react"
 import { Button } from "@/components/ui/Button"
@@ -9,7 +8,6 @@ import { useI18n } from "@/i18n/context"
 
 export default function LoginPage() {
   const { t } = useI18n()
-  const router = useRouter()
   const [form, setForm] = useState({ email: "", password: "" })
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
@@ -29,7 +27,7 @@ export default function LoginPage() {
       if (!res.ok) {
         setError(data.error || t("auth.loginFailed"))
       } else {
-        router.push("/dashboard")
+        window.location.href = "/dashboard"
       }
     } catch {
       setError(t("auth.somethingWentWrong"))

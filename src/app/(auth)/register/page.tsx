@@ -1,6 +1,6 @@
 "use client"
 import { Suspense, useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { PawPrint } from "lucide-react"
 import { Button } from "@/components/ui/Button"
@@ -9,7 +9,6 @@ import { useI18n } from "@/i18n/context"
 
 function RegisterForm() {
   const { t } = useI18n()
-  const router = useRouter()
   const searchParams = useSearchParams()
   const defaultRole = searchParams.get("role") || "OWNER"
 
@@ -38,7 +37,7 @@ function RegisterForm() {
       if (!res.ok) {
         setError(data.error || t("auth.registrationFailed"))
       } else {
-        router.push("/dashboard")
+        window.location.href = "/dashboard"
       }
     } catch {
       setError(t("auth.somethingWentWrong"))

@@ -278,7 +278,9 @@
     "sessionInfo": "Session Info",
     "duration": "Duration",
     "fee": "Fee",
-    "sessionNotes": "Session Notes"
+    "sessionNotes": "Session Notes",
+    "addNote": "Add Note",
+    "addNotePlaceholder": "Add session note..."
   },
   "admin": {
     "dashboard": "Admin Dashboard",

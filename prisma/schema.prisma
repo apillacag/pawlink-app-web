@@ -56,7 +56,7 @@ model WalkerProfile {
   certifications String?
   services       String   @default("WALKING")
   ratePerWalk    Float    @default(15.0)
-  currency       String   @default("USD")
+  currency       String   @default("PEN")
   isAvailable    Boolean  @default(true)
   latitude       Float?
   longitude      Float?

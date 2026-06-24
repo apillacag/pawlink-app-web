@@ -230,7 +230,7 @@
     "experience": "Años de Experiencia",
     "certifications": "Certificaciones",
     "certPlaceholder": "Ej: Certificado en RCP, Paseador Profesional",
-    "rate": "Tarifa por Paseo ($)",
+    "rate": "Tarifa por Paseo (S/)",
     "saveProfile": "Guardar Perfil",
     "profileUpdated": "¡Perfil actualizado exitosamente!",
     "updateFailed": "Error al actualizar el perfil"
@@ -249,7 +249,7 @@
     "training": "Entrenamiento y Obediencia",
     "nutrition": "Nutrición y Bienestar",
     "anxietyManagement": "Manejo de Ansiedad",
-    "rate": "Tarifa por Sesión ($)",
+    "rate": "Tarifa por Sesión (S/)",
     "saveProfile": "Guardar Perfil",
     "profileUpdated": "¡Perfil actualizado exitosamente!",
     "updateFailed": "Error al actualizar el perfil"

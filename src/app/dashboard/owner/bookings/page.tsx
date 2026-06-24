@@ -84,7 +84,7 @@ export default async function OwnerBookingsPage() {
                     )}
                     {booking.totalAmount && (
                       <p className="text-sm font-semibold text-emerald-600">
-                        ${booking.totalAmount.toFixed(2)}
+                        S/${booking.totalAmount.toFixed(2)}
                       </p>
                     )}
                   </div>

@@ -65,7 +65,7 @@ export default async function SpecialistsPage() {
                     )}
                     <p className="flex items-center gap-1">
                       <DollarSign className="h-4 w-4" />
-                      <span className="font-medium text-gray-900">${profile?.ratePerSession.toFixed(2)}</span>
+                      <span className="font-medium text-gray-900">S/${profile?.ratePerSession.toFixed(2)}</span>
                       <span>{t("walkers.perSession")}</span>
                     </p>
                   </div>

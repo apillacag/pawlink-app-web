@@ -230,7 +230,7 @@
     "experience": "Years of Experience",
     "certifications": "Certifications",
     "certPlaceholder": "e.g., CPR Certified, Professional Dog Walker",
-    "rate": "Rate per Walk ($)",
+    "rate": "Rate per Walk (S/)",
     "saveProfile": "Save Profile",
     "profileUpdated": "Profile updated successfully!",
     "updateFailed": "Failed to update profile"
@@ -249,7 +249,7 @@
     "training": "Training & Obedience",
     "nutrition": "Nutrition & Wellness",
     "anxietyManagement": "Anxiety Management",
-    "rate": "Rate per Session ($)",
+    "rate": "Rate per Session (S/)",
     "saveProfile": "Save Profile",
     "profileUpdated": "Profile updated successfully!",
     "updateFailed": "Failed to update profile"

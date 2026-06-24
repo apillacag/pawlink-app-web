@@ -34,7 +34,7 @@ export default async function DashboardPage() {
     stats = [
       { label: t("dashboard.totalWalks"), value: walkCount.toString(), icon: CalendarDays, color: "text-emerald-600" },
       { label: t("dashboard.completed"), value: completedCount.toString(), icon: Star, color: "text-blue-600" },
-      { label: t("dashboard.earnings"), value: `$${earnings._sum.amount?.toFixed(0) || "0"}`, icon: DollarSign, color: "text-amber-600" },
+      { label: t("dashboard.earnings"), value: `S/${earnings._sum.amount?.toFixed(0) || "0"}`, icon: DollarSign, color: "text-amber-600" },
     ]
   } else if (user.role === "SPECIALIST") {
     const sessionCount = await prisma.booking.count({ where: { specialistId: user.id } })

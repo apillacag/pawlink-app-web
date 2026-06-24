@@ -1,33 +1,36 @@
-"use client"
-
+import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
-import { I18nProvider } from "@/i18n/context"
+import { Providers } from "./providers"
+import { getCurrentUser } from "@/lib/auth"
 
 const inter = Inter({ subsets: ["latin"] })
 
-export default function RootLayout({
+export const metadata: Metadata = {
+  title: "PawLink - Connecting Caring Owners with Trusted Pet Professionals",
+  description: "Safe walks, happy pets, peace of mind. Find trusted dog walkers and animal behavior specialists near you.",
+  keywords: "pet care, dog walking, pet wellness, animal behavior, pet services",
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const user = await getCurrentUser()
+
   return (
     <html lang="en">
-      <head>
-        <title>PawLink - Connecting Caring Owners with Trusted Pet Professionals</title>
-        <meta name="description" content="Safe walks, happy pets, peace of mind. Find trusted dog walkers and animal behavior specialists near you." />
-        <meta name="keywords" content="pet care, dog walking, pet wellness, animal behavior, pet services" />
-      </head>
       <body className={inter.className}>
-        <I18nProvider>
+        <Providers>
           <div className="flex min-h-screen flex-col">
-            <Navbar />
+            <Navbar user={user} />
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
-        </I18nProvider>
+        </Providers>
       </body>
     </html>
   )

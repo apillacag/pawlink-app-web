@@ -94,7 +94,7 @@ export default async function WalkDetailPage({ params }: { params: Promise<{ id:
             </p>
           )}
           {walk.totalAmount && (
-            <p className="text-sm font-semibold text-emerald-600">{t("walker.amountLabel")}: ${walk.totalAmount.toFixed(2)}</p>
+            <p className="text-sm font-semibold text-emerald-600">{t("walker.amountLabel")}: S/${walk.totalAmount.toFixed(2)}</p>
           )}
           {walk.notes && (
             <div className="bg-gray-50 rounded-lg p-3">

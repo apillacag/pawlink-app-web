@@ -28,7 +28,7 @@ export default async function AdminPage() {
     { label: t("admin.totalPets"), value: totalPets, icon: Dog, color: "text-amber-600" },
     { label: t("admin.walkers"), value: totalWalkers, icon: UserCheck, color: "text-purple-600" },
     { label: t("admin.specialists"), value: totalSpecialists, icon: TrendingUp, color: "text-rose-600" },
-    { label: t("admin.revenue"), value: `$${(revenue._sum.amount || 0).toFixed(2)}`, icon: DollarSign, color: "text-emerald-600" },
+    { label: t("admin.revenue"), value: `S/${(revenue._sum.amount || 0).toFixed(2)}`, icon: DollarSign, color: "text-emerald-600" },
   ]
 
   return (

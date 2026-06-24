@@ -65,7 +65,7 @@ export default async function WalkersPage() {
                     {profile?.experience && <p>{t("walkers.experience")}: {profile.experience} {t("walkers.years")}</p>}
                     <div className="flex items-center gap-1">
                       <DollarSign className="h-4 w-4" />
-                      <span className="font-medium text-gray-900">${profile?.ratePerWalk.toFixed(2)}</span>
+                      <span className="font-medium text-gray-900">S/${profile?.ratePerWalk.toFixed(2)}</span>
                       <span>{t("walkers.perWalk")}</span>
                     </div>
                   </div>

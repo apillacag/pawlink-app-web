@@ -103,13 +103,6 @@ export function Navbar({ user }: NavbarProps) {
                     </div>
                   </>
                 )}
-                <Link
-                  href="/api/auth/logout"
-                  className="rounded-lg p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
-                  title={t("nav.signOut")}
-                >
-                  <LogOut className="h-5 w-5" />
-                </Link>
               </div>
             ) : (
               <>

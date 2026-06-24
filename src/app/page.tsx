@@ -158,10 +158,10 @@ export default function HomePage() {
               <div className="rounded-2xl bg-gradient-to-br from-amber-50 to-emerald-50 p-8 border border-amber-100">
                 <div className="space-y-6">
                   <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-lg">$</div>
+                    <div className="h-12 w-12 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-lg">S/</div>
                     <div>
                       <p className="font-semibold text-gray-900">{t("home.earnUpTo")}</p>
-                      <p className="text-3xl font-bold text-emerald-600">$25/hr</p>
+                      <p className="text-3xl font-bold text-emerald-600">S/25/hr</p>
                     </div>
                   </div>
                   <p className="text-gray-600 text-sm">

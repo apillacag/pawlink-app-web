@@ -62,6 +62,7 @@ export const ModelName = {
   Review: 'Review',
   Payment: 'Payment',
   WalletTransaction: 'WalletTransaction',
+  PlatformRevenue: 'PlatformRevenue',
   Notification: 'Notification'
 } as const
 
@@ -205,6 +206,7 @@ export const BookingScalarFieldEnum = {
   completedAt: 'completedAt',
   cancelledAt: 'cancelledAt',
   cancellationReason: 'cancellationReason',
+  earningsDistributed: 'earningsDistributed',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -267,6 +269,16 @@ export const WalletTransactionScalarFieldEnum = {
 } as const
 
 export type WalletTransactionScalarFieldEnum = (typeof WalletTransactionScalarFieldEnum)[keyof typeof WalletTransactionScalarFieldEnum]
+
+
+export const PlatformRevenueScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  amount: 'amount',
+  createdAt: 'createdAt'
+} as const
+
+export type PlatformRevenueScalarFieldEnum = (typeof PlatformRevenueScalarFieldEnum)[keyof typeof PlatformRevenueScalarFieldEnum]
 
 
 export const NotificationScalarFieldEnum = {

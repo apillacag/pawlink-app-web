@@ -412,6 +412,24 @@
     "paidBy": "Paid by",
     "pendingPayment": "Pending Payment"
   },
+  "finance": {
+    "walletBalance": "Wallet Balance",
+    "topUp": "Top Up Wallet",
+    "topUpAmount": "Amount to add",
+    "topUpSuccess": "Wallet topped up successfully!",
+    "topUpButton": "Add Funds",
+    "earning": "Earnings",
+    "earningsCredited": "Earnings credited",
+    "platformCommission": "Platform Commission",
+    "commission": "Commission",
+    "refund": "Refund",
+    "refundProcessed": "Refund processed",
+    "transactions": "Transactions",
+    "noTransactions": "No transactions yet",
+    "transactionHistory": "Transaction History",
+    "bookingCompleted": "Booking completed",
+    "bookingCancelled": "Booking cancelled"
+  },
   "walkActions": {
     "confirm": "Confirm",
     "startWalk": "Start Walk",

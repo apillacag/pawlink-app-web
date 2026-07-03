@@ -4,31 +4,26 @@ import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
-import { Wallet, TrendingUp, CalendarDays } from "lucide-react"
-import { translateStatus, translateServiceType } from "@/lib/utils"
+import { Wallet, TrendingUp, CalendarDays, PiggyBank } from "lucide-react"
+import { formatDate, formatCurrency } from "@/lib/utils"
 
 export default async function WalkerEarningsPage() {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "WALKER") redirect("/dashboard")
 
-  const payments = await prisma.payment.findMany({
-    where: { userId: user.id },
-    include: {
-      booking: {
-        include: { pet: true },
-      },
-    },
-    orderBy: { createdAt: "desc" },
-  })
+  const [earningsTransactions, completedWalks, totalPlatformRevenue] = await Promise.all([
+    prisma.walletTransaction.findMany({
+      where: { userId: user.id, type: "EARNING" },
+      orderBy: { createdAt: "desc" },
+    }),
+    prisma.booking.count({ where: { walkerId: user.id, status: "COMPLETED" } }),
+    prisma.platformRevenue.aggregate({
+      _sum: { amount: true },
+    }),
+  ])
 
-  const totalEarnings = payments
-    .filter((p) => p.status === "COMPLETED")
-    .reduce((sum, p) => sum + p.amount, 0)
-
-  const completedWalks = await prisma.booking.count({
-    where: { walkerId: user.id, status: "COMPLETED" },
-  })
+  const totalEarnings = earningsTransactions.reduce((sum, t) => sum + t.amount, 0)
 
   return (
     <div className="space-y-6">
@@ -37,13 +32,13 @@ export default async function WalkerEarningsPage() {
         <p className="text-gray-500">{t("walker.trackEarnings")}</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-4">
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">{t("walker.totalEarnings")}</p>
-                <p className="text-3xl font-bold text-gray-900 mt-1">S/{totalEarnings.toFixed(2)}</p>
+                <p className="text-3xl font-bold text-gray-900 mt-1">{formatCurrency(totalEarnings)}</p>
               </div>
               <Wallet className="h-8 w-8 text-emerald-600 opacity-80" />
             </div>
@@ -66,10 +61,21 @@ export default async function WalkerEarningsPage() {
               <div>
                 <p className="text-sm font-medium text-gray-500">{t("walker.avgPerWalk")}</p>
                 <p className="text-3xl font-bold text-gray-900 mt-1">
-                  S/{completedWalks > 0 ? (totalEarnings / completedWalks).toFixed(2) : "0.00"}
+                  {completedWalks > 0 ? formatCurrency(totalEarnings / completedWalks) : formatCurrency(0)}
                 </p>
               </div>
               <CalendarDays className="h-8 w-8 text-amber-600 opacity-80" />
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-500">{t("finance.walletBalance")}</p>
+                <p className="text-3xl font-bold text-emerald-600 mt-1">{formatCurrency(user.walletBalance || 0)}</p>
+              </div>
+              <PiggyBank className="h-8 w-8 text-purple-600 opacity-80" />
             </div>
           </CardContent>
         </Card>
@@ -80,23 +86,18 @@ export default async function WalkerEarningsPage() {
           <CardTitle>{t("walker.paymentHistory")}</CardTitle>
         </CardHeader>
         <CardContent>
-          {payments.length === 0 ? (
+          {earningsTransactions.length === 0 ? (
             <p className="text-gray-500 text-center py-8">{t("walker.noPayments")}</p>
           ) : (
             <div className="space-y-3">
-              {payments.map((payment) => (
-                <div key={payment.id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+              {earningsTransactions.map((tx) => (
+                <div key={tx.id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
                   <div>
-                    <p className="text-sm font-medium text-gray-900">
-                      {payment.booking?.pet?.name || t("common.walk")} - {payment.booking?.serviceType ? translateServiceType(t, payment.booking.serviceType) : t("common.service")}
-                    </p>
-                    <p className="text-xs text-gray-500">{new Date(payment.createdAt).toLocaleDateString()}</p>
+                    <p className="text-sm font-medium text-gray-900">{tx.description || t("finance.earning")}</p>
+                    <p className="text-xs text-gray-500">{formatDate(tx.createdAt, locale)}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-semibold text-gray-900">S/{payment.amount.toFixed(2)}</p>
-                    <Badge variant={payment.status === "COMPLETED" ? "success" : "warning"}>
-                      {translateStatus(t, payment.status)}
-                    </Badge>
+                    <p className="text-sm font-semibold text-emerald-600">+{formatCurrency(tx.amount)}</p>
                   </div>
                 </div>
               ))}

@@ -63,6 +63,7 @@ export type BookingMinAggregateOutputType = {
   completedAt: Date | null
   cancelledAt: Date | null
   cancellationReason: string | null
+  earningsDistributed: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -88,6 +89,7 @@ export type BookingMaxAggregateOutputType = {
   completedAt: Date | null
   cancelledAt: Date | null
   cancellationReason: string | null
+  earningsDistributed: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -113,6 +115,7 @@ export type BookingCountAggregateOutputType = {
   completedAt: number
   cancelledAt: number
   cancellationReason: number
+  earningsDistributed: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -156,6 +159,7 @@ export type BookingMinAggregateInputType = {
   completedAt?: true
   cancelledAt?: true
   cancellationReason?: true
+  earningsDistributed?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -181,6 +185,7 @@ export type BookingMaxAggregateInputType = {
   completedAt?: true
   cancelledAt?: true
   cancellationReason?: true
+  earningsDistributed?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -206,6 +211,7 @@ export type BookingCountAggregateInputType = {
   completedAt?: true
   cancelledAt?: true
   cancellationReason?: true
+  earningsDistributed?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -318,6 +324,7 @@ export type BookingGroupByOutputType = {
   completedAt: Date | null
   cancelledAt: Date | null
   cancellationReason: string | null
+  earningsDistributed: boolean
   createdAt: Date
   updatedAt: Date
   _count: BookingCountAggregateOutputType | null
@@ -366,6 +373,7 @@ export type BookingWhereInput = {
   completedAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cancelledAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cancellationReason?: Prisma.StringNullableFilter<"Booking"> | string | null
+  earningsDistributed?: Prisma.BoolFilter<"Booking"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -375,6 +383,7 @@ export type BookingWhereInput = {
   review?: Prisma.XOR<Prisma.ReviewNullableScalarRelationFilter, Prisma.ReviewWhereInput> | null
   payment?: Prisma.XOR<Prisma.PaymentNullableScalarRelationFilter, Prisma.PaymentWhereInput> | null
   walkUpdates?: Prisma.WalkUpdateListRelationFilter
+  platformRevenue?: Prisma.XOR<Prisma.PlatformRevenueNullableScalarRelationFilter, Prisma.PlatformRevenueWhereInput> | null
 }
 
 export type BookingOrderByWithRelationInput = {
@@ -398,6 +407,7 @@ export type BookingOrderByWithRelationInput = {
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cancelledAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cancellationReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  earningsDistributed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   owner?: Prisma.UserOrderByWithRelationInput
@@ -407,6 +417,7 @@ export type BookingOrderByWithRelationInput = {
   review?: Prisma.ReviewOrderByWithRelationInput
   payment?: Prisma.PaymentOrderByWithRelationInput
   walkUpdates?: Prisma.WalkUpdateOrderByRelationAggregateInput
+  platformRevenue?: Prisma.PlatformRevenueOrderByWithRelationInput
 }
 
 export type BookingWhereUniqueInput = Prisma.AtLeast<{
@@ -433,6 +444,7 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   completedAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cancelledAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cancellationReason?: Prisma.StringNullableFilter<"Booking"> | string | null
+  earningsDistributed?: Prisma.BoolFilter<"Booking"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -442,6 +454,7 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   review?: Prisma.XOR<Prisma.ReviewNullableScalarRelationFilter, Prisma.ReviewWhereInput> | null
   payment?: Prisma.XOR<Prisma.PaymentNullableScalarRelationFilter, Prisma.PaymentWhereInput> | null
   walkUpdates?: Prisma.WalkUpdateListRelationFilter
+  platformRevenue?: Prisma.XOR<Prisma.PlatformRevenueNullableScalarRelationFilter, Prisma.PlatformRevenueWhereInput> | null
 }, "id">
 
 export type BookingOrderByWithAggregationInput = {
@@ -465,6 +478,7 @@ export type BookingOrderByWithAggregationInput = {
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cancelledAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cancellationReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  earningsDistributed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BookingCountOrderByAggregateInput
@@ -498,6 +512,7 @@ export type BookingScalarWhereWithAggregatesInput = {
   completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Booking"> | Date | string | null
   cancelledAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Booking"> | Date | string | null
   cancellationReason?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  earningsDistributed?: Prisma.BoolWithAggregatesFilter<"Booking"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
 }
@@ -519,6 +534,7 @@ export type BookingCreateInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -528,6 +544,7 @@ export type BookingCreateInput = {
   review?: Prisma.ReviewCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUncheckedCreateInput = {
@@ -551,11 +568,13 @@ export type BookingUncheckedCreateInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   review?: Prisma.ReviewUncheckedCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateUncheckedCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUpdateInput = {
@@ -575,6 +594,7 @@ export type BookingUpdateInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -584,6 +604,7 @@ export type BookingUpdateInput = {
   review?: Prisma.ReviewUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateInput = {
@@ -607,11 +628,13 @@ export type BookingUncheckedUpdateInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   review?: Prisma.ReviewUncheckedUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUncheckedUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUncheckedUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingCreateManyInput = {
@@ -635,6 +658,7 @@ export type BookingCreateManyInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -656,6 +680,7 @@ export type BookingUpdateManyMutationInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -681,6 +706,7 @@ export type BookingUncheckedUpdateManyInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -716,6 +742,7 @@ export type BookingCountOrderByAggregateInput = {
   completedAt?: Prisma.SortOrder
   cancelledAt?: Prisma.SortOrder
   cancellationReason?: Prisma.SortOrder
+  earningsDistributed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -749,6 +776,7 @@ export type BookingMaxOrderByAggregateInput = {
   completedAt?: Prisma.SortOrder
   cancelledAt?: Prisma.SortOrder
   cancellationReason?: Prisma.SortOrder
+  earningsDistributed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -774,6 +802,7 @@ export type BookingMinOrderByAggregateInput = {
   completedAt?: Prisma.SortOrder
   cancelledAt?: Prisma.SortOrder
   cancellationReason?: Prisma.SortOrder
+  earningsDistributed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1005,6 +1034,20 @@ export type BookingUpdateOneRequiredWithoutPaymentNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutPaymentInput, Prisma.BookingUpdateWithoutPaymentInput>, Prisma.BookingUncheckedUpdateWithoutPaymentInput>
 }
 
+export type BookingCreateNestedOneWithoutPlatformRevenueInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPlatformRevenueInput, Prisma.BookingUncheckedCreateWithoutPlatformRevenueInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPlatformRevenueInput
+  connect?: Prisma.BookingWhereUniqueInput
+}
+
+export type BookingUpdateOneRequiredWithoutPlatformRevenueNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPlatformRevenueInput, Prisma.BookingUncheckedCreateWithoutPlatformRevenueInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPlatformRevenueInput
+  upsert?: Prisma.BookingUpsertWithoutPlatformRevenueInput
+  connect?: Prisma.BookingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutPlatformRevenueInput, Prisma.BookingUpdateWithoutPlatformRevenueInput>, Prisma.BookingUncheckedUpdateWithoutPlatformRevenueInput>
+}
+
 export type BookingCreateWithoutOwnerInput = {
   id?: string
   serviceType?: string
@@ -1022,6 +1065,7 @@ export type BookingCreateWithoutOwnerInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   walker: Prisma.UserCreateNestedOneWithoutWalkerBookingsInput
@@ -1030,6 +1074,7 @@ export type BookingCreateWithoutOwnerInput = {
   review?: Prisma.ReviewCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutOwnerInput = {
@@ -1052,11 +1097,13 @@ export type BookingUncheckedCreateWithoutOwnerInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   review?: Prisma.ReviewUncheckedCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateUncheckedCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedCreateNestedOneWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutOwnerInput = {
@@ -1086,6 +1133,7 @@ export type BookingCreateWithoutWalkerInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1094,6 +1142,7 @@ export type BookingCreateWithoutWalkerInput = {
   review?: Prisma.ReviewCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutWalkerInput = {
@@ -1116,11 +1165,13 @@ export type BookingUncheckedCreateWithoutWalkerInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   review?: Prisma.ReviewUncheckedCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateUncheckedCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedCreateNestedOneWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutWalkerInput = {
@@ -1150,6 +1201,7 @@ export type BookingCreateWithoutSpecialistInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1158,6 +1210,7 @@ export type BookingCreateWithoutSpecialistInput = {
   review?: Prisma.ReviewCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutSpecialistInput = {
@@ -1180,11 +1233,13 @@ export type BookingUncheckedCreateWithoutSpecialistInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   review?: Prisma.ReviewUncheckedCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateUncheckedCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedCreateNestedOneWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutSpecialistInput = {
@@ -1237,6 +1292,7 @@ export type BookingScalarWhereInput = {
   completedAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cancelledAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cancellationReason?: Prisma.StringNullableFilter<"Booking"> | string | null
+  earningsDistributed?: Prisma.BoolFilter<"Booking"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
 }
@@ -1290,6 +1346,7 @@ export type BookingCreateWithoutPetInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1298,6 +1355,7 @@ export type BookingCreateWithoutPetInput = {
   review?: Prisma.ReviewCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutPetInput = {
@@ -1320,11 +1378,13 @@ export type BookingUncheckedCreateWithoutPetInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   review?: Prisma.ReviewUncheckedCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateUncheckedCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedCreateNestedOneWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutPetInput = {
@@ -1370,6 +1430,7 @@ export type BookingCreateWithoutWalkUpdatesInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1378,6 +1439,7 @@ export type BookingCreateWithoutWalkUpdatesInput = {
   specialist?: Prisma.UserCreateNestedOneWithoutSpecialistBookingsInput
   review?: Prisma.ReviewCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentCreateNestedOneWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutWalkUpdatesInput = {
@@ -1401,10 +1463,12 @@ export type BookingUncheckedCreateWithoutWalkUpdatesInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   review?: Prisma.ReviewUncheckedCreateNestedOneWithoutBookingInput
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedCreateNestedOneWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutWalkUpdatesInput = {
@@ -1440,6 +1504,7 @@ export type BookingUpdateWithoutWalkUpdatesInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -1448,6 +1513,7 @@ export type BookingUpdateWithoutWalkUpdatesInput = {
   specialist?: Prisma.UserUpdateOneWithoutSpecialistBookingsNestedInput
   review?: Prisma.ReviewUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUpdateOneWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutWalkUpdatesInput = {
@@ -1471,10 +1537,12 @@ export type BookingUncheckedUpdateWithoutWalkUpdatesInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   review?: Prisma.ReviewUncheckedUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUncheckedUpdateOneWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingCreateWithoutReviewInput = {
@@ -1494,6 +1562,7 @@ export type BookingCreateWithoutReviewInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1502,6 +1571,7 @@ export type BookingCreateWithoutReviewInput = {
   specialist?: Prisma.UserCreateNestedOneWithoutSpecialistBookingsInput
   payment?: Prisma.PaymentCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutReviewInput = {
@@ -1525,10 +1595,12 @@ export type BookingUncheckedCreateWithoutReviewInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateUncheckedCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedCreateNestedOneWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutReviewInput = {
@@ -1564,6 +1636,7 @@ export type BookingUpdateWithoutReviewInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -1572,6 +1645,7 @@ export type BookingUpdateWithoutReviewInput = {
   specialist?: Prisma.UserUpdateOneWithoutSpecialistBookingsNestedInput
   payment?: Prisma.PaymentUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutReviewInput = {
@@ -1595,10 +1669,12 @@ export type BookingUncheckedUpdateWithoutReviewInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payment?: Prisma.PaymentUncheckedUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUncheckedUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingCreateWithoutPaymentInput = {
@@ -1618,6 +1694,7 @@ export type BookingCreateWithoutPaymentInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1626,6 +1703,7 @@ export type BookingCreateWithoutPaymentInput = {
   specialist?: Prisma.UserCreateNestedOneWithoutSpecialistBookingsInput
   review?: Prisma.ReviewCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutPaymentInput = {
@@ -1649,10 +1727,12 @@ export type BookingUncheckedCreateWithoutPaymentInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   review?: Prisma.ReviewUncheckedCreateNestedOneWithoutBookingInput
   walkUpdates?: Prisma.WalkUpdateUncheckedCreateNestedManyWithoutBookingInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedCreateNestedOneWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutPaymentInput = {
@@ -1688,6 +1768,7 @@ export type BookingUpdateWithoutPaymentInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -1696,6 +1777,7 @@ export type BookingUpdateWithoutPaymentInput = {
   specialist?: Prisma.UserUpdateOneWithoutSpecialistBookingsNestedInput
   review?: Prisma.ReviewUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutPaymentInput = {
@@ -1719,9 +1801,143 @@ export type BookingUncheckedUpdateWithoutPaymentInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   review?: Prisma.ReviewUncheckedUpdateOneWithoutBookingNestedInput
+  walkUpdates?: Prisma.WalkUpdateUncheckedUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedUpdateOneWithoutBookingNestedInput
+}
+
+export type BookingCreateWithoutPlatformRevenueInput = {
+  id?: string
+  serviceType?: string
+  status?: string
+  scheduledAt: Date | string
+  duration?: number
+  pickupLocation?: string | null
+  dropoffLocation?: string | null
+  totalAmount?: number | null
+  commission?: number | null
+  notes?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  startedAt?: Date | string | null
+  completedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
+  earningsDistributed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutBookingsInput
+  walker: Prisma.UserCreateNestedOneWithoutWalkerBookingsInput
+  pet: Prisma.PetCreateNestedOneWithoutBookingsInput
+  specialist?: Prisma.UserCreateNestedOneWithoutSpecialistBookingsInput
+  review?: Prisma.ReviewCreateNestedOneWithoutBookingInput
+  payment?: Prisma.PaymentCreateNestedOneWithoutBookingInput
+  walkUpdates?: Prisma.WalkUpdateCreateNestedManyWithoutBookingInput
+}
+
+export type BookingUncheckedCreateWithoutPlatformRevenueInput = {
+  id?: string
+  ownerId: string
+  walkerId: string
+  petId: string
+  specialistId?: string | null
+  serviceType?: string
+  status?: string
+  scheduledAt: Date | string
+  duration?: number
+  pickupLocation?: string | null
+  dropoffLocation?: string | null
+  totalAmount?: number | null
+  commission?: number | null
+  notes?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  startedAt?: Date | string | null
+  completedAt?: Date | string | null
+  cancelledAt?: Date | string | null
+  cancellationReason?: string | null
+  earningsDistributed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  review?: Prisma.ReviewUncheckedCreateNestedOneWithoutBookingInput
+  payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutBookingInput
+  walkUpdates?: Prisma.WalkUpdateUncheckedCreateNestedManyWithoutBookingInput
+}
+
+export type BookingCreateOrConnectWithoutPlatformRevenueInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutPlatformRevenueInput, Prisma.BookingUncheckedCreateWithoutPlatformRevenueInput>
+}
+
+export type BookingUpsertWithoutPlatformRevenueInput = {
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutPlatformRevenueInput, Prisma.BookingUncheckedUpdateWithoutPlatformRevenueInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutPlatformRevenueInput, Prisma.BookingUncheckedCreateWithoutPlatformRevenueInput>
+  where?: Prisma.BookingWhereInput
+}
+
+export type BookingUpdateToOneWithWhereWithoutPlatformRevenueInput = {
+  where?: Prisma.BookingWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutPlatformRevenueInput, Prisma.BookingUncheckedUpdateWithoutPlatformRevenueInput>
+}
+
+export type BookingUpdateWithoutPlatformRevenueInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  serviceType?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  pickupLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dropoffLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  commission?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
+  walker?: Prisma.UserUpdateOneRequiredWithoutWalkerBookingsNestedInput
+  pet?: Prisma.PetUpdateOneRequiredWithoutBookingsNestedInput
+  specialist?: Prisma.UserUpdateOneWithoutSpecialistBookingsNestedInput
+  review?: Prisma.ReviewUpdateOneWithoutBookingNestedInput
+  payment?: Prisma.PaymentUpdateOneWithoutBookingNestedInput
+  walkUpdates?: Prisma.WalkUpdateUpdateManyWithoutBookingNestedInput
+}
+
+export type BookingUncheckedUpdateWithoutPlatformRevenueInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  walkerId?: Prisma.StringFieldUpdateOperationsInput | string
+  petId?: Prisma.StringFieldUpdateOperationsInput | string
+  specialistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serviceType?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  pickupLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dropoffLocation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  commission?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  review?: Prisma.ReviewUncheckedUpdateOneWithoutBookingNestedInput
+  payment?: Prisma.PaymentUncheckedUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUncheckedUpdateManyWithoutBookingNestedInput
 }
 
@@ -1745,6 +1961,7 @@ export type BookingCreateManyOwnerInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1769,6 +1986,7 @@ export type BookingCreateManyWalkerInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1793,6 +2011,7 @@ export type BookingCreateManySpecialistInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1814,6 +2033,7 @@ export type BookingUpdateWithoutOwnerInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   walker?: Prisma.UserUpdateOneRequiredWithoutWalkerBookingsNestedInput
@@ -1822,6 +2042,7 @@ export type BookingUpdateWithoutOwnerInput = {
   review?: Prisma.ReviewUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutOwnerInput = {
@@ -1844,11 +2065,13 @@ export type BookingUncheckedUpdateWithoutOwnerInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   review?: Prisma.ReviewUncheckedUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUncheckedUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUncheckedUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateManyWithoutOwnerInput = {
@@ -1871,6 +2094,7 @@ export type BookingUncheckedUpdateManyWithoutOwnerInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1892,6 +2116,7 @@ export type BookingUpdateWithoutWalkerInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -1900,6 +2125,7 @@ export type BookingUpdateWithoutWalkerInput = {
   review?: Prisma.ReviewUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutWalkerInput = {
@@ -1922,11 +2148,13 @@ export type BookingUncheckedUpdateWithoutWalkerInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   review?: Prisma.ReviewUncheckedUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUncheckedUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUncheckedUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateManyWithoutWalkerInput = {
@@ -1949,6 +2177,7 @@ export type BookingUncheckedUpdateManyWithoutWalkerInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1970,6 +2199,7 @@ export type BookingUpdateWithoutSpecialistInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -1978,6 +2208,7 @@ export type BookingUpdateWithoutSpecialistInput = {
   review?: Prisma.ReviewUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutSpecialistInput = {
@@ -2000,11 +2231,13 @@ export type BookingUncheckedUpdateWithoutSpecialistInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   review?: Prisma.ReviewUncheckedUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUncheckedUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUncheckedUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateManyWithoutSpecialistInput = {
@@ -2027,6 +2260,7 @@ export type BookingUncheckedUpdateManyWithoutSpecialistInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2051,6 +2285,7 @@ export type BookingCreateManyPetInput = {
   completedAt?: Date | string | null
   cancelledAt?: Date | string | null
   cancellationReason?: string | null
+  earningsDistributed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -2072,6 +2307,7 @@ export type BookingUpdateWithoutPetInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -2080,6 +2316,7 @@ export type BookingUpdateWithoutPetInput = {
   review?: Prisma.ReviewUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutPetInput = {
@@ -2102,11 +2339,13 @@ export type BookingUncheckedUpdateWithoutPetInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   review?: Prisma.ReviewUncheckedUpdateOneWithoutBookingNestedInput
   payment?: Prisma.PaymentUncheckedUpdateOneWithoutBookingNestedInput
   walkUpdates?: Prisma.WalkUpdateUncheckedUpdateManyWithoutBookingNestedInput
+  platformRevenue?: Prisma.PlatformRevenueUncheckedUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateManyWithoutPetInput = {
@@ -2129,6 +2368,7 @@ export type BookingUncheckedUpdateManyWithoutPetInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancelledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  earningsDistributed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2185,6 +2425,7 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   completedAt?: boolean
   cancelledAt?: boolean
   cancellationReason?: boolean
+  earningsDistributed?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -2194,6 +2435,7 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   review?: boolean | Prisma.Booking$reviewArgs<ExtArgs>
   payment?: boolean | Prisma.Booking$paymentArgs<ExtArgs>
   walkUpdates?: boolean | Prisma.Booking$walkUpdatesArgs<ExtArgs>
+  platformRevenue?: boolean | Prisma.Booking$platformRevenueArgs<ExtArgs>
   _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
@@ -2218,6 +2460,7 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   completedAt?: boolean
   cancelledAt?: boolean
   cancellationReason?: boolean
+  earningsDistributed?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -2247,6 +2490,7 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   completedAt?: boolean
   cancelledAt?: boolean
   cancellationReason?: boolean
+  earningsDistributed?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -2276,11 +2520,12 @@ export type BookingSelectScalar = {
   completedAt?: boolean
   cancelledAt?: boolean
   cancellationReason?: boolean
+  earningsDistributed?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ownerId" | "walkerId" | "petId" | "specialistId" | "serviceType" | "status" | "scheduledAt" | "duration" | "pickupLocation" | "dropoffLocation" | "totalAmount" | "commission" | "notes" | "latitude" | "longitude" | "startedAt" | "completedAt" | "cancelledAt" | "cancellationReason" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ownerId" | "walkerId" | "petId" | "specialistId" | "serviceType" | "status" | "scheduledAt" | "duration" | "pickupLocation" | "dropoffLocation" | "totalAmount" | "commission" | "notes" | "latitude" | "longitude" | "startedAt" | "completedAt" | "cancelledAt" | "cancellationReason" | "earningsDistributed" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   walker?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -2289,6 +2534,7 @@ export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   review?: boolean | Prisma.Booking$reviewArgs<ExtArgs>
   payment?: boolean | Prisma.Booking$paymentArgs<ExtArgs>
   walkUpdates?: boolean | Prisma.Booking$walkUpdatesArgs<ExtArgs>
+  platformRevenue?: boolean | Prisma.Booking$platformRevenueArgs<ExtArgs>
   _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BookingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2314,6 +2560,7 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     review: Prisma.$ReviewPayload<ExtArgs> | null
     payment: Prisma.$PaymentPayload<ExtArgs> | null
     walkUpdates: Prisma.$WalkUpdatePayload<ExtArgs>[]
+    platformRevenue: Prisma.$PlatformRevenuePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2336,6 +2583,7 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     completedAt: Date | null
     cancelledAt: Date | null
     cancellationReason: string | null
+    earningsDistributed: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["booking"]>
@@ -2739,6 +2987,7 @@ export interface Prisma__BookingClient<T, Null = never, ExtArgs extends runtime.
   review<T extends Prisma.Booking$reviewArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$reviewArgs<ExtArgs>>): Prisma.Prisma__ReviewClient<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   payment<T extends Prisma.Booking$paymentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$paymentArgs<ExtArgs>>): Prisma.Prisma__PaymentClient<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   walkUpdates<T extends Prisma.Booking$walkUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$walkUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalkUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  platformRevenue<T extends Prisma.Booking$platformRevenueArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$platformRevenueArgs<ExtArgs>>): Prisma.Prisma__PlatformRevenueClient<runtime.Types.Result.GetResult<Prisma.$PlatformRevenuePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2788,6 +3037,7 @@ export interface BookingFieldRefs {
   readonly completedAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly cancelledAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly cancellationReason: Prisma.FieldRef<"Booking", 'String'>
+  readonly earningsDistributed: Prisma.FieldRef<"Booking", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Booking", 'DateTime'>
 }
@@ -3269,6 +3519,25 @@ export type Booking$walkUpdatesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.WalkUpdateScalarFieldEnum | Prisma.WalkUpdateScalarFieldEnum[]
+}
+
+/**
+ * Booking.platformRevenue
+ */
+export type Booking$platformRevenueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlatformRevenue
+   */
+  select?: Prisma.PlatformRevenueSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PlatformRevenue
+   */
+  omit?: Prisma.PlatformRevenueOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlatformRevenueInclude<ExtArgs> | null
+  where?: Prisma.PlatformRevenueWhereInput
 }
 
 /**

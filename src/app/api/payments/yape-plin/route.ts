@@ -24,7 +24,9 @@ export async function POST(req: Request) {
     if (!booking || booking.ownerId !== user.id) {
       return NextResponse.json({ error: "Booking not found" }, { status: 404 })
     }
-
+    if (booking.status !== "PENDING_PAYMENT") {
+      return NextResponse.json({ error: "Booking is not pending payment" }, { status: 400 })
+    }
     if (!booking.totalAmount) {
       return NextResponse.json({ error: "Invalid booking amount" }, { status: 400 })
     }
@@ -33,27 +35,27 @@ export async function POST(req: Request) {
 
     await new Promise((resolve) => setTimeout(resolve, SIMULATION_DELAY_MS))
 
-    const payment = await prisma.payment.upsert({
-      where: { bookingId: booking.id },
-      update: {
-        method,
-        reference,
-        status: "COMPLETED",
-      },
-      create: {
-        bookingId: booking.id,
-        userId: user.id,
-        amount: booking.totalAmount,
-        currency: "PEN",
-        method,
-        reference,
-        status: "COMPLETED",
-      },
-    })
+    const [payment] = await prisma.$transaction(async (tx) => {
+      const payment = await tx.payment.upsert({
+        where: { bookingId: booking.id },
+        update: { method, reference, status: "COMPLETED" },
+        create: {
+          bookingId: booking.id,
+          userId: user.id,
+          amount: booking.totalAmount!,
+          currency: "PEN",
+          method,
+          reference,
+          status: "COMPLETED",
+        },
+      })
 
-    await prisma.booking.update({
-      where: { id: booking.id },
-      data: { status: "CONFIRMED" },
+      await tx.booking.update({
+        where: { id: booking.id },
+        data: { status: "CONFIRMED" },
+      })
+
+      return [payment]
     })
 
     return NextResponse.json({ payment, reference })

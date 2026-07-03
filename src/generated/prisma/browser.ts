@@ -73,6 +73,11 @@ export type Payment = Prisma.PaymentModel
  */
 export type WalletTransaction = Prisma.WalletTransactionModel
 /**
+ * Model PlatformRevenue
+ * 
+ */
+export type PlatformRevenue = Prisma.PlatformRevenueModel
+/**
  * Model Notification
  * 
  */

@@ -727,6 +727,48 @@ async function main() {
     ],
   })
 
+  // ── Platform Revenue ────────────────────────────────────────────────────────
+  const completedSeeded = await prisma.booking.findMany({ where: { status: "COMPLETED" } })
+  for (const b of completedSeeded) {
+    const existing = await prisma.platformRevenue.findUnique({ where: { bookingId: b.id } })
+    if (!existing && b.commission) {
+      await prisma.platformRevenue.create({
+        data: { bookingId: b.id, amount: b.commission },
+      })
+    }
+    if (!b.earningsDistributed && b.commission && b.totalAmount) {
+      const walkerEarning = b.totalAmount - b.commission
+      const walkerTx = await prisma.walletTransaction.findFirst({
+        where: { reference: b.id, type: "EARNING" },
+      })
+      if (!walkerTx) {
+        const walkerUser = await prisma.user.findUnique({ where: { id: b.walkerId } })
+        if (walkerUser) {
+          await prisma.$transaction([
+            prisma.walletTransaction.create({
+              data: {
+                userId: b.walkerId,
+                type: "EARNING",
+                amount: walkerEarning,
+                description: `Earnings for booking ${b.id}`,
+                reference: b.id,
+                balance: (walkerUser.walletBalance || 0) + walkerEarning,
+              },
+            }),
+            prisma.user.update({
+              where: { id: b.walkerId },
+              data: { walletBalance: { increment: walkerEarning } },
+            }),
+            prisma.booking.update({
+              where: { id: b.id },
+              data: { earningsDistributed: true },
+            }),
+          ])
+        }
+      }
+    }
+  }
+
   console.log("✅ Seed completed successfully!")
   console.log("")
   console.log("📋 Test Accounts (password: password123):")

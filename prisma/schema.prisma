@@ -137,6 +137,7 @@ model Booking {
   completedAt        DateTime?
   cancelledAt        DateTime?
   cancellationReason String?
+  earningsDistributed Boolean  @default(false)
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 
@@ -147,6 +148,7 @@ model Booking {
   review      Review?
   payment     Payment?
   walkUpdates WalkUpdate[]
+  platformRevenue PlatformRevenue?
 }
 
 model WalkUpdate {
@@ -202,6 +204,15 @@ model WalletTransaction {
   createdAt   DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PlatformRevenue {
+  id        String   @id @default(cuid())
+  bookingId String   @unique
+  amount    Float
+  createdAt DateTime @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
 model Notification {

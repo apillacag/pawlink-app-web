@@ -395,6 +395,7 @@ export const ModelName = {
   Review: 'Review',
   Payment: 'Payment',
   WalletTransaction: 'WalletTransaction',
+  PlatformRevenue: 'PlatformRevenue',
   Notification: 'Notification'
 } as const
 
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "pet" | "walkerProfile" | "specialistProfile" | "availability" | "walkerPhoto" | "booking" | "walkUpdate" | "review" | "payment" | "walletTransaction" | "notification"
+    modelProps: "user" | "pet" | "walkerProfile" | "specialistProfile" | "availability" | "walkerPhoto" | "booking" | "walkUpdate" | "review" | "payment" | "walletTransaction" | "platformRevenue" | "notification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1229,6 +1230,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PlatformRevenue: {
+      payload: Prisma.$PlatformRevenuePayload<ExtArgs>
+      fields: Prisma.PlatformRevenueFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlatformRevenueFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformRevenuePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlatformRevenueFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformRevenuePayload>
+        }
+        findFirst: {
+          args: Prisma.PlatformRevenueFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformRevenuePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlatformRevenueFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformRevenuePayload>
+        }
+        findMany: {
+          args: Prisma.PlatformRevenueFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformRevenuePayload>[]
+        }
+        create: {
+          args: Prisma.PlatformRevenueCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformRevenuePayload>
+        }
+        createMany: {
+          args: Prisma.PlatformRevenueCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlatformRevenueCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformRevenuePayload>[]
+        }
+        delete: {
+          args: Prisma.PlatformRevenueDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformRevenuePayload>
+        }
+        update: {
+          args: Prisma.PlatformRevenueUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformRevenuePayload>
+        }
+        deleteMany: {
+          args: Prisma.PlatformRevenueDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlatformRevenueUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlatformRevenueUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformRevenuePayload>[]
+        }
+        upsert: {
+          args: Prisma.PlatformRevenueUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlatformRevenuePayload>
+        }
+        aggregate: {
+          args: Prisma.PlatformRevenueAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlatformRevenue>
+        }
+        groupBy: {
+          args: Prisma.PlatformRevenueGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlatformRevenueGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlatformRevenueCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlatformRevenueCountAggregateOutputType> | number
+        }
+      }
+    }
     Notification: {
       payload: Prisma.$NotificationPayload<ExtArgs>
       fields: Prisma.NotificationFieldRefs
@@ -1466,6 +1541,7 @@ export const BookingScalarFieldEnum = {
   completedAt: 'completedAt',
   cancelledAt: 'cancelledAt',
   cancellationReason: 'cancellationReason',
+  earningsDistributed: 'earningsDistributed',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1528,6 +1604,16 @@ export const WalletTransactionScalarFieldEnum = {
 } as const
 
 export type WalletTransactionScalarFieldEnum = (typeof WalletTransactionScalarFieldEnum)[keyof typeof WalletTransactionScalarFieldEnum]
+
+
+export const PlatformRevenueScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  amount: 'amount',
+  createdAt: 'createdAt'
+} as const
+
+export type PlatformRevenueScalarFieldEnum = (typeof PlatformRevenueScalarFieldEnum)[keyof typeof PlatformRevenueScalarFieldEnum]
 
 
 export const NotificationScalarFieldEnum = {
@@ -1757,6 +1843,7 @@ export type GlobalOmitConfig = {
   review?: Prisma.ReviewOmit
   payment?: Prisma.PaymentOmit
   walletTransaction?: Prisma.WalletTransactionOmit
+  platformRevenue?: Prisma.PlatformRevenueOmit
   notification?: Prisma.NotificationOmit
 }
 

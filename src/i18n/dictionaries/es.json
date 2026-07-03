@@ -412,6 +412,25 @@
     "paidBy": "Pagado por",
     "pendingPayment": "Pago Pendiente"
   },
+  "finance": {
+    "walletBalance": "Saldo de Billetera",
+    "topUp": "Recargar Billetera",
+    "topUpTitle": "Agrega fondos a tu billetera",
+    "topUpAmount": "Monto a agregar",
+    "topUpSuccess": "¡Billetera recargada exitosamente!",
+    "topUpButton": "Agregar Fondos",
+    "earning": "Ganancias",
+    "earningsCredited": "Ganancias acreditadas",
+    "platformCommission": "Comisión de la Plataforma",
+    "commission": "Comisión",
+    "refund": "Reembolso",
+    "refundProcessed": "Reembolso procesado",
+    "transactions": "Transacciones",
+    "noTransactions": "Sin transacciones aún",
+    "transactionHistory": "Historial de Transacciones",
+    "bookingCompleted": "Reserva completada",
+    "bookingCancelled": "Reserva cancelada"
+  },
   "walkActions": {
     "confirm": "Confirmar",
     "startWalk": "Iniciar Paseo",

@@ -5,21 +5,56 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatCurrency(amount: number, currency = "PEN"): string {
+export function formatCurrency(amount: number): string {
   return `S/${amount.toFixed(2)}`
 }
 
-export function formatDate(date: Date | string): string {
-  return new Intl.DateTimeFormat("en-US", {
+export function formatDate(date: Date | string, locale = "en-US"): string {
+  return new Intl.DateTimeFormat(locale, {
     dateStyle: "medium",
     timeStyle: "short",
   }).format(new Date(date))
 }
 
-export function formatTime(date: Date | string): string {
-  return new Intl.DateTimeFormat("en-US", {
+export function formatTime(date: Date | string, locale = "en-US"): string {
+  return new Intl.DateTimeFormat(locale, {
     timeStyle: "short",
   }).format(new Date(date))
+}
+
+export function formatDateTime(date: Date | string, locale = "en-US"): string {
+  return new Intl.DateTimeFormat(locale, {
+    weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit",
+  }).format(new Date(date))
+}
+
+export function translateStatus(t: (key: string) => string, status: string): string {
+  const labels: Record<string, string> = {
+    PENDING: t("bookings.pending"),
+    CONFIRMED: t("bookings.confirmed"),
+    IN_PROGRESS: t("bookings.inProgress"),
+    COMPLETED: t("bookings.completed"),
+    CANCELLED: t("bookings.cancelled"),
+  }
+  return labels[status] || status
+}
+
+export function translateServiceType(t: (key: string) => string, type: string): string {
+  const labels: Record<string, string> = {
+    WALKING: t("bookings.serviceWalking"),
+    CONSULTATION: t("bookings.serviceConsultation"),
+  }
+  return labels[type] || type
+}
+
+export function translateRole(t: (key: string) => string, role: string): string {
+  const labels: Record<string, string> = {
+    ADMIN: t("admin.roleAdmin"),
+    WALKER: t("admin.roleWalker"),
+    SPECIALIST: t("admin.roleSpecialist"),
+    OWNER: t("admin.roleOwner"),
+  }
+  return labels[role] || role
 }
 
 export function getInitials(name: string): string {

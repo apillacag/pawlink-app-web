@@ -10,11 +10,13 @@ datasource db {
 model User {
   id            String   @id @default(cuid())
   email         String   @unique
-  passwordHash  String
+  passwordHash  String?
   name          String
   phone         String?
   avatarUrl     String?
   role          String   @default("OWNER")
+  provider      String   @default("EMAIL")
+  googleId      String?  @unique
   isVerified    Boolean  @default(false)
   isPremium     Boolean  @default(false)
   createdAt     DateTime @default(now())

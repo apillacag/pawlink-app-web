@@ -16,7 +16,7 @@ export function Footer() {
               <span className="text-lg font-bold text-gray-900">PawLink</span>
             </Link>
             <p className="text-sm text-gray-500">
-              Connecting caring owners with trusted pet professionals.
+              {t("nav.tagline")}
             </p>
           </div>
           <div>

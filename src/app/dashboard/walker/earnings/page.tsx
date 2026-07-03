@@ -5,6 +5,7 @@ import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { Wallet, TrendingUp, CalendarDays } from "lucide-react"
+import { translateStatus, translateServiceType } from "@/lib/utils"
 
 export default async function WalkerEarningsPage() {
   const { t } = await getServerTranslations()
@@ -87,14 +88,14 @@ export default async function WalkerEarningsPage() {
                 <div key={payment.id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
                   <div>
                     <p className="text-sm font-medium text-gray-900">
-                      {payment.booking?.pet?.name || t("common.walk")} - {payment.booking?.serviceType || t("common.service")}
+                      {payment.booking?.pet?.name || t("common.walk")} - {payment.booking?.serviceType ? translateServiceType(t, payment.booking.serviceType) : t("common.service")}
                     </p>
                     <p className="text-xs text-gray-500">{new Date(payment.createdAt).toLocaleDateString()}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-semibold text-gray-900">S/{payment.amount.toFixed(2)}</p>
                     <Badge variant={payment.status === "COMPLETED" ? "success" : "warning"}>
-                      {payment.status}
+                      {translateStatus(t, payment.status)}
                     </Badge>
                   </div>
                 </div>

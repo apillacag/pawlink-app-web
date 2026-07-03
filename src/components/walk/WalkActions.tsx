@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/Button"
+import { useI18n } from "@/i18n/context"
 
 interface WalkActionsProps {
   bookingId: string
@@ -12,6 +13,7 @@ interface WalkActionsProps {
 export function WalkActions({ bookingId, status, type = "walk" }: WalkActionsProps) {
   const [loading, setLoading] = useState<string | null>(null)
   const router = useRouter()
+  const { t } = useI18n()
 
   const updateStatus = async (newStatus: string) => {
     setLoading(newStatus)
@@ -33,22 +35,22 @@ export function WalkActions({ bookingId, status, type = "walk" }: WalkActionsPro
     <div className="flex flex-wrap gap-2">
       {status === "PENDING" && (
         <Button size="sm" onClick={() => updateStatus("CONFIRMED")} loading={loading === "CONFIRMED"}>
-          Confirm
+          {t("walkActions.confirm")}
         </Button>
       )}
       {status === "CONFIRMED" && (
         <Button size="sm" onClick={() => updateStatus("IN_PROGRESS")} loading={loading === "IN_PROGRESS"}>
-          {type === "consultation" ? "Start Session" : "Start Walk"}
+          {type === "consultation" ? t("walkActions.startSession") : t("walkActions.startWalk")}
         </Button>
       )}
       {status === "IN_PROGRESS" && (
         <Button size="sm" onClick={() => updateStatus("COMPLETED")} loading={loading === "COMPLETED"}>
-          {type === "consultation" ? "Complete Session" : "Complete Walk"}
+          {type === "consultation" ? t("walkActions.completeSession") : t("walkActions.completeWalk")}
         </Button>
       )}
       {(status === "PENDING" || status === "CONFIRMED") && (
         <Button size="sm" variant="ghost" onClick={() => updateStatus("CANCELLED")} loading={loading === "CANCELLED"}>
-          Cancel
+          {t("walkActions.cancel")}
         </Button>
       )}
     </div>

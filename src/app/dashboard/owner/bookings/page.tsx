@@ -7,9 +7,10 @@ import { Badge } from "@/components/ui/Badge"
 import { CalendarDays, MapPin } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/Button"
+import { translateStatus, formatDateTime } from "@/lib/utils"
 
 export default async function OwnerBookingsPage() {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "OWNER") redirect("/dashboard")
 
@@ -63,15 +64,13 @@ export default async function OwnerBookingsPage() {
                     <div className="flex items-center gap-3">
                       <h3 className="font-semibold text-gray-900">{booking.pet?.name || t("common.pet")}</h3>
                       <Badge variant={statusVariant(booking.status)}>
-                        {booking.status.replace("_", " ")}
+                        {translateStatus(t, booking.status)}
                       </Badge>
                     </div>
                     <div className="flex items-center gap-4 text-sm text-gray-500">
                       <span className="flex items-center gap-1">
                         <CalendarDays className="h-4 w-4" />
-                        {new Date(booking.scheduledAt).toLocaleDateString("en-US", {
-                          weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit"
-                        })}
+                        {formatDateTime(booking.scheduledAt, locale)}
                       </span>
                       <span>{t("bookings.duration")}: {booking.duration}{t("bookings.min")}</span>
                     </div>

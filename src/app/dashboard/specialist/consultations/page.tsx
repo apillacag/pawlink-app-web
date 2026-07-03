@@ -7,9 +7,10 @@ import { Card, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { CalendarDays, Stethoscope, Phone, ArrowRight } from "lucide-react"
 import { WalkActions } from "@/components/walk/WalkActions"
+import { translateStatus, formatDateTime } from "@/lib/utils"
 
 export default async function SpecialistConsultationsPage() {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "SPECIALIST") redirect("/dashboard")
 
@@ -57,11 +58,9 @@ export default async function SpecialistConsultationsPage() {
                     <div className="flex items-center gap-4 text-sm text-gray-500 ml-13">
                       <span className="flex items-center gap-1">
                         <CalendarDays className="h-4 w-4" />
-                        {new Date(consult.scheduledAt).toLocaleDateString("en-US", {
-                          weekday: "long", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit"
-                        })}
+                        {formatDateTime(consult.scheduledAt, locale)}
                       </span>
-                      <span>{consult.duration} min</span>
+                      <span>{consult.duration}{t("bookings.min")}</span>
                     </div>
                     {consult.owner.phone && (
                       <p className="text-sm text-gray-500 ml-13 flex items-center gap-1">
@@ -74,7 +73,7 @@ export default async function SpecialistConsultationsPage() {
                       consult.status === "COMPLETED" ? "success" :
                       consult.status === "CANCELLED" ? "danger" : "info"
                     }>
-                      {consult.status.replace("_", " ")}
+                      {translateStatus(t, consult.status)}
                     </Badge>
                     <WalkActions bookingId={consult.id} status={consult.status} type="consultation" />
                   </div>

@@ -23,7 +23,8 @@
     "helpCenter": "Help Center",
     "safetyTips": "Safety Tips",
     "trustAndSafety": "Trust & Safety",
-    "allRightsReserved": "All rights reserved."
+    "allRightsReserved": "All rights reserved.",
+    "tagline": "Connecting caring owners with trusted pet professionals."
   },
   "home": {
     "heroBadge": "Trusted Pet Care Platform",
@@ -67,6 +68,18 @@
     "becomeWalker": "Become a Walker",
     "becomeSpecialist": "Become a Specialist",
     "earnUpTo": "Earn up to",
+    "earningsRate": "S/25/hr",
+    "professionalsRateDesc": "Top-rated walkers on PawLink earn competitive rates with consistent bookings. Join our growing network of professionals.",
+    "heroCardTitle": "Happy Pet Owners",
+    "heroCardSubtitle": "Trusted by 10,000+ pet parents",
+    "featureFindWalkers": "Find Walkers",
+    "featureFindWalkersDesc": "Near you",
+    "featureLiveTracking": "Live Tracking",
+    "featureLiveTrackingDesc": "Real-time GPS",
+    "featurePhotoUpdates": "Photo Updates",
+    "featurePhotoUpdatesDesc": "During walks",
+    "featureTopRated": "Top Rated",
+    "featureTopRatedDesc": "4.9 average",
     "testimonialsTitle": "What Our Community Says",
     "testimonial1Quote": "PawLink gave me peace of mind. I can see exactly where my dog is during walks and the photo updates are wonderful.",
     "testimonial1Author": "Sarah M.",
@@ -107,7 +120,14 @@
     "specialistDesc": "I offer behavior consultations",
     "loginFailed": "Login failed",
     "registrationFailed": "Registration failed",
-    "somethingWentWrong": "Something went wrong"
+    "somethingWentWrong": "Something went wrong",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "••••••••",
+    "namePlaceholder": "John Doe",
+    "phonePlaceholder": "+1 555 000 0000",
+    "passwordRequirements": "At least 6 characters",
+    "continueWithGoogle": "Continue with Google",
+    "or": "OR"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -183,7 +203,21 @@
     "cancelled": "Cancelled",
     "walkDetails": "Walk Details",
     "walkUpdates": "Walk Updates",
-    "updateNote": "update"
+    "updateNote": "update",
+    "serviceWalking": "Walking",
+    "serviceConsultation": "Consultation",
+    "failed": "Failed",
+    "petLabel": "Pet",
+    "selectPet": "Select a pet",
+    "dateTimeLabel": "Date & Time",
+    "durationLabel": "Duration",
+    "minutes": "minutes",
+    "pickupLocation": "Pickup Location",
+    "notesLabel": "Notes",
+    "notesPlaceholderWalk": "Any special instructions...",
+    "notesPlaceholderConsultation": "Describe your concerns...",
+    "bookWalkButton": "Book Walk",
+    "bookConsultationButton": "Book Consultation"
   },
   "walkers": {
     "title": "Find Dog Walkers",
@@ -309,7 +343,11 @@
     "service": "Service",
     "amount": "Amount",
     "date": "Date",
-    "id": "ID"
+    "id": "ID",
+    "roleAdmin": "Admin",
+    "roleWalker": "Walker",
+    "roleSpecialist": "Specialist",
+    "roleOwner": "Owner"
   },
   "about": {
     "title": "About PawLink",
@@ -333,6 +371,19 @@
     "innovationDesc": "We continuously leverage technology to improve pet care services and user experience.",
     "responsibility": "Responsibility",
     "responsibilityDesc": "We take our responsibility seriously, ensuring reliable and professional pet care services."
+  },
+  "walkActions": {
+    "confirm": "Confirm",
+    "startWalk": "Start Walk",
+    "startSession": "Start Session",
+    "completeWalk": "Complete Walk",
+    "completeSession": "Complete Session",
+    "cancel": "Cancel"
+  },
+  "metadata": {
+    "title": "PawLink - Connecting Caring Owners with Trusted Pet Professionals",
+    "description": "Safe walks, happy pets, peace of mind. Find trusted dog walkers and animal behavior specialists near you.",
+    "keywords": "pet care, dog walking, pet wellness, animal behavior, pet services"
   },
   "common": {
     "loading": "Loading...",

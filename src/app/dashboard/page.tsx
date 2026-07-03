@@ -5,6 +5,7 @@ import { redirect } from "next/navigation"
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { CalendarDays, Dog, Users, Wallet, Star, TrendingUp } from "lucide-react"
+import { translateStatus, translateServiceType } from "@/lib/utils"
 
 export default async function DashboardPage() {
   const { t } = await getServerTranslations()
@@ -98,7 +99,7 @@ export default async function DashboardPage() {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">
-                        {booking.pet?.name || t("common.pet")} - {booking.serviceType}
+                        {booking.pet?.name || t("common.pet")} - {translateServiceType(t, booking.serviceType)}
                       </p>
                       <p className="text-xs text-gray-500">
                         {new Date(booking.scheduledAt).toLocaleDateString()}
@@ -112,7 +113,7 @@ export default async function DashboardPage() {
                     booking.status === "IN_PROGRESS" ? "bg-purple-100 text-purple-700" :
                     "bg-red-100 text-red-700"
                   }`}>
-                    {booking.status.replace("_", " ")}
+                    {translateStatus(t, booking.status)}
                   </span>
                 </div>
               ))}

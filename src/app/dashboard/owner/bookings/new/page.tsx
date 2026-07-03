@@ -138,14 +138,14 @@ export default function NewBookingPage() {
               </div>
 
               <div className="space-y-1">
-                <label className="block text-sm font-medium text-gray-700">Pet</label>
+                <label className="block text-sm font-medium text-gray-700">{t("bookings.petLabel")}</label>
                 <select
                   value={form.petId}
                   onChange={(e) => setForm({ ...form, petId: e.target.value })}
                   className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                   required
                 >
-                  <option value="">Select a pet</option>
+                  <option value="">{t("bookings.selectPet")}</option>
                   {pets.map((pet) => (
                     <option key={pet.id} value={pet.id}>{pet.name} ({pet.species.toLowerCase()})</option>
                   ))}
@@ -154,7 +154,7 @@ export default function NewBookingPage() {
 
               <Input
                 id="scheduledAt"
-                label="Date & Time"
+                label={t("bookings.dateTimeLabel")}
                 type="datetime-local"
                 value={form.scheduledAt}
                 onChange={(e) => setForm({ ...form, scheduledAt: e.target.value })}
@@ -163,7 +163,7 @@ export default function NewBookingPage() {
 
               <Input
                 id="duration"
-                label={`Duration (${isConsultation ? "minutes" : "minutes"})`}
+                label={`${t("bookings.durationLabel")} (${t("bookings.minutes")})`}
                 type="number"
                 min="15"
                 step="15"
@@ -174,25 +174,25 @@ export default function NewBookingPage() {
               {!isConsultation && (
                 <Input
                   id="pickupLocation"
-                  label="Pickup Location"
+                  label={t("bookings.pickupLocation")}
                   value={form.pickupLocation}
                   onChange={(e) => setForm({ ...form, pickupLocation: e.target.value })}
                 />
               )}
 
               <div className="space-y-1">
-                <label className="block text-sm font-medium text-gray-700">Notes</label>
+                <label className="block text-sm font-medium text-gray-700">{t("bookings.notesLabel")}</label>
                 <textarea
                   value={form.notes}
                   onChange={(e) => setForm({ ...form, notes: e.target.value })}
                   rows={3}
                   className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                  placeholder={isConsultation ? "Describe your concerns..." : "Any special instructions..."}
+                  placeholder={isConsultation ? t("bookings.notesPlaceholderConsultation") : t("bookings.notesPlaceholderWalk")}
                 />
               </div>
 
               <Button type="submit" className="w-full" loading={loading}>
-                {isConsultation ? "Book Consultation" : "Book Walk"}
+                {isConsultation ? t("bookings.bookConsultationButton") : t("bookings.bookWalkButton")}
               </Button>
             </form>
           )}

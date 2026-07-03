@@ -53,3 +53,16 @@ export const specialistProfileSchema = z.object({
   specialties: z.string().default("BEHAVIOR"),
   ratePerSession: z.number().positive().default(50),
 })
+
+export const googleOnboardingSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  avatarUrl: z.string().optional(),
+  role: z.enum(["OWNER", "WALKER", "SPECIALIST"]),
+  phone: z.string().optional(),
+  bio: z.string().optional(),
+  ratePerWalk: z.number().positive().optional(),
+  ratePerSession: z.number().positive().optional(),
+  specialties: z.string().optional(),
+  district: z.string().optional(),
+})

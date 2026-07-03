@@ -47,16 +47,16 @@ export default function HomePage() {
                         <PawPrint className="h-7 w-7 text-amber-600" />
                       </div>
                       <div>
-                        <p className="font-semibold text-gray-900">Happy Pet Owners</p>
-                        <p className="text-sm text-gray-500">Trusted by 10,000+ pet parents</p>
+                        <p className="font-semibold text-gray-900">{t("home.heroCardTitle")}</p>
+                        <p className="text-sm text-gray-500">{t("home.heroCardSubtitle")}</p>
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       {[
-                        { icon: Search, label: "Find Walkers", desc: "Near you" },
-                        { icon: MapPin, label: "Live Tracking", desc: "Real-time GPS" },
-                        { icon: MessageCircle, label: "Photo Updates", desc: "During walks" },
-                        { icon: Star, label: "Top Rated", desc: "4.9 average" },
+                        { icon: Search, label: t("home.featureFindWalkers"), desc: t("home.featureFindWalkersDesc") },
+                        { icon: MapPin, label: t("home.featureLiveTracking"), desc: t("home.featureLiveTrackingDesc") },
+                        { icon: MessageCircle, label: t("home.featurePhotoUpdates"), desc: t("home.featurePhotoUpdatesDesc") },
+                        { icon: Star, label: t("home.featureTopRated"), desc: t("home.featureTopRatedDesc") },
                       ].map((item) => (
                         <div key={item.label} className="rounded-xl bg-gray-50 p-4 space-y-2">
                           <item.icon className="h-5 w-5 text-emerald-600" />
@@ -161,12 +161,11 @@ export default function HomePage() {
                     <div className="h-12 w-12 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-lg">S/</div>
                     <div>
                       <p className="font-semibold text-gray-900">{t("home.earnUpTo")}</p>
-                      <p className="text-3xl font-bold text-emerald-600">S/25/hr</p>
+                      <p className="text-3xl font-bold text-emerald-600">{t("home.earningsRate")}</p>
                     </div>
                   </div>
                   <p className="text-gray-600 text-sm">
-                    Top-rated walkers on PawLink earn competitive rates with consistent bookings.
-                    Join our growing network of professionals.
+                    {t("home.professionalsRateDesc")}
                   </p>
                 </div>
               </div>

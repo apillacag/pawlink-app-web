@@ -8,9 +8,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { MapPin, Phone, Clock, Dog } from "lucide-react"
 import { WalkActions } from "@/components/walk/WalkActions"
+import { translateStatus, formatDateTime } from "@/lib/utils"
 
 export default async function WalkDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "WALKER") redirect("/dashboard")
 
@@ -35,11 +36,11 @@ export default async function WalkDetailPage({ params }: { params: Promise<{ id:
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-semibold text-gray-900">{t("walker.walkDetails")}</h2>
-          <p className="text-gray-500">{walk.pet?.name} - {new Date(walk.scheduledAt).toLocaleDateString()}</p>
+          <p className="text-gray-500">{walk.pet?.name} - {formatDateTime(walk.scheduledAt, locale)}</p>
         </div>
         <div className="flex items-center gap-3">
           <Badge variant={walk.status === "COMPLETED" ? "success" : walk.status === "IN_PROGRESS" ? "info" : "warning"}>
-            {walk.status.replace("_", " ")}
+            {translateStatus(t, walk.status)}
           </Badge>
           <WalkActions bookingId={walk.id} status={walk.status} />
         </div>
@@ -90,9 +91,7 @@ export default async function WalkDetailPage({ params }: { params: Promise<{ id:
           <div className="flex items-center gap-2 text-sm">
             <Clock className="h-4 w-4 text-gray-400" />
             <span className="text-gray-600">
-              {new Date(walk.scheduledAt).toLocaleString("en-US", {
-                weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit"
-              })}
+              {formatDateTime(walk.scheduledAt, locale)}
             </span>
           </div>
           <p className="text-sm text-gray-600">{t("walker.duration")}: {walk.duration} {t("bookings.min")}</p>

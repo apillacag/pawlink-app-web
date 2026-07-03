@@ -23,7 +23,8 @@
     "helpCenter": "Centro de Ayuda",
     "safetyTips": "Consejos de Seguridad",
     "trustAndSafety": "Confianza y Seguridad",
-    "allRightsReserved": "Todos los derechos reservados."
+    "allRightsReserved": "Todos los derechos reservados.",
+    "tagline": "Conectamos dueños con profesionales de confianza para el cuidado de mascotas."
   },
   "home": {
     "heroBadge": "Plataforma Confiable de Cuidado de Mascotas",
@@ -67,6 +68,18 @@
     "becomeWalker": "Ser Paseador",
     "becomeSpecialist": "Ser Especialista",
     "earnUpTo": "Gana hasta",
+    "earningsRate": "S/25/hora",
+    "professionalsRateDesc": "Los paseadores mejor calificados en PawLink ganan tarifas competitivas con reservas constantes. Únete a nuestra creciente red de profesionales.",
+    "heroCardTitle": "Dueños Felices",
+    "heroCardSubtitle": "Con la confianza de más de 10,000 dueños",
+    "featureFindWalkers": "Buscar Paseadores",
+    "featureFindWalkersDesc": "Cerca de ti",
+    "featureLiveTracking": "Seguimiento en Vivo",
+    "featureLiveTrackingDesc": "GPS en tiempo real",
+    "featurePhotoUpdates": "Actualizaciones con Fotos",
+    "featurePhotoUpdatesDesc": "Durante los paseos",
+    "featureTopRated": "Mejor Calificados",
+    "featureTopRatedDesc": "Promedio 4.9",
     "testimonialsTitle": "Lo Que Dice Nuestra Comunidad",
     "testimonial1Quote": "PawLink me dio tranquilidad. Puedo ver exactamente dónde está mi perro durante los paseos y las fotos son maravillosas.",
     "testimonial1Author": "María S.",
@@ -107,7 +120,14 @@
     "specialistDesc": "Ofrezco consultas de comportamiento",
     "loginFailed": "Error al iniciar sesión",
     "registrationFailed": "Error al registrarse",
-    "somethingWentWrong": "Algo salió mal"
+    "somethingWentWrong": "Algo salió mal",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "passwordPlaceholder": "••••••••",
+    "namePlaceholder": "Juan Pérez",
+    "phonePlaceholder": "+51 999 000 000",
+    "passwordRequirements": "Al menos 6 caracteres",
+    "continueWithGoogle": "Continuar con Google",
+    "or": "O"
   },
   "dashboard": {
     "title": "Panel de Control",
@@ -183,7 +203,21 @@
     "cancelled": "Cancelado",
     "walkDetails": "Detalles del Paseo",
     "walkUpdates": "Actualizaciones",
-    "updateNote": "actualización"
+    "updateNote": "actualización",
+    "serviceWalking": "Paseo",
+    "serviceConsultation": "Consulta",
+    "failed": "Fallido",
+    "petLabel": "Mascota",
+    "selectPet": "Selecciona una mascota",
+    "dateTimeLabel": "Fecha y Hora",
+    "durationLabel": "Duración",
+    "minutes": "minutos",
+    "pickupLocation": "Dirección de Recogida",
+    "notesLabel": "Notas",
+    "notesPlaceholderWalk": "Instrucciones especiales...",
+    "notesPlaceholderConsultation": "Describe tus inquietudes...",
+    "bookWalkButton": "Reservar Paseo",
+    "bookConsultationButton": "Reservar Consulta"
   },
   "walkers": {
     "title": "Buscar Paseadores",
@@ -309,7 +343,11 @@
     "service": "Servicio",
     "amount": "Monto",
     "date": "Fecha",
-    "id": "ID"
+    "id": "ID",
+    "roleAdmin": "Admin",
+    "roleWalker": "Paseador",
+    "roleSpecialist": "Especialista",
+    "roleOwner": "Dueño"
   },
   "about": {
     "title": "Sobre PawLink",
@@ -333,6 +371,19 @@
     "innovationDesc": "Aprovechamos la tecnología para mejorar los servicios de cuidado de mascotas y la experiencia del usuario.",
     "responsibility": "Responsabilidad",
     "responsibilityDesc": "Tomamos nuestra responsabilidad en serio, garantizando servicios de cuidado de mascotas confiables y profesionales."
+  },
+  "walkActions": {
+    "confirm": "Confirmar",
+    "startWalk": "Iniciar Paseo",
+    "startSession": "Iniciar Sesión",
+    "completeWalk": "Completar Paseo",
+    "completeSession": "Completar Sesión",
+    "cancel": "Cancelar"
+  },
+  "metadata": {
+    "title": "PawLink - Conectamos Dueños con Profesionales de Confianza",
+    "description": "Paseos seguros, mascotas felices, tranquilidad. Encuentra paseadores de perros y especialistas en comportamiento animal cerca de ti.",
+    "keywords": "cuidado de mascotas, paseo de perros, bienestar animal, comportamiento animal, servicios para mascotas"
   },
   "common": {
     "loading": "Cargando...",

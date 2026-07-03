@@ -4,10 +4,10 @@ import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
-import { formatDate } from "@/lib/utils"
+import { formatDate, translateRole } from "@/lib/utils"
 
 export default async function AdminUsersPage() {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "ADMIN") redirect("/dashboard")
 
@@ -60,7 +60,7 @@ export default async function AdminUsersPage() {
                             u.role === "WALKER" ? "success" :
                             u.role === "SPECIALIST" ? "info" : "default"
                           }>
-                            {u.role}
+                            {translateRole(t, u.role)}
                           </Badge>
                         </td>
                         <td className="px-6 py-4">
@@ -71,7 +71,7 @@ export default async function AdminUsersPage() {
                         </td>
                         <td className="px-6 py-4 text-gray-500">{u._count.pets}</td>
                         <td className="px-6 py-4 text-gray-500">{u._count.bookings}</td>
-                        <td className="px-6 py-4 text-gray-500">{formatDate(u.createdAt)}</td>
+                        <td className="px-6 py-4 text-gray-500">{formatDate(u.createdAt, locale)}</td>
                       </tr>
                     ))
                   )}

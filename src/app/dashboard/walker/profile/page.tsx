@@ -57,7 +57,7 @@ export default function WalkerProfilePage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {message && (
               <div className={`rounded-lg border p-3 text-sm ${
-                message.includes("successfully")
+                message === t("walker.profileUpdated")
                   ? "bg-emerald-50 border-emerald-200 text-emerald-700"
                   : "bg-red-50 border-red-200 text-red-700"
               }`}>

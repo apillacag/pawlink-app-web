@@ -7,9 +7,10 @@ import { Card, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { CalendarDays, Dog, MapPin, ArrowRight } from "lucide-react"
 import { WalkActions } from "@/components/walk/WalkActions"
+import { translateStatus, formatDateTime } from "@/lib/utils"
 
 export default async function WalkerWalksPage() {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "WALKER") redirect("/dashboard")
 
@@ -68,9 +69,7 @@ export default async function WalkerWalksPage() {
                     <div className="flex items-center gap-4 text-sm text-gray-500 ml-13">
                       <span className="flex items-center gap-1">
                         <CalendarDays className="h-4 w-4" />
-                        {new Date(walk.scheduledAt).toLocaleDateString("en-US", {
-                          weekday: "long", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit"
-                        })}
+                        {formatDateTime(walk.scheduledAt, locale)}
                       </span>
                       <span>{walk.duration}{t("bookings.min")}</span>
                     </div>
@@ -82,7 +81,7 @@ export default async function WalkerWalksPage() {
                   </div>
                   <div className="flex flex-col items-end gap-2">
                     <Badge variant={statusVariant(walk.status)}>
-                      {walk.status.replace("_", " ")}
+                      {translateStatus(t, walk.status)}
                     </Badge>
                     <WalkActions bookingId={walk.id} status={walk.status} />
                   </div>

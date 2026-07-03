@@ -4,10 +4,10 @@ import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
-import { formatDate, formatCurrency } from "@/lib/utils"
+import { formatDate, formatCurrency, translateStatus, translateServiceType } from "@/lib/utils"
 
 export default async function AdminBookingsPage() {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "ADMIN") redirect("/dashboard")
 
@@ -60,15 +60,15 @@ export default async function AdminBookingsPage() {
                       <td className="px-6 py-4 text-gray-500">{b.owner.name}</td>
                       <td className="px-6 py-4 text-gray-500">{b.walker.name}</td>
                       <td className="px-6 py-4">
-                        <Badge>{b.serviceType}</Badge>
+                        <Badge>{translateServiceType(t, b.serviceType)}</Badge>
                       </td>
                       <td className="px-6 py-4">
-                        <Badge variant={statusVariant(b.status)}>{b.status.replace("_", " ")}</Badge>
+                        <Badge variant={statusVariant(b.status)}>{translateStatus(t, b.status)}</Badge>
                       </td>
                       <td className="px-6 py-4 text-gray-900 font-medium">
                         {b.totalAmount ? `S/${b.totalAmount.toFixed(2)}` : "-"}
                       </td>
-                      <td className="px-6 py-4 text-gray-500">{formatDate(b.createdAt)}</td>
+                      <td className="px-6 py-4 text-gray-500">{formatDate(b.createdAt, locale)}</td>
                     </tr>
                   ))}
                 </tbody>

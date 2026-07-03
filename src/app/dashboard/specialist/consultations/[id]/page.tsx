@@ -9,9 +9,10 @@ import { Badge } from "@/components/ui/Badge"
 import { Phone, Clock, Dog, FileText } from "lucide-react"
 import { WalkActions } from "@/components/walk/WalkActions"
 import { AddNote } from "@/components/walk/AddNote"
+import { translateStatus, formatDateTime } from "@/lib/utils"
 
 export default async function ConsultationDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "SPECIALIST") redirect("/dashboard")
 
@@ -36,14 +37,14 @@ export default async function ConsultationDetailPage({ params }: { params: Promi
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-semibold text-gray-900">{t("specialistDash.consultationDetails")}</h2>
-          <p className="text-gray-500">{consult.pet?.name} - {new Date(consult.scheduledAt).toLocaleDateString()}</p>
+          <p className="text-gray-500">{consult.pet?.name} - {formatDateTime(consult.scheduledAt, locale)}</p>
         </div>
         <div className="flex items-center gap-3">
           <Badge variant={
             consult.status === "COMPLETED" ? "success" :
             consult.status === "CANCELLED" ? "danger" : "info"
           }>
-            {consult.status.replace("_", " ")}
+            {translateStatus(t, consult.status)}
           </Badge>
           <WalkActions bookingId={consult.id} status={consult.status} type="consultation" />
         </div>
@@ -94,12 +95,10 @@ export default async function ConsultationDetailPage({ params }: { params: Promi
           <div className="flex items-center gap-2 text-sm">
             <Clock className="h-4 w-4 text-gray-400" />
             <span className="text-gray-600">
-              {new Date(consult.scheduledAt).toLocaleString("en-US", {
-                weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit"
-              })}
+              {formatDateTime(consult.scheduledAt, locale)}
             </span>
           </div>
-          <p className="text-sm text-gray-600">{t("specialistDash.duration")}: {consult.duration} min</p>
+          <p className="text-sm text-gray-600">{t("specialistDash.duration")}: {consult.duration}{t("bookings.min")}</p>
           {consult.totalAmount && (
             <p className="text-sm font-semibold text-purple-600">{t("specialistDash.fee")}: S/{consult.totalAmount.toFixed(2)}</p>
           )}

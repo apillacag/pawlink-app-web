@@ -5,10 +5,10 @@ import { redirect } from "next/navigation"
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { CalendarDays, Dog, Users, Wallet, Star, TrendingUp } from "lucide-react"
-import { translateStatus, translateServiceType } from "@/lib/utils"
+import { translateStatus, translateServiceType, formatCurrency, formatDate } from "@/lib/utils"
 
 export default async function DashboardPage() {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user) redirect("/login")
 
@@ -35,7 +35,7 @@ export default async function DashboardPage() {
     stats = [
       { label: t("dashboard.totalWalks"), value: walkCount.toString(), icon: CalendarDays, color: "text-emerald-600" },
       { label: t("dashboard.completed"), value: completedCount.toString(), icon: Star, color: "text-blue-600" },
-      { label: t("dashboard.earnings"), value: `S/${earnings._sum.amount?.toFixed(0) || "0"}`, icon: Wallet, color: "text-amber-600" },
+      { label: t("dashboard.earnings"), value: formatCurrency(earnings._sum.amount || 0, locale), icon: Wallet, color: "text-amber-600" },
     ]
   } else if (user.role === "SPECIALIST") {
     const sessionCount = await prisma.booking.count({ where: { specialistId: user.id } })
@@ -102,7 +102,7 @@ export default async function DashboardPage() {
                         {booking.pet?.name || t("common.pet")} - {translateServiceType(t, booking.serviceType)}
                       </p>
                       <p className="text-xs text-gray-500">
-                        {new Date(booking.scheduledAt).toLocaleDateString()}
+                        {formatDate(booking.scheduledAt, locale)}
                       </p>
                     </div>
                   </div>

@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/Badge"
 import { CalendarDays, MapPin } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/Button"
-import { translateStatus, formatDateTime } from "@/lib/utils"
+import { translateStatus, formatDateTime, formatCurrency } from "@/lib/utils"
 
 export default async function OwnerBookingsPage() {
   const { t, locale } = await getServerTranslations()
@@ -84,7 +84,7 @@ export default async function OwnerBookingsPage() {
                     )}
                     {booking.totalAmount && (
                       <p className="text-sm font-semibold text-emerald-600">
-                        S/{booking.totalAmount.toFixed(2)}
+                        {formatCurrency(booking.totalAmount, locale)}
                       </p>
                     )}
                   </div>

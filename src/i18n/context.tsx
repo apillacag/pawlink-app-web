@@ -40,19 +40,20 @@ export function useT() {
   return t
 }
 
-export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(defaultLocale)
+export function I18nProvider({ children, initialLocale }: { children: ReactNode; initialLocale?: Locale }) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale ?? defaultLocale)
   const [dict, setDict] = useState<Dictionary | null>(null)
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const initial = getInitialLocale()
-    setLocaleState(initial)
-    import(`./dictionaries/${initial}.json`).then((m) => {
+    const fromCookie = getInitialLocale()
+    const effective = initialLocale ?? fromCookie
+    setLocaleState(effective)
+    import(`./dictionaries/${effective}.json`).then((m) => {
       setDict(m.default)
       setReady(true)
     })
-  }, [])
+  }, [initialLocale])
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale)

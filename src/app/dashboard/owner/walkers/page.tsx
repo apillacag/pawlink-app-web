@@ -7,9 +7,10 @@ import { Badge } from "@/components/ui/Badge"
 import { Button } from "@/components/ui/Button"
 import { Star, MapPin, Wallet } from "lucide-react"
 import Link from "next/link"
+import { formatCurrency } from "@/lib/utils"
 
 export default async function WalkersPage() {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "OWNER") redirect("/dashboard")
 
@@ -65,7 +66,7 @@ export default async function WalkersPage() {
                     {profile?.experience && <p>{t("walkers.experience")}: {profile.experience} {t("walkers.years")}</p>}
                     <div className="flex items-center gap-1">
                       <Wallet className="h-4 w-4" />
-                      <span className="font-medium text-gray-900">S/{profile?.ratePerWalk.toFixed(2)}</span>
+                      <span className="font-medium text-gray-900">{formatCurrency(profile?.ratePerWalk || 0, locale)}</span>
                       <span>{t("walkers.perWalk")}</span>
                     </div>
                   </div>

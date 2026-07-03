@@ -1,15 +1,18 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { useI18n } from "@/i18n/context"
 import { localeLabels, type Locale } from "@/i18n/config"
 import { Globe } from "lucide-react"
 
 export function LanguageToggle() {
   const { locale, setLocale } = useI18n()
+  const router = useRouter()
 
   const toggle = () => {
     const next: Locale = locale === "en" ? "es" : "en"
     setLocale(next)
+    router.refresh()
   }
 
   return (

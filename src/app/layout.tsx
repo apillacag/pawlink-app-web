@@ -28,7 +28,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <Providers>
+        <Providers locale={locale}>
           <div className="flex min-h-screen flex-col">
             <Navbar user={user} />
             <main className="flex-1">{children}</main>

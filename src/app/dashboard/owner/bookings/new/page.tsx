@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
 import { Card, CardContent } from "@/components/ui/Card"
 import { useI18n } from "@/i18n/context"
+import { formatCurrency } from "@/lib/utils"
 
 interface Pet {
   id: string
@@ -22,7 +23,7 @@ interface Professional {
 }
 
 export default function NewBookingPage() {
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
   const router = useRouter()
   const searchParams = useSearchParams()
   const walkerId = searchParams.get("walkerId")
@@ -133,7 +134,7 @@ export default function NewBookingPage() {
               <div className={`rounded-lg p-4 text-sm ${isConsultation ? "bg-purple-50 border border-purple-200" : "bg-emerald-50 border border-emerald-200"}`}>
                 <p className="font-medium text-gray-900">{professional.name}</p>
                 <p className={`font-medium ${isConsultation ? "text-purple-600" : "text-emerald-600"}`}>
-                  S/{professional.rate.toFixed(2)} {isConsultation ? t("walkers.perSession") : t("walkers.perWalk")}
+                  {formatCurrency(professional.rate, locale)} {isConsultation ? t("walkers.perSession") : t("walkers.perWalk")}
                 </p>
               </div>
 

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { getCurrentUser } from "@/lib/auth"
-import stripe from "@/lib/stripe"
+import getStripe from "@/lib/stripe"
 
 export async function POST(req: Request) {
   const user = await getCurrentUser()
@@ -24,6 +24,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid booking amount" }, { status: 400 })
     }
 
+    const stripe = getStripe()
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],

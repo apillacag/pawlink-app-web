@@ -1,10 +1,15 @@
 import Stripe from "stripe"
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "")
+function getStripe(): Stripe {
+  const key = process.env.STRIPE_SECRET_KEY
+  if (!key) throw new Error("STRIPE_SECRET_KEY is not set")
+  return new Stripe(key)
+}
 
-export default stripe
+export default getStripe
 
 export async function createPaymentIntent(amount: number, bookingId: string) {
+  const stripe = getStripe()
   const intent = await stripe.paymentIntents.create({
     amount: Math.round(amount * 100),
     currency: "pen",
@@ -15,5 +20,6 @@ export async function createPaymentIntent(amount: number, bookingId: string) {
 }
 
 export async function retrievePaymentIntent(id: string) {
+  const stripe = getStripe()
   return stripe.paymentIntents.retrieve(id)
 }

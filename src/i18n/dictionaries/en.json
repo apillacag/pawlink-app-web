@@ -201,6 +201,7 @@
     "inProgress": "In Progress",
     "completed": "Completed",
     "cancelled": "Cancelled",
+    "pendingPayment": "Pending Payment",
     "walkDetails": "Walk Details",
     "walkUpdates": "Walk Updates",
     "updateNote": "update",
@@ -218,6 +219,9 @@
     "notesPlaceholderConsultation": "Describe your concerns...",
     "bookWalkButton": "Book Walk",
     "bookConsultationButton": "Book Consultation"
+  },
+  "walkPayments": {
+    "completedPayments": "Completed Payments"
   },
   "walkers": {
     "title": "Find Dog Walkers",
@@ -347,7 +351,12 @@
     "roleAdmin": "Admin",
     "roleWalker": "Walker",
     "roleSpecialist": "Specialist",
-    "roleOwner": "Owner"
+    "roleOwner": "Owner",
+    "todayRevenue": "Today's Revenue",
+    "totalTransactions": "Total Transactions",
+    "latestPayments": "Latest Payments",
+    "managePayments": "Manage Payments",
+    "managePaymentsDesc": "View all platform payments"
   },
   "about": {
     "title": "About PawLink",
@@ -371,6 +380,37 @@
     "innovationDesc": "We continuously leverage technology to improve pet care services and user experience.",
     "responsibility": "Responsibility",
     "responsibilityDesc": "We take our responsibility seriously, ensuring reliable and professional pet care services."
+  },
+  "payments": {
+    "title": "Payment",
+    "selectMethod": "Select Payment Method",
+    "card": "Credit/Debit Card",
+    "cardDesc": "Pay securely with Visa, Mastercard, or American Express",
+    "yape": "Yape",
+    "yapeDesc": "Pay with Yape, scan the QR code",
+    "plin": "Plin",
+    "plinDesc": "Pay with Plin, scan the QR code",
+    "wallet": "PawLink Wallet",
+    "walletDesc": "Pay with your PawLink Wallet balance",
+    "balance": "Wallet Balance",
+    "insufficientBalance": "Insufficient balance",
+    "payNow": "Pay Now",
+    "processing": "Processing payment...",
+    "success": "Payment Successful!",
+    "successDesc": "Your booking has been confirmed. You will be redirected shortly.",
+    "failed": "Payment Failed",
+    "failedDesc": "Something went wrong. Please try again.",
+    "scanQR": "Scan this QR code with your",
+    "simulating": "Waiting for payment confirmation...",
+    "manualConfirm": "I've made the payment",
+    "total": "Total Amount",
+    "history": "Payment History",
+    "noPayments": "No payments found",
+    "method": "Method",
+    "reference": "Reference",
+    "datePaid": "Date",
+    "paidBy": "Paid by",
+    "pendingPayment": "Pending Payment"
   },
   "walkActions": {
     "confirm": "Confirm",

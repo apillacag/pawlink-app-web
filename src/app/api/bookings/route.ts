@@ -60,7 +60,7 @@ export async function POST(req: Request) {
         notes: body.notes || null,
         totalAmount,
         commission,
-        status: "PENDING",
+        status: "PENDING_PAYMENT",
       },
       include: {
         pet: true,

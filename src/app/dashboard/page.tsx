@@ -18,7 +18,7 @@ export default async function DashboardPage() {
     const petCount = await prisma.pet.count({ where: { ownerId: user.id } })
     const bookingCount = await prisma.booking.count({ where: { ownerId: user.id } })
     const upcomingBookings = await prisma.booking.count({
-      where: { ownerId: user.id, status: { in: ["PENDING", "CONFIRMED"] } },
+      where: { ownerId: user.id, status: { in: ["PENDING", "PENDING_PAYMENT", "CONFIRMED"] } },
     })
     stats = [
       { label: t("dashboard.totalPets"), value: petCount.toString(), icon: Dog, color: "text-emerald-600" },
@@ -109,6 +109,7 @@ export default async function DashboardPage() {
                   <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${
                     booking.status === "COMPLETED" ? "bg-emerald-100 text-emerald-700" :
                     booking.status === "PENDING" ? "bg-amber-100 text-amber-700" :
+                    booking.status === "PENDING_PAYMENT" ? "bg-amber-100 text-amber-700" :
                     booking.status === "CONFIRMED" ? "bg-blue-100 text-blue-700" :
                     booking.status === "IN_PROGRESS" ? "bg-purple-100 text-purple-700" :
                     "bg-red-100 text-red-700"

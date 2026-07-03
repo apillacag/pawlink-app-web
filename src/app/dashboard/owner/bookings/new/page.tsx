@@ -101,7 +101,7 @@ export default function NewBookingPage() {
       if (!res.ok) {
         setError(data.error || t("common.somethingWentWrong"))
       } else {
-        window.location.href = "/dashboard/owner/bookings"
+        window.location.href = `/dashboard/owner/payment/${data.booking.id}`
       }
     } catch {
       setError(t("common.somethingWentWrong"))

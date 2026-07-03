@@ -20,8 +20,18 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  walletBalance: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  walletBalance: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -36,6 +46,7 @@ export type UserMinAggregateOutputType = {
   googleId: string | null
   isVerified: boolean | null
   isPremium: boolean | null
+  walletBalance: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -52,6 +63,7 @@ export type UserMaxAggregateOutputType = {
   googleId: string | null
   isVerified: boolean | null
   isPremium: boolean | null
+  walletBalance: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -68,11 +80,20 @@ export type UserCountAggregateOutputType = {
   googleId: number
   isVerified: number
   isPremium: number
+  walletBalance: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  walletBalance?: true
+}
+
+export type UserSumAggregateInputType = {
+  walletBalance?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -86,6 +107,7 @@ export type UserMinAggregateInputType = {
   googleId?: true
   isVerified?: true
   isPremium?: true
+  walletBalance?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -102,6 +124,7 @@ export type UserMaxAggregateInputType = {
   googleId?: true
   isVerified?: true
   isPremium?: true
+  walletBalance?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -118,6 +141,7 @@ export type UserCountAggregateInputType = {
   googleId?: true
   isVerified?: true
   isPremium?: true
+  walletBalance?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -161,6 +185,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -191,6 +227,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -207,9 +245,12 @@ export type UserGroupByOutputType = {
   googleId: string | null
   isVerified: boolean
   isPremium: boolean
+  walletBalance: number
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -244,6 +285,7 @@ export type UserWhereInput = {
   googleId?: Prisma.StringNullableFilter<"User"> | string | null
   isVerified?: Prisma.BoolFilter<"User"> | boolean
   isPremium?: Prisma.BoolFilter<"User"> | boolean
+  walletBalance?: Prisma.FloatFilter<"User"> | number
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   pets?: Prisma.PetListRelationFilter
@@ -255,6 +297,7 @@ export type UserWhereInput = {
   specialistProfile?: Prisma.XOR<Prisma.SpecialistProfileNullableScalarRelationFilter, Prisma.SpecialistProfileWhereInput> | null
   notifications?: Prisma.NotificationListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  walletTransactions?: Prisma.WalletTransactionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -269,6 +312,7 @@ export type UserOrderByWithRelationInput = {
   googleId?: Prisma.SortOrderInput | Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isPremium?: Prisma.SortOrder
+  walletBalance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   pets?: Prisma.PetOrderByRelationAggregateInput
@@ -280,6 +324,7 @@ export type UserOrderByWithRelationInput = {
   specialistProfile?: Prisma.SpecialistProfileOrderByWithRelationInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
+  walletTransactions?: Prisma.WalletTransactionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -297,6 +342,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   provider?: Prisma.StringFilter<"User"> | string
   isVerified?: Prisma.BoolFilter<"User"> | boolean
   isPremium?: Prisma.BoolFilter<"User"> | boolean
+  walletBalance?: Prisma.FloatFilter<"User"> | number
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   pets?: Prisma.PetListRelationFilter
@@ -308,6 +354,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   specialistProfile?: Prisma.XOR<Prisma.SpecialistProfileNullableScalarRelationFilter, Prisma.SpecialistProfileWhereInput> | null
   notifications?: Prisma.NotificationListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  walletTransactions?: Prisma.WalletTransactionListRelationFilter
 }, "id" | "email" | "googleId">
 
 export type UserOrderByWithAggregationInput = {
@@ -322,11 +369,14 @@ export type UserOrderByWithAggregationInput = {
   googleId?: Prisma.SortOrderInput | Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isPremium?: Prisma.SortOrder
+  walletBalance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -344,6 +394,7 @@ export type UserScalarWhereWithAggregatesInput = {
   googleId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   isPremium?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  walletBalance?: Prisma.FloatWithAggregatesFilter<"User"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -360,6 +411,7 @@ export type UserCreateInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetCreateNestedManyWithoutOwnerInput
@@ -371,6 +423,7 @@ export type UserCreateInput = {
   specialistProfile?: Prisma.SpecialistProfileCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -385,6 +438,7 @@ export type UserUncheckedCreateInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetUncheckedCreateNestedManyWithoutOwnerInput
@@ -396,6 +450,7 @@ export type UserUncheckedCreateInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -410,6 +465,7 @@ export type UserUpdateInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUpdateManyWithoutOwnerNestedInput
@@ -421,6 +477,7 @@ export type UserUpdateInput = {
   specialistProfile?: Prisma.SpecialistProfileUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -435,6 +492,7 @@ export type UserUncheckedUpdateInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUncheckedUpdateManyWithoutOwnerNestedInput
@@ -446,6 +504,7 @@ export type UserUncheckedUpdateInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -460,6 +519,7 @@ export type UserCreateManyInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -476,6 +536,7 @@ export type UserUpdateManyMutationInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -492,6 +553,7 @@ export type UserUncheckedUpdateManyInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -508,8 +570,13 @@ export type UserCountOrderByAggregateInput = {
   googleId?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isPremium?: Prisma.SortOrder
+  walletBalance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  walletBalance?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -524,6 +591,7 @@ export type UserMaxOrderByAggregateInput = {
   googleId?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isPremium?: Prisma.SortOrder
+  walletBalance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -540,8 +608,13 @@ export type UserMinOrderByAggregateInput = {
   googleId?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isPremium?: Prisma.SortOrder
+  walletBalance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  walletBalance?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -564,6 +637,14 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -684,6 +765,20 @@ export type UserUpdateOneRequiredWithoutPaymentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPaymentsInput, Prisma.UserUpdateWithoutPaymentsInput>, Prisma.UserUncheckedUpdateWithoutPaymentsInput>
 }
 
+export type UserCreateNestedOneWithoutWalletTransactionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWalletTransactionsInput, Prisma.UserUncheckedCreateWithoutWalletTransactionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWalletTransactionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutWalletTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWalletTransactionsInput, Prisma.UserUncheckedCreateWithoutWalletTransactionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWalletTransactionsInput
+  upsert?: Prisma.UserUpsertWithoutWalletTransactionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWalletTransactionsInput, Prisma.UserUpdateWithoutWalletTransactionsInput>, Prisma.UserUncheckedUpdateWithoutWalletTransactionsInput>
+}
+
 export type UserCreateNestedOneWithoutNotificationsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
@@ -710,6 +805,7 @@ export type UserCreateWithoutPetsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   bookings?: Prisma.BookingCreateNestedManyWithoutOwnerInput
@@ -720,6 +816,7 @@ export type UserCreateWithoutPetsInput = {
   specialistProfile?: Prisma.SpecialistProfileCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPetsInput = {
@@ -734,6 +831,7 @@ export type UserUncheckedCreateWithoutPetsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOwnerInput
@@ -744,6 +842,7 @@ export type UserUncheckedCreateWithoutPetsInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPetsInput = {
@@ -774,6 +873,7 @@ export type UserUpdateWithoutPetsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookings?: Prisma.BookingUpdateManyWithoutOwnerNestedInput
@@ -784,6 +884,7 @@ export type UserUpdateWithoutPetsInput = {
   specialistProfile?: Prisma.SpecialistProfileUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPetsInput = {
@@ -798,6 +899,7 @@ export type UserUncheckedUpdateWithoutPetsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutOwnerNestedInput
@@ -808,6 +910,7 @@ export type UserUncheckedUpdateWithoutPetsInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWalkerProfileInput = {
@@ -822,6 +925,7 @@ export type UserCreateWithoutWalkerProfileInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetCreateNestedManyWithoutOwnerInput
@@ -832,6 +936,7 @@ export type UserCreateWithoutWalkerProfileInput = {
   specialistProfile?: Prisma.SpecialistProfileCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWalkerProfileInput = {
@@ -846,6 +951,7 @@ export type UserUncheckedCreateWithoutWalkerProfileInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetUncheckedCreateNestedManyWithoutOwnerInput
@@ -856,6 +962,7 @@ export type UserUncheckedCreateWithoutWalkerProfileInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWalkerProfileInput = {
@@ -886,6 +993,7 @@ export type UserUpdateWithoutWalkerProfileInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUpdateManyWithoutOwnerNestedInput
@@ -896,6 +1004,7 @@ export type UserUpdateWithoutWalkerProfileInput = {
   specialistProfile?: Prisma.SpecialistProfileUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWalkerProfileInput = {
@@ -910,6 +1019,7 @@ export type UserUncheckedUpdateWithoutWalkerProfileInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUncheckedUpdateManyWithoutOwnerNestedInput
@@ -920,6 +1030,7 @@ export type UserUncheckedUpdateWithoutWalkerProfileInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSpecialistProfileInput = {
@@ -934,6 +1045,7 @@ export type UserCreateWithoutSpecialistProfileInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetCreateNestedManyWithoutOwnerInput
@@ -944,6 +1056,7 @@ export type UserCreateWithoutSpecialistProfileInput = {
   walkerProfile?: Prisma.WalkerProfileCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSpecialistProfileInput = {
@@ -958,6 +1071,7 @@ export type UserUncheckedCreateWithoutSpecialistProfileInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetUncheckedCreateNestedManyWithoutOwnerInput
@@ -968,6 +1082,7 @@ export type UserUncheckedCreateWithoutSpecialistProfileInput = {
   walkerProfile?: Prisma.WalkerProfileUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSpecialistProfileInput = {
@@ -998,6 +1113,7 @@ export type UserUpdateWithoutSpecialistProfileInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUpdateManyWithoutOwnerNestedInput
@@ -1008,6 +1124,7 @@ export type UserUpdateWithoutSpecialistProfileInput = {
   walkerProfile?: Prisma.WalkerProfileUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSpecialistProfileInput = {
@@ -1022,6 +1139,7 @@ export type UserUncheckedUpdateWithoutSpecialistProfileInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1032,6 +1150,7 @@ export type UserUncheckedUpdateWithoutSpecialistProfileInput = {
   walkerProfile?: Prisma.WalkerProfileUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBookingsInput = {
@@ -1046,6 +1165,7 @@ export type UserCreateWithoutBookingsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetCreateNestedManyWithoutOwnerInput
@@ -1056,6 +1176,7 @@ export type UserCreateWithoutBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBookingsInput = {
@@ -1070,6 +1191,7 @@ export type UserUncheckedCreateWithoutBookingsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetUncheckedCreateNestedManyWithoutOwnerInput
@@ -1080,6 +1202,7 @@ export type UserUncheckedCreateWithoutBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBookingsInput = {
@@ -1099,6 +1222,7 @@ export type UserCreateWithoutWalkerBookingsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetCreateNestedManyWithoutOwnerInput
@@ -1109,6 +1233,7 @@ export type UserCreateWithoutWalkerBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWalkerBookingsInput = {
@@ -1123,6 +1248,7 @@ export type UserUncheckedCreateWithoutWalkerBookingsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetUncheckedCreateNestedManyWithoutOwnerInput
@@ -1133,6 +1259,7 @@ export type UserUncheckedCreateWithoutWalkerBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWalkerBookingsInput = {
@@ -1152,6 +1279,7 @@ export type UserCreateWithoutSpecialistBookingsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetCreateNestedManyWithoutOwnerInput
@@ -1162,6 +1290,7 @@ export type UserCreateWithoutSpecialistBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSpecialistBookingsInput = {
@@ -1176,6 +1305,7 @@ export type UserUncheckedCreateWithoutSpecialistBookingsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetUncheckedCreateNestedManyWithoutOwnerInput
@@ -1186,6 +1316,7 @@ export type UserUncheckedCreateWithoutSpecialistBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSpecialistBookingsInput = {
@@ -1216,6 +1347,7 @@ export type UserUpdateWithoutBookingsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUpdateManyWithoutOwnerNestedInput
@@ -1226,6 +1358,7 @@ export type UserUpdateWithoutBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBookingsInput = {
@@ -1240,6 +1373,7 @@ export type UserUncheckedUpdateWithoutBookingsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1250,6 +1384,7 @@ export type UserUncheckedUpdateWithoutBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutWalkerBookingsInput = {
@@ -1275,6 +1410,7 @@ export type UserUpdateWithoutWalkerBookingsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUpdateManyWithoutOwnerNestedInput
@@ -1285,6 +1421,7 @@ export type UserUpdateWithoutWalkerBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWalkerBookingsInput = {
@@ -1299,6 +1436,7 @@ export type UserUncheckedUpdateWithoutWalkerBookingsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1309,6 +1447,7 @@ export type UserUncheckedUpdateWithoutWalkerBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutSpecialistBookingsInput = {
@@ -1334,6 +1473,7 @@ export type UserUpdateWithoutSpecialistBookingsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUpdateManyWithoutOwnerNestedInput
@@ -1344,6 +1484,7 @@ export type UserUpdateWithoutSpecialistBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSpecialistBookingsInput = {
@@ -1358,6 +1499,7 @@ export type UserUncheckedUpdateWithoutSpecialistBookingsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1368,6 +1510,7 @@ export type UserUncheckedUpdateWithoutSpecialistBookingsInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReviewsInput = {
@@ -1382,6 +1525,7 @@ export type UserCreateWithoutReviewsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetCreateNestedManyWithoutOwnerInput
@@ -1392,6 +1536,7 @@ export type UserCreateWithoutReviewsInput = {
   specialistProfile?: Prisma.SpecialistProfileCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
@@ -1406,6 +1551,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetUncheckedCreateNestedManyWithoutOwnerInput
@@ -1416,6 +1562,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReviewsInput = {
@@ -1446,6 +1593,7 @@ export type UserUpdateWithoutReviewsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUpdateManyWithoutOwnerNestedInput
@@ -1456,6 +1604,7 @@ export type UserUpdateWithoutReviewsInput = {
   specialistProfile?: Prisma.SpecialistProfileUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -1470,6 +1619,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1480,6 +1630,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   specialistProfile?: Prisma.SpecialistProfileUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -1494,6 +1645,7 @@ export type UserCreateWithoutPaymentsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetCreateNestedManyWithoutOwnerInput
@@ -1504,6 +1656,7 @@ export type UserCreateWithoutPaymentsInput = {
   walkerProfile?: Prisma.WalkerProfileCreateNestedOneWithoutUserInput
   specialistProfile?: Prisma.SpecialistProfileCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -1518,6 +1671,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetUncheckedCreateNestedManyWithoutOwnerInput
@@ -1528,6 +1682,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   walkerProfile?: Prisma.WalkerProfileUncheckedCreateNestedOneWithoutUserInput
   specialistProfile?: Prisma.SpecialistProfileUncheckedCreateNestedOneWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -1558,6 +1713,7 @@ export type UserUpdateWithoutPaymentsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUpdateManyWithoutOwnerNestedInput
@@ -1568,6 +1724,7 @@ export type UserUpdateWithoutPaymentsInput = {
   walkerProfile?: Prisma.WalkerProfileUpdateOneWithoutUserNestedInput
   specialistProfile?: Prisma.SpecialistProfileUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -1582,6 +1739,7 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1592,6 +1750,127 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   walkerProfile?: Prisma.WalkerProfileUncheckedUpdateOneWithoutUserNestedInput
   specialistProfile?: Prisma.SpecialistProfileUncheckedUpdateOneWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutWalletTransactionsInput = {
+  id?: string
+  email: string
+  passwordHash?: string | null
+  name: string
+  phone?: string | null
+  avatarUrl?: string | null
+  role?: string
+  provider?: string
+  googleId?: string | null
+  isVerified?: boolean
+  isPremium?: boolean
+  walletBalance?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  pets?: Prisma.PetCreateNestedManyWithoutOwnerInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutOwnerInput
+  walkerBookings?: Prisma.BookingCreateNestedManyWithoutWalkerInput
+  specialistBookings?: Prisma.BookingCreateNestedManyWithoutSpecialistInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutReviewerInput
+  walkerProfile?: Prisma.WalkerProfileCreateNestedOneWithoutUserInput
+  specialistProfile?: Prisma.SpecialistProfileCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutWalletTransactionsInput = {
+  id?: string
+  email: string
+  passwordHash?: string | null
+  name: string
+  phone?: string | null
+  avatarUrl?: string | null
+  role?: string
+  provider?: string
+  googleId?: string | null
+  isVerified?: boolean
+  isPremium?: boolean
+  walletBalance?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  pets?: Prisma.PetUncheckedCreateNestedManyWithoutOwnerInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutOwnerInput
+  walkerBookings?: Prisma.BookingUncheckedCreateNestedManyWithoutWalkerInput
+  specialistBookings?: Prisma.BookingUncheckedCreateNestedManyWithoutSpecialistInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReviewerInput
+  walkerProfile?: Prisma.WalkerProfileUncheckedCreateNestedOneWithoutUserInput
+  specialistProfile?: Prisma.SpecialistProfileUncheckedCreateNestedOneWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutWalletTransactionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutWalletTransactionsInput, Prisma.UserUncheckedCreateWithoutWalletTransactionsInput>
+}
+
+export type UserUpsertWithoutWalletTransactionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutWalletTransactionsInput, Prisma.UserUncheckedUpdateWithoutWalletTransactionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutWalletTransactionsInput, Prisma.UserUncheckedCreateWithoutWalletTransactionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutWalletTransactionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutWalletTransactionsInput, Prisma.UserUncheckedUpdateWithoutWalletTransactionsInput>
+}
+
+export type UserUpdateWithoutWalletTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  pets?: Prisma.PetUpdateManyWithoutOwnerNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutOwnerNestedInput
+  walkerBookings?: Prisma.BookingUpdateManyWithoutWalkerNestedInput
+  specialistBookings?: Prisma.BookingUpdateManyWithoutSpecialistNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutReviewerNestedInput
+  walkerProfile?: Prisma.WalkerProfileUpdateOneWithoutUserNestedInput
+  specialistProfile?: Prisma.SpecialistProfileUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutWalletTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  pets?: Prisma.PetUncheckedUpdateManyWithoutOwnerNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutOwnerNestedInput
+  walkerBookings?: Prisma.BookingUncheckedUpdateManyWithoutWalkerNestedInput
+  specialistBookings?: Prisma.BookingUncheckedUpdateManyWithoutSpecialistNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  walkerProfile?: Prisma.WalkerProfileUncheckedUpdateOneWithoutUserNestedInput
+  specialistProfile?: Prisma.SpecialistProfileUncheckedUpdateOneWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -1606,6 +1885,7 @@ export type UserCreateWithoutNotificationsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetCreateNestedManyWithoutOwnerInput
@@ -1616,6 +1896,7 @@ export type UserCreateWithoutNotificationsInput = {
   walkerProfile?: Prisma.WalkerProfileCreateNestedOneWithoutUserInput
   specialistProfile?: Prisma.SpecialistProfileCreateNestedOneWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -1630,6 +1911,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   googleId?: string | null
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   pets?: Prisma.PetUncheckedCreateNestedManyWithoutOwnerInput
@@ -1640,6 +1922,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   walkerProfile?: Prisma.WalkerProfileUncheckedCreateNestedOneWithoutUserInput
   specialistProfile?: Prisma.SpecialistProfileUncheckedCreateNestedOneWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -1670,6 +1953,7 @@ export type UserUpdateWithoutNotificationsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUpdateManyWithoutOwnerNestedInput
@@ -1680,6 +1964,7 @@ export type UserUpdateWithoutNotificationsInput = {
   walkerProfile?: Prisma.WalkerProfileUpdateOneWithoutUserNestedInput
   specialistProfile?: Prisma.SpecialistProfileUpdateOneWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -1694,6 +1979,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  walletBalance?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pets?: Prisma.PetUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1704,6 +1990,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   walkerProfile?: Prisma.WalkerProfileUncheckedUpdateOneWithoutUserNestedInput
   specialistProfile?: Prisma.SpecialistProfileUncheckedUpdateOneWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1719,6 +2006,7 @@ export type UserCountOutputType = {
   reviews: number
   notifications: number
   payments: number
+  walletTransactions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1729,6 +2017,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   reviews?: boolean | UserCountOutputTypeCountReviewsArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   payments?: boolean | UserCountOutputTypeCountPaymentsArgs
+  walletTransactions?: boolean | UserCountOutputTypeCountWalletTransactionsArgs
 }
 
 /**
@@ -1790,6 +2079,13 @@ export type UserCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.PaymentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountWalletTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WalletTransactionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1803,6 +2099,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   googleId?: boolean
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   pets?: boolean | Prisma.User$petsArgs<ExtArgs>
@@ -1814,6 +2111,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   specialistProfile?: boolean | Prisma.User$specialistProfileArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
+  walletTransactions?: boolean | Prisma.User$walletTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1829,6 +2127,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   googleId?: boolean
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -1845,6 +2144,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   googleId?: boolean
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -1861,11 +2161,12 @@ export type UserSelectScalar = {
   googleId?: boolean
   isVerified?: boolean
   isPremium?: boolean
+  walletBalance?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "phone" | "avatarUrl" | "role" | "provider" | "googleId" | "isVerified" | "isPremium" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "phone" | "avatarUrl" | "role" | "provider" | "googleId" | "isVerified" | "isPremium" | "walletBalance" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   pets?: boolean | Prisma.User$petsArgs<ExtArgs>
   bookings?: boolean | Prisma.User$bookingsArgs<ExtArgs>
@@ -1876,6 +2177,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   specialistProfile?: boolean | Prisma.User$specialistProfileArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
+  walletTransactions?: boolean | Prisma.User$walletTransactionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1893,6 +2195,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     specialistProfile: Prisma.$SpecialistProfilePayload<ExtArgs> | null
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     payments: Prisma.$PaymentPayload<ExtArgs>[]
+    walletTransactions: Prisma.$WalletTransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1906,6 +2209,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     googleId: string | null
     isVerified: boolean
     isPremium: boolean
+    walletBalance: number
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -2311,6 +2615,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   specialistProfile<T extends Prisma.User$specialistProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$specialistProfileArgs<ExtArgs>>): Prisma.Prisma__SpecialistProfileClient<runtime.Types.Result.GetResult<Prisma.$SpecialistProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.User$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  walletTransactions<T extends Prisma.User$walletTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$walletTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WalletTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2351,6 +2656,7 @@ export interface UserFieldRefs {
   readonly googleId: Prisma.FieldRef<"User", 'String'>
   readonly isVerified: Prisma.FieldRef<"User", 'Boolean'>
   readonly isPremium: Prisma.FieldRef<"User", 'Boolean'>
+  readonly walletBalance: Prisma.FieldRef<"User", 'Float'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -2949,6 +3255,30 @@ export type User$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * User.walletTransactions
+ */
+export type User$walletTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WalletTransaction
+   */
+  select?: Prisma.WalletTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WalletTransaction
+   */
+  omit?: Prisma.WalletTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WalletTransactionInclude<ExtArgs> | null
+  where?: Prisma.WalletTransactionWhereInput
+  orderBy?: Prisma.WalletTransactionOrderByWithRelationInput | Prisma.WalletTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.WalletTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WalletTransactionScalarFieldEnum | Prisma.WalletTransactionScalarFieldEnum[]
 }
 
 /**

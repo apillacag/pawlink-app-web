@@ -2,7 +2,7 @@ export type Role = "OWNER" | "WALKER" | "SPECIALIST" | "ADMIN"
 
 export type ServiceType = "WALKING" | "CONSULTATION"
 
-export type BookingStatus = "PENDING" | "CONFIRMED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED"
+export type BookingStatus = "PENDING" | "PENDING_PAYMENT" | "CONFIRMED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED"
 
 export interface UserProfile {
   id: string

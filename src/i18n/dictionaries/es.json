@@ -201,6 +201,7 @@
     "inProgress": "En Progreso",
     "completed": "Completado",
     "cancelled": "Cancelado",
+    "pendingPayment": "Pago Pendiente",
     "walkDetails": "Detalles del Paseo",
     "walkUpdates": "Actualizaciones",
     "updateNote": "actualización",
@@ -218,6 +219,9 @@
     "notesPlaceholderConsultation": "Describe tus inquietudes...",
     "bookWalkButton": "Reservar Paseo",
     "bookConsultationButton": "Reservar Consulta"
+  },
+  "walkPayments": {
+    "completedPayments": "Pagos Completados"
   },
   "walkers": {
     "title": "Buscar Paseadores",
@@ -347,7 +351,12 @@
     "roleAdmin": "Admin",
     "roleWalker": "Paseador",
     "roleSpecialist": "Especialista",
-    "roleOwner": "Dueño"
+    "roleOwner": "Dueño",
+    "todayRevenue": "Ingresos de Hoy",
+    "totalTransactions": "Total Transacciones",
+    "latestPayments": "Últimos Pagos",
+    "managePayments": "Gestionar Pagos",
+    "managePaymentsDesc": "Ver todos los pagos de la plataforma"
   },
   "about": {
     "title": "Sobre PawLink",
@@ -371,6 +380,37 @@
     "innovationDesc": "Aprovechamos la tecnología para mejorar los servicios de cuidado de mascotas y la experiencia del usuario.",
     "responsibility": "Responsabilidad",
     "responsibilityDesc": "Tomamos nuestra responsabilidad en serio, garantizando servicios de cuidado de mascotas confiables y profesionales."
+  },
+  "payments": {
+    "title": "Pago",
+    "selectMethod": "Seleccionar Método de Pago",
+    "card": "Tarjeta de Crédito/Débito",
+    "cardDesc": "Paga de forma segura con Visa, Mastercard o American Express",
+    "yape": "Yape",
+    "yapeDesc": "Paga con Yape, escanea el código QR",
+    "plin": "Plin",
+    "plinDesc": "Paga con Plin, escanea el código QR",
+    "wallet": "Billetera PawLink",
+    "walletDesc": "Paga con el saldo de tu Billetera PawLink",
+    "balance": "Saldo de Billetera",
+    "insufficientBalance": "Saldo insuficiente",
+    "payNow": "Pagar Ahora",
+    "processing": "Procesando pago...",
+    "success": "¡Pago Exitoso!",
+    "successDesc": "Tu reserva ha sido confirmada. Serás redirigido en breve.",
+    "failed": "Pago Fallido",
+    "failedDesc": "Algo salió mal. Por favor intenta de nuevo.",
+    "scanQR": "Escanea este código QR con tu aplicación",
+    "simulating": "Esperando confirmación del pago...",
+    "manualConfirm": "Ya hice el pago",
+    "total": "Monto Total",
+    "history": "Historial de Pagos",
+    "noPayments": "No se encontraron pagos",
+    "method": "Método",
+    "reference": "Referencia",
+    "datePaid": "Fecha",
+    "paidBy": "Pagado por",
+    "pendingPayment": "Pago Pendiente"
   },
   "walkActions": {
     "confirm": "Confirmar",

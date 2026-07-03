@@ -61,6 +61,7 @@ export const ModelName = {
   WalkUpdate: 'WalkUpdate',
   Review: 'Review',
   Payment: 'Payment',
+  WalletTransaction: 'WalletTransaction',
   Notification: 'Notification'
 } as const
 
@@ -92,6 +93,7 @@ export const UserScalarFieldEnum = {
   googleId: 'googleId',
   isVerified: 'isVerified',
   isPremium: 'isPremium',
+  walletBalance: 'walletBalance',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -244,12 +246,27 @@ export const PaymentScalarFieldEnum = {
   currency: 'currency',
   status: 'status',
   stripePaymentId: 'stripePaymentId',
+  reference: 'reference',
   method: 'method',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const WalletTransactionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  amount: 'amount',
+  description: 'description',
+  reference: 'reference',
+  balance: 'balance',
+  createdAt: 'createdAt'
+} as const
+
+export type WalletTransactionScalarFieldEnum = (typeof WalletTransactionScalarFieldEnum)[keyof typeof WalletTransactionScalarFieldEnum]
 
 
 export const NotificationScalarFieldEnum = {

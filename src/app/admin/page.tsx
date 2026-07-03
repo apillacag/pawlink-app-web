@@ -3,7 +3,7 @@ import { getCurrentUser } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
-import { Users, CalendarDays, Dog, Wallet, TrendingUp, UserCheck } from "lucide-react"
+import { Users, CalendarDays, Dog, Wallet as WalletIcon, TrendingUp, UserCheck } from "lucide-react"
 
 export default async function AdminPage() {
   const { t } = await getServerTranslations()
@@ -28,7 +28,7 @@ export default async function AdminPage() {
     { label: t("admin.totalPets"), value: totalPets, icon: Dog, color: "text-amber-600" },
     { label: t("admin.walkers"), value: totalWalkers, icon: UserCheck, color: "text-purple-600" },
     { label: t("admin.specialists"), value: totalSpecialists, icon: TrendingUp, color: "text-rose-600" },
-    { label: t("admin.revenue"), value: `S/${(revenue._sum.amount || 0).toFixed(2)}`, icon: Wallet, color: "text-emerald-600" },
+    { label: t("admin.revenue"), value: `S/${(revenue._sum.amount || 0).toFixed(2)}`, icon: WalletIcon, color: "text-emerald-600" },
   ]
 
   return (
@@ -70,6 +70,17 @@ export default async function AdminPage() {
                 <div>
                   <p className="font-semibold text-gray-900">{t("admin.manageBookings")}</p>
                   <p className="text-sm text-gray-500">{t("admin.manageBookingsDesc")}</p>
+                </div>
+              </CardContent>
+            </Card>
+          </a>
+          <a href="/admin/payments" className="block">
+            <Card className="hover:shadow-md transition-shadow cursor-pointer">
+              <CardContent className="p-6 flex items-center gap-4">
+                <WalletIcon className="h-10 w-10 text-emerald-600" />
+                <div>
+                  <p className="font-semibold text-gray-900">{t("admin.managePayments")}</p>
+                  <p className="text-sm text-gray-500">{t("admin.managePaymentsDesc")}</p>
                 </div>
               </CardContent>
             </Card>

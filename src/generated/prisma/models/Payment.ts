@@ -42,6 +42,7 @@ export type PaymentMinAggregateOutputType = {
   currency: string | null
   status: string | null
   stripePaymentId: string | null
+  reference: string | null
   method: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -55,6 +56,7 @@ export type PaymentMaxAggregateOutputType = {
   currency: string | null
   status: string | null
   stripePaymentId: string | null
+  reference: string | null
   method: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -68,6 +70,7 @@ export type PaymentCountAggregateOutputType = {
   currency: number
   status: number
   stripePaymentId: number
+  reference: number
   method: number
   createdAt: number
   updatedAt: number
@@ -91,6 +94,7 @@ export type PaymentMinAggregateInputType = {
   currency?: true
   status?: true
   stripePaymentId?: true
+  reference?: true
   method?: true
   createdAt?: true
   updatedAt?: true
@@ -104,6 +108,7 @@ export type PaymentMaxAggregateInputType = {
   currency?: true
   status?: true
   stripePaymentId?: true
+  reference?: true
   method?: true
   createdAt?: true
   updatedAt?: true
@@ -117,6 +122,7 @@ export type PaymentCountAggregateInputType = {
   currency?: true
   status?: true
   stripePaymentId?: true
+  reference?: true
   method?: true
   createdAt?: true
   updatedAt?: true
@@ -217,6 +223,7 @@ export type PaymentGroupByOutputType = {
   currency: string
   status: string
   stripePaymentId: string | null
+  reference: string | null
   method: string | null
   createdAt: Date
   updatedAt: Date
@@ -253,6 +260,7 @@ export type PaymentWhereInput = {
   currency?: Prisma.StringFilter<"Payment"> | string
   status?: Prisma.StringFilter<"Payment"> | string
   stripePaymentId?: Prisma.StringNullableFilter<"Payment"> | string | null
+  reference?: Prisma.StringNullableFilter<"Payment"> | string | null
   method?: Prisma.StringNullableFilter<"Payment"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
@@ -268,6 +276,7 @@ export type PaymentOrderByWithRelationInput = {
   currency?: Prisma.SortOrder
   status?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  reference?: Prisma.SortOrderInput | Prisma.SortOrder
   method?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -286,6 +295,7 @@ export type PaymentWhereUniqueInput = Prisma.AtLeast<{
   currency?: Prisma.StringFilter<"Payment"> | string
   status?: Prisma.StringFilter<"Payment"> | string
   stripePaymentId?: Prisma.StringNullableFilter<"Payment"> | string | null
+  reference?: Prisma.StringNullableFilter<"Payment"> | string | null
   method?: Prisma.StringNullableFilter<"Payment"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
@@ -301,6 +311,7 @@ export type PaymentOrderByWithAggregationInput = {
   currency?: Prisma.SortOrder
   status?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  reference?: Prisma.SortOrderInput | Prisma.SortOrder
   method?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -322,6 +333,7 @@ export type PaymentScalarWhereWithAggregatesInput = {
   currency?: Prisma.StringWithAggregatesFilter<"Payment"> | string
   status?: Prisma.StringWithAggregatesFilter<"Payment"> | string
   stripePaymentId?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
+  reference?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
   method?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Payment"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Payment"> | Date | string
@@ -333,6 +345,7 @@ export type PaymentCreateInput = {
   currency?: string
   status?: string
   stripePaymentId?: string | null
+  reference?: string | null
   method?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -348,6 +361,7 @@ export type PaymentUncheckedCreateInput = {
   currency?: string
   status?: string
   stripePaymentId?: string | null
+  reference?: string | null
   method?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -359,6 +373,7 @@ export type PaymentUpdateInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -374,6 +389,7 @@ export type PaymentUncheckedUpdateInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -387,6 +403,7 @@ export type PaymentCreateManyInput = {
   currency?: string
   status?: string
   stripePaymentId?: string | null
+  reference?: string | null
   method?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -398,6 +415,7 @@ export type PaymentUpdateManyMutationInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -411,6 +429,7 @@ export type PaymentUncheckedUpdateManyInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -439,6 +458,7 @@ export type PaymentCountOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   status?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrder
+  reference?: Prisma.SortOrder
   method?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -456,6 +476,7 @@ export type PaymentMaxOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   status?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrder
+  reference?: Prisma.SortOrder
   method?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -469,6 +490,7 @@ export type PaymentMinOrderByAggregateInput = {
   currency?: Prisma.SortOrder
   status?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrder
+  reference?: Prisma.SortOrder
   method?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -558,6 +580,7 @@ export type PaymentCreateWithoutUserInput = {
   currency?: string
   status?: string
   stripePaymentId?: string | null
+  reference?: string | null
   method?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -571,6 +594,7 @@ export type PaymentUncheckedCreateWithoutUserInput = {
   currency?: string
   status?: string
   stripePaymentId?: string | null
+  reference?: string | null
   method?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -613,6 +637,7 @@ export type PaymentScalarWhereInput = {
   currency?: Prisma.StringFilter<"Payment"> | string
   status?: Prisma.StringFilter<"Payment"> | string
   stripePaymentId?: Prisma.StringNullableFilter<"Payment"> | string | null
+  reference?: Prisma.StringNullableFilter<"Payment"> | string | null
   method?: Prisma.StringNullableFilter<"Payment"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
@@ -624,6 +649,7 @@ export type PaymentCreateWithoutBookingInput = {
   currency?: string
   status?: string
   stripePaymentId?: string | null
+  reference?: string | null
   method?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -637,6 +663,7 @@ export type PaymentUncheckedCreateWithoutBookingInput = {
   currency?: string
   status?: string
   stripePaymentId?: string | null
+  reference?: string | null
   method?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -664,6 +691,7 @@ export type PaymentUpdateWithoutBookingInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -677,6 +705,7 @@ export type PaymentUncheckedUpdateWithoutBookingInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -689,6 +718,7 @@ export type PaymentCreateManyUserInput = {
   currency?: string
   status?: string
   stripePaymentId?: string | null
+  reference?: string | null
   method?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -700,6 +730,7 @@ export type PaymentUpdateWithoutUserInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -713,6 +744,7 @@ export type PaymentUncheckedUpdateWithoutUserInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -725,6 +757,7 @@ export type PaymentUncheckedUpdateManyWithoutUserInput = {
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   method?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -740,6 +773,7 @@ export type PaymentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   currency?: boolean
   status?: boolean
   stripePaymentId?: boolean
+  reference?: boolean
   method?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -755,6 +789,7 @@ export type PaymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   currency?: boolean
   status?: boolean
   stripePaymentId?: boolean
+  reference?: boolean
   method?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -770,6 +805,7 @@ export type PaymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   currency?: boolean
   status?: boolean
   stripePaymentId?: boolean
+  reference?: boolean
   method?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -785,12 +821,13 @@ export type PaymentSelectScalar = {
   currency?: boolean
   status?: boolean
   stripePaymentId?: boolean
+  reference?: boolean
   method?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bookingId" | "userId" | "amount" | "currency" | "status" | "stripePaymentId" | "method" | "createdAt" | "updatedAt", ExtArgs["result"]["payment"]>
+export type PaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bookingId" | "userId" | "amount" | "currency" | "status" | "stripePaymentId" | "reference" | "method" | "createdAt" | "updatedAt", ExtArgs["result"]["payment"]>
 export type PaymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   booking?: boolean | Prisma.BookingDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -818,6 +855,7 @@ export type $PaymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     currency: string
     status: string
     stripePaymentId: string | null
+    reference: string | null
     method: string | null
     createdAt: Date
     updatedAt: Date
@@ -1253,6 +1291,7 @@ export interface PaymentFieldRefs {
   readonly currency: Prisma.FieldRef<"Payment", 'String'>
   readonly status: Prisma.FieldRef<"Payment", 'String'>
   readonly stripePaymentId: Prisma.FieldRef<"Payment", 'String'>
+  readonly reference: Prisma.FieldRef<"Payment", 'String'>
   readonly method: Prisma.FieldRef<"Payment", 'String'>
   readonly createdAt: Prisma.FieldRef<"Payment", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Payment", 'DateTime'>

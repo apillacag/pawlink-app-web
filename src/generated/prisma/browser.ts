@@ -68,6 +68,11 @@ export type Review = Prisma.ReviewModel
  */
 export type Payment = Prisma.PaymentModel
 /**
+ * Model WalletTransaction
+ * 
+ */
+export type WalletTransaction = Prisma.WalletTransactionModel
+/**
  * Model Notification
  * 
  */

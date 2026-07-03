@@ -33,6 +33,11 @@ export function WalkActions({ bookingId, status, type = "walk" }: WalkActionsPro
 
   return (
     <div className="flex flex-wrap gap-2">
+      {status === "PENDING_PAYMENT" && (
+        <span className="inline-flex items-center rounded-lg bg-amber-50 border border-amber-200 px-3 py-1.5 text-sm text-amber-700">
+          {t("bookings.pendingPayment")}
+        </span>
+      )}
       {status === "PENDING" && (
         <Button size="sm" onClick={() => updateStatus("CONFIRMED")} loading={loading === "CONFIRMED"}>
           {t("walkActions.confirm")}

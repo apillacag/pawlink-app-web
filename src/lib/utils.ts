@@ -31,6 +31,7 @@ export function formatDateTime(date: Date | string, locale = "en-US"): string {
 export function translateStatus(t: (key: string) => string, status: string): string {
   const labels: Record<string, string> = {
     PENDING: t("bookings.pending"),
+    PENDING_PAYMENT: t("bookings.pendingPayment"),
     CONFIRMED: t("bookings.confirmed"),
     IN_PROGRESS: t("bookings.inProgress"),
     COMPLETED: t("bookings.completed"),

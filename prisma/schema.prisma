@@ -19,18 +19,20 @@ model User {
   googleId      String?  @unique
   isVerified    Boolean  @default(false)
   isPremium     Boolean  @default(false)
+  walletBalance Float    @default(100.0)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  pets             Pet[]
-  bookings         Booking[]           @relation("OwnerBookings")
-  walkerBookings   Booking[]           @relation("WalkerBookings")
-  specialistBookings Booking[]         @relation("SpecialistBookings")
-  reviews          Review[]
-  walkerProfile    WalkerProfile?
+  pets              Pet[]
+  bookings          Booking[]           @relation("OwnerBookings")
+  walkerBookings    Booking[]           @relation("WalkerBookings")
+  specialistBookings Booking[]          @relation("SpecialistBookings")
+  reviews           Review[]
+  walkerProfile     WalkerProfile?
   specialistProfile SpecialistProfile?
-  notifications    Notification[]
-  payments         Payment[]
+  notifications     Notification[]
+  payments          Payment[]
+  walletTransactions WalletTransaction[]
 }
 
 model Pet {
@@ -177,15 +179,29 @@ model Payment {
   bookingId       String   @unique
   userId          String
   amount          Float
-  currency        String   @default("USD")
+  currency        String   @default("PEN")
   status          String   @default("PENDING")
   stripePaymentId String?
+  reference       String?
   method          String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
   booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
   user    User    @relation(fields: [userId], references: [id])
+}
+
+model WalletTransaction {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String
+  amount      Float
+  description String?
+  reference   String?
+  balance     Float
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Notification {

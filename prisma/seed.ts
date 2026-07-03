@@ -394,6 +394,7 @@ async function main() {
       currency: "PEN",
       status: "COMPLETED",
       method: "credit_card",
+      reference: "PAY-001",
     },
   })
 
@@ -438,6 +439,7 @@ async function main() {
       currency: "PEN",
       status: "COMPLETED",
       method: "credit_card",
+      reference: "PAY-002",
     },
   })
 
@@ -482,6 +484,7 @@ async function main() {
       currency: "PEN",
       status: "COMPLETED",
       method: "credit_card",
+      reference: "PAY-003",
     },
   })
 
@@ -606,6 +609,7 @@ async function main() {
       currency: "PEN",
       status: "COMPLETED",
       method: "credit_card",
+      reference: "PAY-008",
     },
   })
 
@@ -684,6 +688,41 @@ async function main() {
         title: "Consultation Booked",
         message: "New consultation request from Carol for Rocky.",
         link: "/dashboard/specialist/consultations",
+      },
+    ],
+  })
+
+  // ── Wallet Transactions ─────────────────────────────────────────────────────
+  await prisma.walletTransaction.createMany({
+    data: [
+      {
+        userId: alice.id,
+        type: "DEPOSIT",
+        amount: 100.0,
+        description: "Welcome bonus",
+        balance: 100.0,
+      },
+      {
+        userId: bob.id,
+        type: "DEPOSIT",
+        amount: 100.0,
+        description: "Welcome bonus",
+        balance: 100.0,
+      },
+      {
+        userId: carol.id,
+        type: "DEPOSIT",
+        amount: 100.0,
+        description: "Welcome bonus",
+        balance: 100.0,
+      },
+      {
+        userId: alice.id,
+        type: "PAYMENT",
+        amount: -23.0,
+        description: "Payment for walk with Daniel (Max)",
+        reference: "PAY-001",
+        balance: 77.0,
       },
     ],
   })

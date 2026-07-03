@@ -2,7 +2,7 @@ import { getServerTranslations } from "@/i18n/server"
 import { getCurrentUser } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import { PawPrint, LayoutDashboard, Calendar, Users, Heart, Settings, Dog, Stethoscope } from "lucide-react"
+import { PawPrint, LayoutDashboard, Calendar, Users, Heart, Settings, Dog, Stethoscope, Wallet } from "lucide-react"
 
 export default async function DashboardLayout({
   children,
@@ -19,6 +19,7 @@ export default async function DashboardLayout({
       ? [
           { href: "/dashboard/owner/pets", label: t("dashboard.myPets"), icon: Dog },
           { href: "/dashboard/owner/bookings", label: t("dashboard.bookings"), icon: Calendar },
+          { href: "/dashboard/owner/payments", label: t("payments.history"), icon: Wallet },
           { href: "/dashboard/owner/walkers", label: t("dashboard.findWalkers"), icon: Users },
           { href: "/dashboard/owner/specialists", label: t("dashboard.specialists"), icon: Stethoscope },
         ]

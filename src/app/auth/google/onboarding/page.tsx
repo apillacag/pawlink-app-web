@@ -5,8 +5,10 @@ import Link from "next/link"
 import { PawPrint, Dog, User, Stethoscope, ArrowRight, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
+import { useI18n } from "@/i18n/context"
 
 function OnboardingForm() {
+  const { t } = useI18n()
   const searchParams = useSearchParams()
   const router = useRouter()
   const email = searchParams.get("email") || ""
@@ -23,15 +25,15 @@ function OnboardingForm() {
     district: "",
     ratePerWalk: "15",
     ratePerSession: "50",
-    specialties: "BEHAVIOR",
+    specialties: "BEHAVIOR" as string,
   })
 
   const roles = [
     {
       value: "OWNER" as const,
       icon: User,
-      label: "Pet Owner",
-      desc: "I want to hire services.",
+      label: t("auth.petOwner"),
+      desc: t("auth.petOwnerDesc"),
       color: "text-emerald-600",
       bg: "bg-emerald-50",
       border: "border-emerald-200",
@@ -39,8 +41,8 @@ function OnboardingForm() {
     {
       value: "WALKER" as const,
       icon: Dog,
-      label: "Dog Walker",
-      desc: "I want to offer walking services.",
+      label: t("auth.dogWalker"),
+      desc: t("auth.dogWalkerDesc"),
       color: "text-amber-600",
       bg: "bg-amber-50",
       border: "border-amber-200",
@@ -48,8 +50,8 @@ function OnboardingForm() {
     {
       value: "SPECIALIST" as const,
       icon: Stethoscope,
-      label: "Specialist",
-      desc: "I want to provide professional pet behavior consultations.",
+      label: t("auth.specialist"),
+      desc: t("auth.specialistDesc"),
       color: "text-purple-600",
       bg: "bg-purple-50",
       border: "border-purple-200",
@@ -89,10 +91,10 @@ function OnboardingForm() {
         window.location.href = "/dashboard"
       } else {
         const data = await res.json()
-        setError(data.error || "Something went wrong")
+        setError(data.error || t("common.somethingWentWrong"))
       }
     } catch {
-      setError("Something went wrong. Please try again.")
+      setError(t("common.somethingWentWrong"))
     } finally {
       setLoading(false)
     }
@@ -105,8 +107,8 @@ function OnboardingForm() {
           <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-emerald-100 mb-4">
             <PawPrint className="h-8 w-8 text-emerald-600" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Welcome to PawLink</h1>
-          <p className="text-gray-500 mt-1">How would you like to use PawLink?</p>
+          <h1 className="text-2xl font-bold text-gray-900">{t("auth.createAccount")}</h1>
+          <p className="text-gray-500 mt-1">{t("auth.iAmA")}</p>
           {email && <p className="text-xs text-gray-400 mt-2">{email}</p>}
         </div>
 
@@ -147,12 +149,12 @@ function OnboardingForm() {
           disabled={!role}
           onClick={() => setStep("info")}
         >
-          Continue <ArrowRight className="h-4 w-4 ml-1" />
+          {t("common.next")} <ArrowRight className="h-4 w-4 ml-1" />
         </Button>
 
         <p className="text-center text-sm text-gray-500">
-          Already have an account?{" "}
-          <Link href="/login" className="font-medium text-emerald-600 hover:text-emerald-500">Sign in</Link>
+          {t("auth.haveAccount")}{" "}
+          <Link href="/login" className="font-medium text-emerald-600 hover:text-emerald-500">{t("auth.signIn")}</Link>
         </p>
       </div>
     )
@@ -164,11 +166,11 @@ function OnboardingForm() {
         <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-emerald-100 mb-4">
           <PawPrint className="h-8 w-8 text-emerald-600" />
         </div>
-        <h1 className="text-2xl font-bold text-gray-900">Complete your profile</h1>
+        <h1 className="text-2xl font-bold text-gray-900">{t("auth.completeProfile")}</h1>
         <p className="text-gray-500 mt-1">
-          {role === "OWNER" ? "You're almost done!" :
-           role === "WALKER" ? "Tell us about your walking services" :
-           "Tell us about your professional services"}
+          {role === "OWNER" ? t("auth.almostDone") :
+           role === "WALKER" ? t("auth.tellUsWalker") :
+           t("auth.tellUsSpecialist")}
         </p>
       </div>
 
@@ -179,9 +181,9 @@ function OnboardingForm() {
 
         <Input
           id="phone"
-          label="Phone number"
+          label={t("auth.phone")}
           type="tel"
-          placeholder="+51 999 000 000"
+          placeholder={t("auth.phonePlaceholder")}
           value={form.phone}
           onChange={(e) => setForm({ ...form, phone: e.target.value })}
         />
@@ -190,20 +192,20 @@ function OnboardingForm() {
           <>
             <Input
               id="district"
-              label="District / City"
-              placeholder="e.g., Miraflores, Lima"
+              label={t("auth.district")}
+              placeholder={t("auth.districtPlaceholder")}
               value={form.district}
               onChange={(e) => setForm({ ...form, district: e.target.value })}
             />
 
             <div className="space-y-1">
-              <label className="block text-sm font-medium text-gray-700">Short biography</label>
+              <label className="block text-sm font-medium text-gray-700">{t("auth.bio")}</label>
               <textarea
                 value={form.bio}
                 onChange={(e) => setForm({ ...form, bio: e.target.value })}
                 rows={3}
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
-                placeholder="Tell pet owners about yourself and your experience..."
+                placeholder={t("auth.bioPlaceholder")}
               />
             </div>
           </>
@@ -212,7 +214,7 @@ function OnboardingForm() {
         {role === "WALKER" && (
           <Input
             id="rate"
-            label="Price per walk (S/)"
+            label={t("auth.ratePerWalk")}
             type="number"
             step="0.50"
             value={form.ratePerWalk}
@@ -223,22 +225,22 @@ function OnboardingForm() {
         {role === "SPECIALIST" && (
           <>
             <div className="space-y-1">
-              <label className="block text-sm font-medium text-gray-700">Specialty</label>
+              <label className="block text-sm font-medium text-gray-700">{t("auth.specialty")}</label>
               <select
                 value={form.specialties}
                 onChange={(e) => setForm({ ...form, specialties: e.target.value })}
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
               >
-                <option value="BEHAVIOR">Behavioral Therapy</option>
-                <option value="TRAINING">Training & Obedience</option>
-                <option value="NUTRITION">Nutrition & Wellness</option>
-                <option value="ANXIETY">Anxiety Management</option>
+                <option value="BEHAVIOR">{t("auth.specialtyBehavior")}</option>
+                <option value="TRAINING">{t("auth.specialtyTraining")}</option>
+                <option value="NUTRITION">{t("auth.specialtyNutrition")}</option>
+                <option value="ANXIETY">{t("auth.specialtyAnxiety")}</option>
               </select>
             </div>
 
             <Input
               id="rate"
-              label="Price per session (S/)"
+              label={t("auth.ratePerSession")}
               type="number"
               step="5"
               value={form.ratePerSession}
@@ -250,16 +252,16 @@ function OnboardingForm() {
 
       <div className="flex gap-3">
         <Button variant="outline" className="flex-1" onClick={() => setStep("role")}>
-          Back
+          {t("common.back")}
         </Button>
         <Button className="flex-1" loading={loading} onClick={handleSubmit}>
-          Create Account
+          {t("auth.createAccountBtn")}
         </Button>
       </div>
 
       <p className="text-center text-sm text-gray-500">
-        Already have an account?{" "}
-        <Link href="/login" className="font-medium text-emerald-600 hover:text-emerald-500">Sign in</Link>
+        {t("auth.haveAccount")}{" "}
+        <Link href="/login" className="font-medium text-emerald-600 hover:text-emerald-500">{t("auth.signIn")}</Link>
       </p>
     </div>
   )

@@ -66,7 +66,7 @@ export default async function AdminBookingsPage() {
                         <Badge variant={statusVariant(b.status)}>{translateStatus(t, b.status)}</Badge>
                       </td>
                       <td className="px-6 py-4 text-gray-900 font-medium">
-                        {b.totalAmount ? `S/${b.totalAmount.toFixed(2)}` : "-"}
+                        {b.totalAmount ? formatCurrency(b.totalAmount, locale) : "-"}
                       </td>
                       <td className="px-6 py-4 text-gray-500">{formatDate(b.createdAt, locale)}</td>
                     </tr>

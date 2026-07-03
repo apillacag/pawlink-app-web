@@ -1,27 +1,19 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import { cookies } from "next/headers"
 import "./globals.css"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { Providers } from "./providers"
 import { getCurrentUser } from "@/lib/auth"
+import { getServerTranslations } from "@/i18n/server"
 const inter = Inter({ subsets: ["latin"] })
 
 export async function generateMetadata(): Promise<Metadata> {
-  const cookieStore = await cookies()
-  const locale = cookieStore.get("pawlink_locale")?.value || "en"
-  if (locale === "es") {
-    return {
-      title: "PawLink - Conectamos Dueños con Profesionales de Confianza",
-      description: "Paseos seguros, mascotas felices, tranquilidad. Encuentra paseadores de perros y especialistas en comportamiento animal cerca de ti.",
-      keywords: "cuidado de mascotas, paseo de perros, bienestar animal, comportamiento animal, servicios para mascotas",
-    }
-  }
+  const { t } = await getServerTranslations()
   return {
-    title: "PawLink - Connecting Caring Owners with Trusted Pet Professionals",
-    description: "Safe walks, happy pets, peace of mind. Find trusted dog walkers and animal behavior specialists near you.",
-    keywords: "pet care, dog walking, pet wellness, animal behavior, pet services",
+    title: t("metadata.title"),
+    description: t("metadata.description"),
+    keywords: t("metadata.keywords"),
   }
 }
 
@@ -30,9 +22,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const { locale } = await getServerTranslations()
   const user = await getCurrentUser()
-  const cookieStore = await cookies()
-  const locale = cookieStore.get("pawlink_locale")?.value || "en"
 
   return (
     <html lang={locale}>

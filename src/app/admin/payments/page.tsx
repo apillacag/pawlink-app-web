@@ -65,7 +65,7 @@ export default async function AdminPaymentsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">{t("admin.revenue")}</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{formatCurrency(totalRevenue)}</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">{formatCurrency(totalRevenue, locale)}</p>
               </div>
               <TrendingUp className="h-8 w-8 text-emerald-600 opacity-80" />
             </div>
@@ -76,7 +76,7 @@ export default async function AdminPaymentsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">{t("admin.todayRevenue")}</p>
-                <p className="text-2xl font-bold text-emerald-600 mt-1">{formatCurrency(todayRevenue)}</p>
+                <p className="text-2xl font-bold text-emerald-600 mt-1">{formatCurrency(todayRevenue, locale)}</p>
               </div>
               <CalendarDays className="h-8 w-8 text-blue-600 opacity-80" />
             </div>
@@ -106,7 +106,7 @@ export default async function AdminPaymentsPage() {
                     <Icon className="h-5 w-5 text-gray-400" />
                     <div>
                       <p className="text-sm font-medium text-gray-500 capitalize">{method.replace("_", " ")}</p>
-                      <p className="text-lg font-bold text-gray-900">{formatCurrency(amount)}</p>
+                      <p className="text-lg font-bold text-gray-900">{formatCurrency(amount, locale)}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -145,10 +145,10 @@ export default async function AdminPaymentsPage() {
                       <td className="py-3">
                         <span className="inline-flex items-center gap-1">
                           <Icon className="h-3.5 w-3.5 text-gray-400" />
-                          {payment.method === "credit_card" ? "Card" : payment.method?.toUpperCase()}
+                          {payment.method === "credit_card" ? t("payments.card") : payment.method?.toUpperCase()}
                         </span>
                       </td>
-                      <td className="py-3 font-medium">{formatCurrency(payment.amount)}</td>
+                      <td className="py-3 font-medium">{formatCurrency(payment.amount, locale)}</td>
                       <td className="py-3">
                         <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${payment.status === "COMPLETED" ? "bg-emerald-100 text-emerald-700" : "bg-gray-100 text-gray-600"}`}>
                           {payment.status === "COMPLETED" ? t("bookings.completed") : payment.status}

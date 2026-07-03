@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { MapPin, Phone, Clock, Dog } from "lucide-react"
 import { WalkActions } from "@/components/walk/WalkActions"
-import { translateStatus, formatDateTime } from "@/lib/utils"
+import { translateStatus, formatDateTime, formatCurrency, formatTime } from "@/lib/utils"
 
 export default async function WalkDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { t, locale } = await getServerTranslations()
@@ -101,7 +101,7 @@ export default async function WalkDetailPage({ params }: { params: Promise<{ id:
             </p>
           )}
           {walk.totalAmount && (
-            <p className="text-sm font-semibold text-emerald-600">{t("walker.amountLabel")}: S/{walk.totalAmount.toFixed(2)}</p>
+            <p className="text-sm font-semibold text-emerald-600">{t("walker.amountLabel")}: {formatCurrency(walk.totalAmount, locale)}</p>
           )}
           {walk.notes && (
             <div className="bg-gray-50 rounded-lg p-3">
@@ -123,7 +123,7 @@ export default async function WalkDetailPage({ params }: { params: Promise<{ id:
                   <div className="h-2 w-2 rounded-full bg-emerald-500 mt-1.5" />
                   <div>
                     <p className="text-gray-700">{update.note || `${update.type} ${t("bookings.updateNote")}`}</p>
-                    <p className="text-gray-400 text-xs">{new Date(update.createdAt).toLocaleTimeString()}</p>
+                    <p className="text-gray-400 text-xs">{formatTime(update.createdAt, locale)}</p>
                   </div>
                 </div>
               ))}

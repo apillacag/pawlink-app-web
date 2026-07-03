@@ -4,9 +4,10 @@ import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Users, CalendarDays, Dog, Wallet as WalletIcon, TrendingUp, UserCheck } from "lucide-react"
+import { formatCurrency } from "@/lib/utils"
 
 export default async function AdminPage() {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "ADMIN") redirect("/dashboard")
 
@@ -28,7 +29,7 @@ export default async function AdminPage() {
     { label: t("admin.totalPets"), value: totalPets, icon: Dog, color: "text-amber-600" },
     { label: t("admin.walkers"), value: totalWalkers, icon: UserCheck, color: "text-purple-600" },
     { label: t("admin.specialists"), value: totalSpecialists, icon: TrendingUp, color: "text-rose-600" },
-    { label: t("admin.revenue"), value: `S/${(revenue._sum.amount || 0).toFixed(2)}`, icon: WalletIcon, color: "text-emerald-600" },
+    { label: t("admin.revenue"), value: formatCurrency(revenue._sum.amount || 0, locale), icon: WalletIcon, color: "text-emerald-600" },
   ]
 
   return (

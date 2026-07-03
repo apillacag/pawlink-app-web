@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button"
 import { Plus, Dog, Cat, Edit, Trash2 } from "lucide-react"
 
 export default async function PetsPage() {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "OWNER") redirect("/dashboard")
 
@@ -52,7 +52,7 @@ export default async function PetsPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900">{pet.name}</h3>
-                      <p className="text-sm text-gray-500">{pet.breed || pet.species}</p>
+                      <p className="text-sm text-gray-500">{pet.breed || t(`pets.${pet.species.toLowerCase()}`)}</p>
                     </div>
                   </div>
                 </div>

@@ -4,10 +4,11 @@ import { prisma } from "@/lib/prisma"
 import { redirect, notFound } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
+import { formatDate, translateStatus } from "@/lib/utils"
 import { Dog, Cat, CalendarDays, Weight, FileText } from "lucide-react"
 
 export default async function PetDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
   const user = await getCurrentUser()
   if (!user || user.role !== "OWNER") redirect("/dashboard")
 
@@ -35,7 +36,7 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
             </div>
             <div>
               <CardTitle>{pet.name}</CardTitle>
-              <p className="text-sm text-gray-500">{pet.breed || pet.species}</p>
+              <p className="text-sm text-gray-500">{pet.breed || t(`pets.${pet.species.toLowerCase()}`)}</p>
             </div>
           </div>
         </CardHeader>
@@ -74,12 +75,12 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                 <div key={booking.id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
                   <div>
                     <p className="text-sm font-medium text-gray-900">
-                      {new Date(booking.scheduledAt).toLocaleDateString()}
+                      {formatDate(booking.scheduledAt, locale)}
                     </p>
                     <p className="text-xs text-gray-500">{t("bookings.walker")}: {booking.walker.name}</p>
                   </div>
                   <Badge variant={booking.status === "COMPLETED" ? "success" : booking.status === "CANCELLED" ? "danger" : "info"}>
-                    {booking.status.replace("_", " ")}
+                    {translateStatus(t, booking.status)}
                   </Badge>
                 </div>
               ))}

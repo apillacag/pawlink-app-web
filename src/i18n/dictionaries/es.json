@@ -127,7 +127,22 @@
     "phonePlaceholder": "+51 999 000 000",
     "passwordRequirements": "Al menos 6 caracteres",
     "continueWithGoogle": "Continuar con Google",
-    "or": "O"
+    "or": "O",
+    "completeProfile": "Completa tu perfil",
+    "almostDone": "¡Ya casi estás!",
+    "tellUsWalker": "Cuéntanos sobre tus servicios de paseo",
+    "tellUsSpecialist": "Cuéntanos sobre tus servicios profesionales",
+    "district": "Distrito / Ciudad",
+    "districtPlaceholder": "ej. Miraflores, Lima",
+    "bio": "Biografía corta",
+    "bioPlaceholder": "Cuéntales a los dueños sobre ti y tu experiencia...",
+    "ratePerWalk": "Precio por paseo (S/)",
+    "specialty": "Especialidad",
+    "specialtyBehavior": "Terapia de Conducta",
+    "specialtyTraining": "Entrenamiento y Obediencia",
+    "specialtyNutrition": "Nutrición y Bienestar",
+    "specialtyAnxiety": "Manejo de Ansiedad",
+    "ratePerSession": "Precio por sesión (S/)"
   },
   "dashboard": {
     "title": "Panel de Control",
@@ -457,6 +472,8 @@
     "next": "Siguiente",
     "previous": "Anterior",
     "submit": "Enviar",
-    "confirm": "Confirmar"
+    "confirm": "Confirmar",
+    "pet": "Mascota",
+    "na": "N/A"
   }
 }

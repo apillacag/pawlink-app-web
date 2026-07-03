@@ -124,10 +124,25 @@
     "emailPlaceholder": "you@example.com",
     "passwordPlaceholder": "••••••••",
     "namePlaceholder": "John Doe",
-    "phonePlaceholder": "+1 555 000 0000",
+    "phonePlaceholder": "+51 999 000 000",
     "passwordRequirements": "At least 6 characters",
     "continueWithGoogle": "Continue with Google",
-    "or": "OR"
+    "or": "OR",
+    "completeProfile": "Complete your profile",
+    "almostDone": "You're almost done!",
+    "tellUsWalker": "Tell us about your walking services",
+    "tellUsSpecialist": "Tell us about your professional services",
+    "district": "District / City",
+    "districtPlaceholder": "e.g., Miraflores, Lima",
+    "bio": "Short biography",
+    "bioPlaceholder": "Tell pet owners about yourself and your experience...",
+    "ratePerWalk": "Price per walk (S/)",
+    "specialty": "Specialty",
+    "specialtyBehavior": "Behavioral Therapy",
+    "specialtyTraining": "Training & Obedience",
+    "specialtyNutrition": "Nutrition & Wellness",
+    "specialtyAnxiety": "Anxiety Management",
+    "ratePerSession": "Price per session (S/)"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -456,6 +471,8 @@
     "next": "Next",
     "previous": "Previous",
     "submit": "Submit",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "pet": "Pet",
+    "na": "N/A"
   }
 }

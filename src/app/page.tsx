@@ -1,11 +1,10 @@
-"use client"
 import Link from "next/link"
 import { PawPrint, Shield, MapPin, Star, Heart, Users, ArrowRight, CheckCircle, Search, MessageCircle, Calendar, Camera } from "lucide-react"
 import { Button } from "@/components/ui/Button"
-import { useI18n } from "@/i18n/context"
+import { getServerTranslations } from "@/i18n/server"
 
-export default function HomePage() {
-  const { t } = useI18n()
+export default async function HomePage() {
+  const { t } = await getServerTranslations()
 
   return (
     <div className="min-h-screen">

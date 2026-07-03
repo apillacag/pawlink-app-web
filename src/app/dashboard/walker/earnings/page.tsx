@@ -38,7 +38,7 @@ export default async function WalkerEarningsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">{t("walker.totalEarnings")}</p>
-                <p className="text-3xl font-bold text-gray-900 mt-1">{formatCurrency(totalEarnings)}</p>
+                <p className="text-3xl font-bold text-gray-900 mt-1">{formatCurrency(totalEarnings, locale)}</p>
               </div>
               <Wallet className="h-8 w-8 text-emerald-600 opacity-80" />
             </div>
@@ -61,7 +61,7 @@ export default async function WalkerEarningsPage() {
               <div>
                 <p className="text-sm font-medium text-gray-500">{t("walker.avgPerWalk")}</p>
                 <p className="text-3xl font-bold text-gray-900 mt-1">
-                  {completedWalks > 0 ? formatCurrency(totalEarnings / completedWalks) : formatCurrency(0)}
+                  {completedWalks > 0 ? formatCurrency(totalEarnings / completedWalks, locale) : formatCurrency(0, locale)}
                 </p>
               </div>
               <CalendarDays className="h-8 w-8 text-amber-600 opacity-80" />
@@ -73,7 +73,7 @@ export default async function WalkerEarningsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">{t("finance.walletBalance")}</p>
-                <p className="text-3xl font-bold text-emerald-600 mt-1">{formatCurrency(user.walletBalance || 0)}</p>
+                <p className="text-3xl font-bold text-emerald-600 mt-1">{formatCurrency(user.walletBalance || 0, locale)}</p>
               </div>
               <PiggyBank className="h-8 w-8 text-purple-600 opacity-80" />
             </div>
@@ -97,7 +97,7 @@ export default async function WalkerEarningsPage() {
                     <p className="text-xs text-gray-500">{formatDate(tx.createdAt, locale)}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-semibold text-emerald-600">+{formatCurrency(tx.amount)}</p>
+                    <p className="text-sm font-semibold text-emerald-600">+{formatCurrency(tx.amount, locale)}</p>
                   </div>
                 </div>
               ))}

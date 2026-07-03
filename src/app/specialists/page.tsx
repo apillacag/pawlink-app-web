@@ -3,10 +3,11 @@ import { prisma } from "@/lib/prisma"
 import { Card, CardContent } from "@/components/ui/Card"
 import { Star, Stethoscope } from "lucide-react"
 import { Button } from "@/components/ui/Button"
+import { formatCurrency } from "@/lib/utils"
 import Link from "next/link"
 
 export default async function SpecialistsPage() {
-  const { t } = await getServerTranslations()
+  const { t, locale } = await getServerTranslations()
 
   const specialists = await prisma.user.findMany({
     where: {
@@ -60,7 +61,7 @@ export default async function SpecialistsPage() {
                     )}
                     <div className="flex items-center justify-between">
                       <span className="text-lg font-bold text-purple-600">
-                        S/{profile?.ratePerSession.toFixed(2)} <span className="text-sm font-normal text-gray-500">{t("walkers.perSession")}</span>
+                        {formatCurrency(profile?.ratePerSession || 0, locale)} <span className="text-sm font-normal text-gray-500">{t("walkers.perSession")}</span>
                       </span>
                       <Link href="/register">
                         <Button size="sm">{t("specialists.bookConsultation")}</Button>

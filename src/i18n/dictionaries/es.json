@@ -233,7 +233,15 @@
     "notesPlaceholderWalk": "Instrucciones especiales...",
     "notesPlaceholderConsultation": "Describe tus inquietudes...",
     "bookWalkButton": "Reservar Paseo",
-    "bookConsultationButton": "Reservar Consulta"
+    "bookConsultationButton": "Reservar Consulta",
+    "continuePayment": "Continuar pago",
+    "cancelBooking": "Cancelar reserva",
+    "confirmCancelBooking": "¿Seguro que deseas cancelar esta reserva?",
+    "pendingPaymentMessage": "Todavía no has realizado el pago. Completa el pago para confirmar tu reserva.",
+    "bookingAlreadyPaid": "Reserva ya pagada.",
+    "bookingCancelledStatus": "Reserva cancelada.",
+    "bookingCompletedStatus": "Reserva completada.",
+    "bookingNotAvailable": "Esta reserva ya no está disponible para pago."
   },
   "walkPayments": {
     "completedPayments": "Pagos Completados"
@@ -425,7 +433,8 @@
     "reference": "Referencia",
     "datePaid": "Fecha",
     "paidBy": "Pagado por",
-    "pendingPayment": "Pago Pendiente"
+    "pendingPayment": "Pago Pendiente",
+    "pendingPayments": "Pagos Pendientes"
   },
   "finance": {
     "walletBalance": "Saldo de Billetera",

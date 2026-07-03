@@ -4,9 +4,10 @@ import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
-import { CalendarDays, MapPin } from "lucide-react"
+import { CalendarDays, MapPin, AlertTriangle } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/Button"
+import { PendingPaymentActions } from "@/components/bookings/PendingPaymentActions"
 import { translateStatus, formatDateTime, formatCurrency } from "@/lib/utils"
 
 export default async function OwnerBookingsPage() {
@@ -24,10 +25,17 @@ export default async function OwnerBookingsPage() {
     orderBy: { scheduledAt: "desc" },
   })
 
+  const sorted = [...bookings].sort((a, b) => {
+    if (a.status === "PENDING_PAYMENT" && b.status !== "PENDING_PAYMENT") return -1
+    if (a.status !== "PENDING_PAYMENT" && b.status === "PENDING_PAYMENT") return 1
+    return 0
+  })
+
   const statusVariant = (status: string) => {
     switch (status) {
       case "COMPLETED": return "success" as const
       case "PENDING": return "warning" as const
+      case "PENDING_PAYMENT": return "warning" as const
       case "CONFIRMED": return "info" as const
       case "IN_PROGRESS": return "info" as const
       case "CANCELLED": return "danger" as const
@@ -44,7 +52,7 @@ export default async function OwnerBookingsPage() {
         </Link>
       </div>
 
-      {bookings.length === 0 ? (
+      {sorted.length === 0 ? (
         <Card>
           <CardContent className="p-12 text-center">
             <CalendarDays className="h-12 w-12 text-gray-300 mx-auto mb-4" />
@@ -56,9 +64,15 @@ export default async function OwnerBookingsPage() {
         </Card>
       ) : (
         <div className="space-y-4">
-          {bookings.map((booking) => (
-            <Card key={booking.id}>
+          {sorted.map((booking) => (
+            <Card key={booking.id} className={booking.status === "PENDING_PAYMENT" ? "border-amber-300 ring-1 ring-amber-200" : ""}>
               <CardContent className="p-6">
+                {booking.status === "PENDING_PAYMENT" && (
+                  <div className="flex items-center gap-2 rounded-lg bg-amber-50 border border-amber-200 p-3 mb-4 text-sm text-amber-800">
+                    <AlertTriangle className="h-4 w-4 shrink-0" />
+                    <span>{t("bookings.pendingPaymentMessage")}</span>
+                  </div>
+                )}
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
                     <div className="flex items-center gap-3">
@@ -86,6 +100,11 @@ export default async function OwnerBookingsPage() {
                       <p className="text-sm font-semibold text-emerald-600">
                         {formatCurrency(booking.totalAmount, locale)}
                       </p>
+                    )}
+                  </div>
+                  <div className="flex flex-col items-end gap-2 shrink-0 ml-4">
+                    {booking.status === "PENDING_PAYMENT" && (
+                      <PendingPaymentActions bookingId={booking.id} />
                     )}
                   </div>
                 </div>

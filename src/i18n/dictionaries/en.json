@@ -233,7 +233,15 @@
     "notesPlaceholderWalk": "Any special instructions...",
     "notesPlaceholderConsultation": "Describe your concerns...",
     "bookWalkButton": "Book Walk",
-    "bookConsultationButton": "Book Consultation"
+    "bookConsultationButton": "Book Consultation",
+    "continuePayment": "Continue Payment",
+    "cancelBooking": "Cancel Booking",
+    "confirmCancelBooking": "Are you sure you want to cancel this booking?",
+    "pendingPaymentMessage": "Your booking has not been paid yet. Complete the payment to confirm your reservation.",
+    "bookingAlreadyPaid": "Booking already paid.",
+    "bookingCancelledStatus": "Booking cancelled.",
+    "bookingCompletedStatus": "Booking completed.",
+    "bookingNotAvailable": "This booking is no longer available for payment."
   },
   "walkPayments": {
     "completedPayments": "Completed Payments"
@@ -425,7 +433,8 @@
     "reference": "Reference",
     "datePaid": "Date",
     "paidBy": "Paid by",
-    "pendingPayment": "Pending Payment"
+    "pendingPayment": "Pending Payment",
+    "pendingPayments": "Pending Payments"
   },
   "finance": {
     "walletBalance": "Wallet Balance",

@@ -15,7 +15,7 @@ export default async function SpecialistConsultationsPage() {
   if (!user || user.role !== "SPECIALIST") redirect("/dashboard")
 
   const consultations = await prisma.booking.findMany({
-    where: { specialistId: user.id },
+    where: { specialistId: user.id, status: { not: "PENDING_PAYMENT" } },
     include: {
       pet: true,
       owner: { select: { name: true, phone: true } },

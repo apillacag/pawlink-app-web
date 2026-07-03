@@ -17,12 +17,16 @@ export default async function DashboardPage() {
   if (user.role === "OWNER") {
     const petCount = await prisma.pet.count({ where: { ownerId: user.id } })
     const bookingCount = await prisma.booking.count({ where: { ownerId: user.id } })
+    const pendingPayments = await prisma.booking.count({
+      where: { ownerId: user.id, status: "PENDING_PAYMENT" },
+    })
     const upcomingBookings = await prisma.booking.count({
-      where: { ownerId: user.id, status: { in: ["PENDING", "PENDING_PAYMENT", "CONFIRMED"] } },
+      where: { ownerId: user.id, status: { in: ["PENDING", "CONFIRMED"] } },
     })
     stats = [
       { label: t("dashboard.totalPets"), value: petCount.toString(), icon: Dog, color: "text-emerald-600" },
       { label: t("dashboard.totalBookings"), value: bookingCount.toString(), icon: CalendarDays, color: "text-blue-600" },
+      { label: t("payments.pendingPayments"), value: pendingPayments.toString(), icon: TrendingUp, color: pendingPayments > 0 ? "text-amber-600" : "text-gray-400" },
       { label: t("dashboard.upcoming"), value: upcomingBookings.toString(), icon: TrendingUp, color: "text-amber-600" },
     ]
   } else if (user.role === "WALKER") {
@@ -66,7 +70,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
-      <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label}>
             <CardContent className="p-6">

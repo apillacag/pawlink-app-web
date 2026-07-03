@@ -15,7 +15,7 @@ export default async function WalkerWalksPage() {
   if (!user || user.role !== "WALKER") redirect("/dashboard")
 
   const walks = await prisma.booking.findMany({
-    where: { walkerId: user.id },
+    where: { walkerId: user.id, status: { not: "PENDING_PAYMENT" } },
     include: {
       pet: true,
       owner: { select: { name: true, phone: true } },

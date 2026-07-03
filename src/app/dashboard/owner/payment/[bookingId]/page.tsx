@@ -168,6 +168,25 @@ export default function PaymentPage({ params }: { params: Promise<{ bookingId: s
     }
   }
 
+  if (booking && booking.status !== "PENDING_PAYMENT" && status === "idle") {
+    const statusMsg = booking.status === "COMPLETED" ? t("bookings.bookingCompletedStatus") :
+      booking.status === "CANCELLED" ? t("bookings.bookingCancelledStatus") :
+      booking.status === "CONFIRMED" || booking.status === "IN_PROGRESS" ? t("bookings.bookingAlreadyPaid") :
+      t("bookings.bookingNotAvailable")
+    return (
+      <div className="max-w-lg mx-auto text-center py-16 space-y-6">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-6">
+          <XCircle className="h-8 w-8 text-gray-400" />
+        </div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">{statusMsg}</h2>
+        <p className="text-gray-500 mb-8">{t("bookings.bookingNotAvailable")}</p>
+        <Link href="/dashboard/owner/bookings">
+          <Button>{t("common.back")}</Button>
+        </Link>
+      </div>
+    )
+  }
+
   if (status === "success") {
     return (
       <div className="max-w-lg mx-auto text-center py-16">

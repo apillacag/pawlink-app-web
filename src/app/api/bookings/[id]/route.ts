@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { getCurrentUser } from "@/lib/auth"
-import { isValidTransition, distributeEarnings, processRefund } from "@/lib/finance"
+import { isValidTransition, distributeEarnings, distributeEarningsInTx, processRefund } from "@/lib/finance"
 
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const user = await getCurrentUser()
@@ -133,15 +133,18 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
         if (user.role !== "SPECIALIST" && user.role !== "ADMIN") {
           return NextResponse.json({ error: "Only the specialist can accept a consultation" }, { status: 403 })
         }
-        const result = await distributeEarnings(booking.id)
-        await prisma.notification.create({
-          data: {
-            userId: booking.ownerId,
-            type: "CONSULTATION_ACCEPTED",
-            title: "Consultation Accepted",
-            message: "Your consultation has been accepted by the specialist.",
-            link: "/dashboard/owner/bookings",
-          },
+        const [result] = await prisma.$transaction(async (tx) => {
+          const earningsResult = await distributeEarningsInTx(booking.id, tx)
+          await tx.notification.create({
+            data: {
+              userId: booking.ownerId,
+              type: "CONSULTATION_ACCEPTED",
+              title: "Consultation Accepted",
+              message: "Your consultation has been accepted by the specialist.",
+              link: "/dashboard/owner/bookings",
+            },
+          })
+          return [earningsResult]
         })
         return NextResponse.json({
           booking: { id, status: "CONFIRMED" },

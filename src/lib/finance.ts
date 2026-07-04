@@ -20,7 +20,7 @@ export async function distributeEarnings(bookingId: string) {
   const professional = await prisma.user.findUnique({ where: { id: professionalId } })
   if (!professional) throw new Error("Professional not found")
 
-  const [result] = await prisma.$transaction([
+  await prisma.$transaction([
     prisma.walletTransaction.create({
       data: {
         userId: professionalId,
@@ -54,6 +54,59 @@ export async function distributeEarnings(bookingId: string) {
       },
     }),
   ])
+
+  return { professionalAmount, platformAmount, alreadyDistributed: false }
+}
+
+export async function distributeEarningsInTx(bookingId: string, tx: any) {
+  const booking = await tx.booking.findUnique({
+    where: { id: bookingId },
+    include: { payment: true },
+  })
+  if (!booking) throw new Error("Booking not found")
+  if (booking.earningsDistributed) return { alreadyDistributed: true }
+
+  const totalAmount = booking.totalAmount || 0
+  const platformAmount = totalAmount * PLATFORM_COMMISSION_RATE
+  const professionalAmount = totalAmount - platformAmount
+  const professionalId = booking.walkerId || booking.specialistId
+  if (!professionalId) throw new Error("No professional assigned to this booking")
+
+  const professional = await tx.user.findUnique({ where: { id: professionalId } })
+  if (!professional) throw new Error("Professional not found")
+
+  await tx.booking.update({
+    where: { id: bookingId },
+    data: { status: "CONFIRMED", earningsDistributed: true },
+  })
+  await tx.walletTransaction.create({
+    data: {
+      userId: professionalId,
+      type: "EARNING",
+      amount: professionalAmount,
+      description: `Earnings for booking ${booking.id}`,
+      reference: booking.id,
+      balance: (professional.walletBalance || 0) + professionalAmount,
+    },
+  })
+  await tx.user.update({
+    where: { id: professionalId },
+    data: { walletBalance: { increment: professionalAmount } },
+  })
+  await tx.platformRevenue.upsert({
+    where: { bookingId: booking.id },
+    update: { amount: platformAmount },
+    create: { bookingId: booking.id, amount: platformAmount },
+  })
+  await tx.notification.create({
+    data: {
+      userId: professionalId,
+      type: "EARNING_RECEIVED",
+      title: "Earnings Received",
+      message: `You earned S/${professionalAmount.toFixed(2)} for booking #${booking.id.slice(0, 8)}`,
+      link: professional?.role === "SPECIALIST" ? "/dashboard/specialist/consultations" : "/dashboard/walker/earnings",
+    },
+  })
 
   return { professionalAmount, platformAmount, alreadyDistributed: false }
 }

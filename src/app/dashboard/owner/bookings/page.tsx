@@ -73,12 +73,18 @@ export default async function OwnerBookingsPage() {
                     <span>{t("bookings.pendingPaymentMessage")}</span>
                   </div>
                 )}
+                {booking.status === "PENDING" && booking.serviceType === "CONSULTATION" && (
+                  <div className="flex items-center gap-2 rounded-lg bg-blue-50 border border-blue-200 p-3 mb-4 text-sm text-blue-800">
+                    <AlertTriangle className="h-4 w-4 shrink-0" />
+                    <span>{t("bookings.pendingConsultationMessage")}</span>
+                  </div>
+                )}
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
                     <div className="flex items-center gap-3">
                       <h3 className="font-semibold text-gray-900">{booking.pet?.name || t("common.pet")}</h3>
                       <Badge variant={statusVariant(booking.status)}>
-                        {translateStatus(t, booking.status)}
+                        {booking.status === "PENDING" && booking.serviceType === "CONSULTATION" ? t("bookings.pendingSpecialistConfirmation") : translateStatus(t, booking.status)}
                       </Badge>
                     </div>
                     <div className="flex items-center gap-4 text-sm text-gray-500">

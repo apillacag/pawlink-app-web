@@ -15,52 +15,40 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid signature" }, { status: 400 })
     }
 
+    const handlePaymentSuccess = async (bookingId: string, stripePaymentId: string) => {
+      const payment = await prisma.payment.findFirst({
+        where: { stripePaymentId },
+      })
+
+      if (payment && payment.status !== "COMPLETED") {
+        const booking = await prisma.booking.findUnique({
+          where: { id: bookingId },
+          select: { serviceType: true },
+        })
+
+        await prisma.$transaction([
+          prisma.payment.update({
+            where: { id: payment.id },
+            data: { status: "COMPLETED" },
+          }),
+          prisma.booking.update({
+            where: { id: bookingId },
+            data: { status: booking?.serviceType === "CONSULTATION" ? "PENDING" : "CONFIRMED" },
+          }),
+        ])
+      }
+    }
+
     if (event.type === "payment_intent.succeeded") {
       const intent = event.data.object as any
       const bookingId = intent.metadata?.bookingId
-
-      if (bookingId) {
-        const payment = await prisma.payment.findFirst({
-          where: { stripePaymentId: intent.id },
-        })
-
-        if (payment && payment.status !== "COMPLETED") {
-          await prisma.$transaction([
-            prisma.payment.update({
-              where: { id: payment.id },
-              data: { status: "COMPLETED" },
-            }),
-            prisma.booking.update({
-              where: { id: bookingId },
-              data: { status: "CONFIRMED" },
-            }),
-          ])
-        }
-      }
+      if (bookingId) await handlePaymentSuccess(bookingId, intent.id)
     }
 
     if (event.type === "checkout.session.completed") {
       const session = event.data.object as any
       const bookingId = session.metadata?.bookingId
-
-      if (bookingId) {
-        const payment = await prisma.payment.findFirst({
-          where: { stripePaymentId: session.id },
-        })
-
-        if (payment && payment.status !== "COMPLETED") {
-          await prisma.$transaction([
-            prisma.payment.update({
-              where: { id: payment.id },
-              data: { status: "COMPLETED" },
-            }),
-            prisma.booking.update({
-              where: { id: bookingId },
-              data: { status: "CONFIRMED" },
-            }),
-          ])
-        }
-      }
+      if (bookingId) await handlePaymentSuccess(bookingId, session.id)
     }
 
     return NextResponse.json({ received: true })

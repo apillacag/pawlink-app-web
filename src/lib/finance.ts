@@ -8,7 +8,7 @@ export async function distributeEarnings(bookingId: string) {
     include: { payment: true },
   })
   if (!booking) throw new Error("Booking not found")
-  if (booking.status !== "COMPLETED") throw new Error("Booking is not completed")
+  if (booking.status !== "COMPLETED" && booking.status !== "CONFIRMED") throw new Error("Booking must be completed or confirmed to distribute earnings")
   if (booking.earningsDistributed) return { alreadyDistributed: true }
 
   const totalAmount = booking.totalAmount || 0

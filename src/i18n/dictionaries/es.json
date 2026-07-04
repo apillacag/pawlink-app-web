@@ -241,7 +241,9 @@
     "bookingAlreadyPaid": "Reserva ya pagada.",
     "bookingCancelledStatus": "Reserva cancelada.",
     "bookingCompletedStatus": "Reserva completada.",
-    "bookingNotAvailable": "Esta reserva ya no está disponible para pago."
+    "bookingNotAvailable": "Esta reserva ya no está disponible para pago.",
+    "pendingSpecialistConfirmation": "Pendiente de confirmación del especialista",
+    "pendingConsultationMessage": "Tu pago ha sido recibido y permanecerá retenido hasta que el especialista acepte la consulta."
   },
   "walkPayments": {
     "completedPayments": "Pagos Completados"
@@ -461,7 +463,9 @@
     "startSession": "Iniciar Sesión",
     "completeWalk": "Completar Paseo",
     "completeSession": "Completar Sesión",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "acceptConsultation": "Aceptar Consulta",
+    "rejectConsultation": "Rechazar Consulta"
   },
   "metadata": {
     "title": "PawLink - Conectamos Dueños con Profesionales de Confianza",

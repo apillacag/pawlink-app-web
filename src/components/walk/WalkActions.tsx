@@ -53,7 +53,17 @@ export function WalkActions({ bookingId, status, type = "walk" }: WalkActionsPro
           {t("bookings.pendingPayment")}
         </span>
       )}
-      {status === "PENDING" && (
+      {status === "PENDING" && type === "consultation" && (
+        <>
+          <Button size="sm" onClick={() => updateStatus("CONFIRMED")} loading={loading === "CONFIRMED"}>
+            {t("walkActions.acceptConsultation")}
+          </Button>
+          <Button size="sm" variant="outline" onClick={() => updateStatus("CANCELLED")} loading={loading === "CANCELLED"}>
+            {t("walkActions.rejectConsultation")}
+          </Button>
+        </>
+      )}
+      {status === "PENDING" && type !== "consultation" && (
         <Button size="sm" onClick={() => updateStatus("CONFIRMED")} loading={loading === "CONFIRMED"}>
           {t("walkActions.confirm")}
         </Button>
@@ -68,7 +78,7 @@ export function WalkActions({ bookingId, status, type = "walk" }: WalkActionsPro
           {type === "consultation" ? t("walkActions.completeSession") : t("walkActions.completeWalk")}
         </Button>
       )}
-      {(status === "PENDING" || status === "CONFIRMED") && (
+      {(status === "PENDING" || status === "CONFIRMED") && (status !== "PENDING" || type !== "consultation") && (
         <Button size="sm" variant="ghost" onClick={() => updateStatus("CANCELLED")} loading={loading === "CANCELLED"}>
           {t("walkActions.cancel")}
         </Button>

@@ -114,10 +114,40 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
 
     if (body.status === "CANCELLED") {
       const result = await handleCancel(booking, body.reason)
+      if (booking.serviceType === "CONSULTATION" && result.hadPayment) {
+        await prisma.notification.create({
+          data: {
+            userId: booking.ownerId,
+            type: "CONSULTATION_REJECTED",
+            title: "Consultation Rejected",
+            message: "Your consultation was rejected. The full amount has been refunded to your wallet.",
+            link: "/dashboard/owner/bookings",
+          },
+        })
+      }
       return NextResponse.json({ booking: { id, status: "CANCELLED" }, ...result })
     }
 
     if (body.status === "CONFIRMED") {
+      if (booking.serviceType === "CONSULTATION") {
+        if (user.role !== "SPECIALIST" && user.role !== "ADMIN") {
+          return NextResponse.json({ error: "Only the specialist can accept a consultation" }, { status: 403 })
+        }
+        const result = await distributeEarnings(booking.id)
+        await prisma.notification.create({
+          data: {
+            userId: booking.ownerId,
+            type: "CONSULTATION_ACCEPTED",
+            title: "Consultation Accepted",
+            message: "Your consultation has been accepted by the specialist.",
+            link: "/dashboard/owner/bookings",
+          },
+        })
+        return NextResponse.json({
+          booking: { id, status: "CONFIRMED" },
+          earnings: result.alreadyDistributed ? undefined : { professionalAmount: result.professionalAmount, platformAmount: result.platformAmount },
+        })
+      }
       await prisma.booking.update({ where: { id }, data: updateData })
       return NextResponse.json({ booking: { id, status: "CONFIRMED" } })
     }

@@ -241,7 +241,9 @@
     "bookingAlreadyPaid": "Booking already paid.",
     "bookingCancelledStatus": "Booking cancelled.",
     "bookingCompletedStatus": "Booking completed.",
-    "bookingNotAvailable": "This booking is no longer available for payment."
+    "bookingNotAvailable": "This booking is no longer available for payment.",
+    "pendingSpecialistConfirmation": "Pending Specialist Confirmation",
+    "pendingConsultationMessage": "Your payment has been received and is securely held until the specialist accepts your consultation."
   },
   "walkPayments": {
     "completedPayments": "Completed Payments"
@@ -460,7 +462,9 @@
     "startSession": "Start Session",
     "completeWalk": "Complete Walk",
     "completeSession": "Complete Session",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "acceptConsultation": "Accept Consultation",
+    "rejectConsultation": "Reject Consultation"
   },
   "metadata": {
     "title": "PawLink - Connecting Caring Owners with Trusted Pet Professionals",

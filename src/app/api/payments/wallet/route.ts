@@ -64,7 +64,7 @@ export async function POST(req: Request) {
 
       await tx.booking.update({
         where: { id: booking.id },
-        data: { status: "CONFIRMED" },
+        data: { status: booking.serviceType === "CONSULTATION" ? "PENDING" : "CONFIRMED" },
       })
 
       return [payment]

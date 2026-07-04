@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/Button"
 import { useI18n } from "@/i18n/context"
+import { AlertTriangle } from "lucide-react"
 
 interface WalkActionsProps {
   bookingId: string
@@ -12,11 +13,13 @@ interface WalkActionsProps {
 
 export function WalkActions({ bookingId, status, type = "walk" }: WalkActionsProps) {
   const [loading, setLoading] = useState<string | null>(null)
+  const [error, setError] = useState("")
   const router = useRouter()
   const { t } = useI18n()
 
   const updateStatus = async (newStatus: string) => {
     setLoading(newStatus)
+    setError("")
     try {
       const res = await fetch(`/api/bookings/${bookingId}`, {
         method: "PATCH",
@@ -25,14 +28,26 @@ export function WalkActions({ bookingId, status, type = "walk" }: WalkActionsPro
       })
       if (res.ok) {
         router.refresh()
+      } else {
+        const data = await res.json()
+        setError(data.error || t("common.somethingWentWrong"))
       }
+    } catch {
+      setError(t("common.somethingWentWrong"))
     } finally {
       setLoading(null)
     }
   }
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-col gap-2">
+      {error && (
+        <div className="flex items-center gap-1.5 text-xs text-red-600 bg-red-50 rounded px-2 py-1">
+          <AlertTriangle className="h-3 w-3 shrink-0" />
+          <span>{error}</span>
+        </div>
+      )}
+      <div className="flex flex-wrap gap-2">
       {status === "PENDING_PAYMENT" && (
         <span className="inline-flex items-center rounded-lg bg-amber-50 border border-amber-200 px-3 py-1.5 text-sm text-amber-700">
           {t("bookings.pendingPayment")}
@@ -58,6 +73,7 @@ export function WalkActions({ bookingId, status, type = "walk" }: WalkActionsPro
           {t("walkActions.cancel")}
         </Button>
       )}
+    </div>
     </div>
   )
 }

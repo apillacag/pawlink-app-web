@@ -79,7 +79,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     })
     if (!booking) return NextResponse.json({ error: "Not found" }, { status: 404 })
 
-    const allowed = user.role === "ADMIN" || booking.ownerId === user.id || booking.walkerId === user.id
+    const allowed = user.role === "ADMIN" || booking.ownerId === user.id || booking.walkerId === user.id || booking.specialistId === user.id
     if (!allowed) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     if (!body.status) return NextResponse.json({ error: "Status is required" }, { status: 400 })

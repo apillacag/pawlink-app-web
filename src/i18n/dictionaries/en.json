@@ -343,7 +343,16 @@
     "fee": "Fee",
     "sessionNotes": "Session Notes",
     "addNote": "Add Note",
-    "addNotePlaceholder": "Add session note..."
+    "addNotePlaceholder": "Add session note...",
+    "earnings": "Earnings",
+    "trackEarnings": "Track your income and completed consultations",
+    "totalEarnings": "Total Earnings",
+    "totalConsultations": "Total Consultations",
+    "completedConsultations": "Completed Consultations",
+    "avgPerConsultation": "Avg. per Consultation",
+    "pendingEarnings": "Pending Earnings",
+    "earningsHistory": "Earnings History",
+    "noEarnings": "No earnings yet"
   },
   "admin": {
     "dashboard": "Admin Dashboard",

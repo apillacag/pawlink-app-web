@@ -42,11 +42,18 @@ export default async function DashboardPage() {
       { label: t("dashboard.earnings"), value: formatCurrency(earnings._sum.amount || 0, locale), icon: Wallet, color: "text-amber-600" },
     ]
   } else if (user.role === "SPECIALIST") {
-    const sessionCount = await prisma.booking.count({ where: { specialistId: user.id } })
-    const completedCount = await prisma.booking.count({ where: { specialistId: user.id, status: "COMPLETED" } })
+    const [sessionCount, completedCount, earningsResult] = await Promise.all([
+      prisma.booking.count({ where: { specialistId: user.id } }),
+      prisma.booking.count({ where: { specialistId: user.id, status: "COMPLETED" } }),
+      prisma.walletTransaction.aggregate({
+        where: { userId: user.id, type: "EARNING" },
+        _sum: { amount: true },
+      }),
+    ])
     stats = [
       { label: t("dashboard.totalSessions"), value: sessionCount.toString(), icon: CalendarDays, color: "text-emerald-600" },
       { label: t("dashboard.completed"), value: completedCount.toString(), icon: Star, color: "text-blue-600" },
+      { label: t("dashboard.earnings"), value: formatCurrency(earningsResult._sum.amount || 0, locale), icon: Wallet, color: "text-amber-600" },
     ]
   } else {
     const userCount = await prisma.user.count()

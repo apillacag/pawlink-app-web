@@ -343,7 +343,16 @@
     "fee": "Honorario",
     "sessionNotes": "Notas de la Sesión",
     "addNote": "Agregar Nota",
-    "addNotePlaceholder": "Agregar nota de sesión..."
+    "addNotePlaceholder": "Agregar nota de sesión...",
+    "earnings": "Ganancias",
+    "trackEarnings": "Seguimiento de tus ingresos y consultas completadas",
+    "totalEarnings": "Ganancias Totales",
+    "totalConsultations": "Consultas Totales",
+    "completedConsultations": "Consultas Completadas",
+    "avgPerConsultation": "Prom. por Consulta",
+    "pendingEarnings": "Ganancias Pendientes",
+    "earningsHistory": "Historial de Ganancias",
+    "noEarnings": "Sin ganancias aún"
   },
   "admin": {
     "dashboard": "Panel de Administración",

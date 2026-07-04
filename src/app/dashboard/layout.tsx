@@ -34,6 +34,7 @@ export default async function DashboardLayout({
     ...(user.role === "SPECIALIST"
       ? [
           { href: "/dashboard/specialist/consultations", label: t("dashboard.consultations"), icon: Calendar },
+          { href: "/dashboard/specialist/earnings", label: t("dashboard.earnings"), icon: Heart },
           { href: "/dashboard/specialist/profile", label: t("dashboard.profile"), icon: Settings },
         ]
       : []),

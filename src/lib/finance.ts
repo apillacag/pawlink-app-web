@@ -13,25 +13,27 @@ export async function distributeEarnings(bookingId: string) {
 
   const totalAmount = booking.totalAmount || 0
   const platformAmount = totalAmount * PLATFORM_COMMISSION_RATE
-  const walkerAmount = totalAmount - platformAmount
+  const professionalAmount = totalAmount - platformAmount
+  const professionalId = booking.walkerId || booking.specialistId
+  if (!professionalId) throw new Error("No professional assigned to this booking")
 
-  const walker = await prisma.user.findUnique({ where: { id: booking.walkerId } })
-  if (!walker) throw new Error("Walker not found")
+  const professional = await prisma.user.findUnique({ where: { id: professionalId } })
+  if (!professional) throw new Error("Professional not found")
 
   const [result] = await prisma.$transaction([
     prisma.walletTransaction.create({
       data: {
-        userId: booking.walkerId,
+        userId: professionalId,
         type: "EARNING",
-        amount: walkerAmount,
+        amount: professionalAmount,
         description: `Earnings for booking ${booking.id}`,
         reference: booking.id,
-        balance: (walker.walletBalance || 0) + walkerAmount,
+        balance: (professional.walletBalance || 0) + professionalAmount,
       },
     }),
     prisma.user.update({
-      where: { id: booking.walkerId },
-      data: { walletBalance: { increment: walkerAmount } },
+      where: { id: professionalId },
+      data: { walletBalance: { increment: professionalAmount } },
     }),
     prisma.platformRevenue.upsert({
       where: { bookingId: booking.id },
@@ -44,16 +46,16 @@ export async function distributeEarnings(bookingId: string) {
     }),
     prisma.notification.create({
       data: {
-        userId: booking.walkerId,
+        userId: professionalId,
         type: "EARNING_RECEIVED",
         title: "Earnings Received",
-        message: `You earned S/${walkerAmount.toFixed(2)} for booking #${booking.id.slice(0, 8)}`,
-        link: "/dashboard/walker/earnings",
+        message: `You earned S/${professionalAmount.toFixed(2)} for booking #${booking.id.slice(0, 8)}`,
+        link: professional?.role === "SPECIALIST" ? "/dashboard/specialist/consultations" : "/dashboard/walker/earnings",
       },
     }),
   ])
 
-  return { walkerAmount, platformAmount, alreadyDistributed: false }
+  return { professionalAmount, platformAmount, alreadyDistributed: false }
 }
 
 export async function processRefund(bookingId: string) {

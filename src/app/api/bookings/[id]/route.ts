@@ -93,8 +93,8 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     const updateData: Record<string, any> = { status: body.status }
 
     if (body.status === "IN_PROGRESS") {
-      if (user.role !== "WALKER" && user.role !== "ADMIN") {
-        return NextResponse.json({ error: "Only the walker can start a walk" }, { status: 403 })
+      if (user.role !== "WALKER" && user.role !== "SPECIALIST" && user.role !== "ADMIN") {
+        return NextResponse.json({ error: "Only the assigned professional can start" }, { status: 403 })
       }
       updateData.startedAt = new Date()
       await prisma.booking.update({ where: { id }, data: updateData })
@@ -102,13 +102,13 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     }
 
     if (body.status === "COMPLETED") {
-      if (user.role !== "WALKER" && user.role !== "ADMIN") {
-        return NextResponse.json({ error: "Only the walker can complete a walk" }, { status: 403 })
+      if (user.role !== "WALKER" && user.role !== "SPECIALIST" && user.role !== "ADMIN") {
+        return NextResponse.json({ error: "Only the assigned professional can complete a booking" }, { status: 403 })
       }
       const result = await handleComplete(booking)
       return NextResponse.json({
         booking: { id, status: "COMPLETED" },
-        earnings: result.alreadyDistributed ? undefined : { walkerAmount: result.walkerAmount, platformAmount: result.platformAmount },
+        earnings: result.alreadyDistributed ? undefined : { professionalAmount: result.professionalAmount, platformAmount: result.platformAmount },
       })
     }
 

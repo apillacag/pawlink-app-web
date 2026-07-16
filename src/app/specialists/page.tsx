@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/Card"
 import { Star, Stethoscope } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 import { formatCurrency } from "@/lib/utils"
+import { getSpecialistProfileImage } from "@/lib/profileImages"
 import Link from "next/link"
 
 export default async function SpecialistsPage() {
@@ -32,7 +33,7 @@ export default async function SpecialistsPage() {
           <Card>
             <CardContent className="p-16 text-center">
               <img
-                src="/images/about-pets.jpg"
+                src="/images/specialists-empty.jpg"
                 alt="No specialists available"
                 className="w-28 h-28 object-cover rounded-full mx-auto mb-4 shadow-sm"
                 loading="lazy"
@@ -51,7 +52,7 @@ export default async function SpecialistsPage() {
                     <div className="flex items-center gap-3 mb-4">
                       <div className="h-14 w-14 rounded-full overflow-hidden flex-shrink-0">
                         <img
-                          src={specialist.avatarUrl || "/images/default-avatar.jpg"}
+                          src={getSpecialistProfileImage(specialist.id, specialist.name, specialist.avatarUrl)}
                           alt={specialist.name}
                           className="w-full h-full object-cover"
                           loading="lazy"

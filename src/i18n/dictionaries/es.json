@@ -94,6 +94,10 @@
     "ctaDesc": "Únete a miles de dueños felices y profesionales de confianza en PawLink hoy.",
     "ctaButton": "Comienza Gratis"
   },
+  "tutorial": {
+    "title": "Aprende a Usar PawLink",
+    "desc": "¿Nuevo en PawLink? Mira nuestro tutorial rápido para aprender a encontrar profesionales de confianza, reservar servicios y mantener a tus mascotas felices y seguras."
+  },
   "auth": {
     "welcomeBack": "Bienvenido de nuevo",
     "signInToAccount": "Inicia sesión en tu cuenta",

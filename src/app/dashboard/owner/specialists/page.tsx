@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button"
 import { Star, Wallet, Award } from "lucide-react"
 import Link from "next/link"
 import { formatCurrency } from "@/lib/utils"
+import { getSpecialistProfileImage } from "@/lib/profileImages"
 
 export default async function SpecialistsPage() {
   const { t, locale } = await getServerTranslations()
@@ -46,7 +47,7 @@ export default async function SpecialistsPage() {
                   <div className="flex items-center gap-3 mb-4">
                     <div className="h-12 w-12 rounded-full bg-amber-100 overflow-hidden flex-shrink-0">
                       <img
-                        src={s.avatarUrl || "/images/default-avatar.jpg"}
+                        src={getSpecialistProfileImage(s.id, s.name, s.avatarUrl)}
                         alt={s.name}
                         className="w-full h-full object-cover"
                         loading="lazy"

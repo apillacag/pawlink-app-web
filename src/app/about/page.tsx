@@ -10,7 +10,7 @@ export default function AboutPage() {
       <section className="relative bg-gradient-to-br from-emerald-50 via-white to-amber-50 py-20 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <img
-            src="/images/about-pets.jpg"
+            src="/images/about-hero.jpg"
             alt=""
             className="w-full h-full object-cover"
             aria-hidden="true"
@@ -37,8 +37,8 @@ export default function AboutPage() {
             <div className="space-y-6">
               <div className="rounded-2xl overflow-hidden shadow-md">
                 <img
-                  src="/images/about-pets.jpg"
-                  alt="Happy golden retriever"
+                  src="/images/about-mission.jpg"
+                  alt="Dog sitting in park"
                   className="w-full h-56 object-cover"
                   loading="lazy"
                 />

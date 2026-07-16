@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/Card"
 import { Star, Search } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 import { formatCurrency } from "@/lib/utils"
+import { getWalkerProfileImage } from "@/lib/profileImages"
 import Link from "next/link"
 
 export default async function WalkersPage() {
@@ -51,7 +52,7 @@ export default async function WalkersPage() {
                     <div className="flex items-center gap-3 mb-4">
                       <div className="h-14 w-14 rounded-full overflow-hidden flex-shrink-0">
                         <img
-                          src={walker.avatarUrl || "/images/default-avatar.jpg"}
+                          src={getWalkerProfileImage(walker.id, walker.name, walker.avatarUrl)}
                           alt={walker.name}
                           className="w-full h-full object-cover"
                           loading="lazy"

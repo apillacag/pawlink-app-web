@@ -59,6 +59,26 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section className="py-20 bg-emerald-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">{t("tutorial.title")}</h2>
+            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">{t("tutorial.desc")}</p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl bg-black">
+              <iframe
+                src="https://www.youtube.com/embed/kL4MA8GpjTs"
+                title="PawLink Tutorial"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">

@@ -44,8 +44,13 @@ export default async function SpecialistsPage() {
               <Card key={s.id}>
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="h-12 w-12 rounded-full bg-amber-100 flex items-center justify-center text-lg font-medium text-amber-700">
-                      {s.name.charAt(0)}
+                    <div className="h-12 w-12 rounded-full bg-amber-100 overflow-hidden flex-shrink-0">
+                      <img
+                        src={s.avatarUrl || "/images/default-avatar.jpg"}
+                        alt={s.name}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900">{s.name}</h3>

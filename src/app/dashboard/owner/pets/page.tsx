@@ -29,7 +29,12 @@ export default async function PetsPage() {
       {pets.length === 0 ? (
         <Card>
           <CardContent className="p-12 text-center">
-            <Dog className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+            <img
+              src="/images/empty-pets.jpg"
+              alt="No pets yet"
+              className="w-28 h-28 object-cover rounded-full mx-auto mb-4 shadow-sm"
+              loading="lazy"
+            />
             <p className="text-gray-500 mb-4">{t("pets.noPets")}</p>
             <Link href="/dashboard/owner/pets/new">
               <Button>{t("pets.addFirstPet")}</Button>
@@ -42,19 +47,25 @@ export default async function PetsPage() {
             <Card key={pet.id}>
               <CardContent className="p-6">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 rounded-full bg-emerald-100 flex items-center justify-center">
-                      {pet.species === "CAT" ? (
-                        <Cat className="h-6 w-6 text-emerald-600" />
-                      ) : (
-                        <Dog className="h-6 w-6 text-emerald-600" />
-                      )}
+                    <div className="flex items-center gap-3">
+                      <div className="h-12 w-12 rounded-full bg-emerald-100 overflow-hidden flex-shrink-0">
+                        {pet.photoUrl ? (
+                          <img src={pet.photoUrl} alt={pet.name} className="w-full h-full object-cover" loading="lazy" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            {pet.species === "CAT" ? (
+                              <Cat className="h-6 w-6 text-emerald-600" />
+                            ) : (
+                              <Dog className="h-6 w-6 text-emerald-600" />
+                            )}
+                          </div>
+                        )}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900">{pet.name}</h3>
+                        <p className="text-sm text-gray-500">{pet.breed || t(`pets.${pet.species.toLowerCase()}`)}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">{pet.name}</h3>
-                      <p className="text-sm text-gray-500">{pet.breed || t(`pets.${pet.species.toLowerCase()}`)}</p>
-                    </div>
-                  </div>
                 </div>
                 <div className="space-y-1 text-sm text-gray-500">
                   {pet.age && <p>{t("pets.ageLabel")}: {pet.age} {t("pets.years")}</p>}

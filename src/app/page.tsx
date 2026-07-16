@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { PawPrint, Shield, MapPin, Star, Heart, Users, ArrowRight, CheckCircle, Search, MessageCircle, Calendar, Camera } from "lucide-react"
+import { PawPrint, Shield, MapPin, Star, Heart, Users, ArrowRight, CheckCircle, Search, Calendar, Camera } from "lucide-react"
 import { Button } from "@/components/ui/Button"
 import { getServerTranslations } from "@/i18n/server"
 
@@ -38,32 +38,19 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="hidden lg:block relative">
-              <div className="relative rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 p-1">
-                <div className="rounded-2xl bg-white p-8 shadow-xl">
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-4">
-                      <div className="h-14 w-14 rounded-full bg-amber-100 flex items-center justify-center">
-                        <PawPrint className="h-7 w-7 text-amber-600" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-gray-900">{t("home.heroCardTitle")}</p>
-                        <p className="text-sm text-gray-500">{t("home.heroCardSubtitle")}</p>
-                      </div>
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src="/images/hero-dog-walking.jpg"
+                  alt="Dog walking in a sunny park"
+                  className="w-full h-full object-cover rounded-2xl"
+                  style={{ maxHeight: "520px", minHeight: "400px" }}
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent p-6">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-full bg-white/90 flex items-center justify-center">
+                      <PawPrint className="h-5 w-5 text-emerald-600" />
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      {[
-                        { icon: Search, label: t("home.featureFindWalkers"), desc: t("home.featureFindWalkersDesc") },
-                        { icon: MapPin, label: t("home.featureLiveTracking"), desc: t("home.featureLiveTrackingDesc") },
-                        { icon: MessageCircle, label: t("home.featurePhotoUpdates"), desc: t("home.featurePhotoUpdatesDesc") },
-                        { icon: Star, label: t("home.featureTopRated"), desc: t("home.featureTopRatedDesc") },
-                      ].map((item) => (
-                        <div key={item.label} className="rounded-xl bg-gray-50 p-4 space-y-2">
-                          <item.icon className="h-5 w-5 text-emerald-600" />
-                          <p className="font-medium text-sm text-gray-900">{item.label}</p>
-                          <p className="text-xs text-gray-500">{item.desc}</p>
-                        </div>
-                      ))}
-                    </div>
+                    <p className="text-white font-medium text-sm">{t("home.heroCardTitle")} &mdash; {t("home.heroCardSubtitle")}</p>
                   </div>
                 </div>
               </div>
@@ -153,7 +140,15 @@ export default async function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative space-y-6">
+              <div className="rounded-2xl overflow-hidden shadow-md">
+                <img
+                  src="/images/for-professionals.jpg"
+                  alt="Happy pet owner with dog"
+                  className="w-full h-56 object-cover"
+                  loading="lazy"
+                />
+              </div>
               <div className="rounded-2xl bg-gradient-to-br from-amber-50 to-emerald-50 p-8 border border-amber-100">
                 <div className="space-y-6">
                   <div className="flex items-center gap-3">
@@ -185,18 +180,21 @@ export default async function HomePage() {
                 author: t("home.testimonial1Author"),
                 role: t("home.testimonial1Role"),
                 rating: 5,
+                avatar: "/images/testimonial-1.jpg",
               },
               {
                 quote: t("home.testimonial2Quote"),
                 author: t("home.testimonial2Author"),
                 role: t("home.testimonial2Role"),
                 rating: 5,
+                avatar: "/images/testimonial-2.jpg",
               },
               {
                 quote: t("home.testimonial3Quote"),
                 author: t("home.testimonial3Author"),
                 role: t("home.testimonial3Role"),
                 rating: 5,
+                avatar: "/images/testimonial-3.jpg",
               },
             ].map((tItem) => (
               <div key={tItem.author} className="rounded-xl bg-white border border-gray-200 p-6">
@@ -206,9 +204,17 @@ export default async function HomePage() {
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4 italic">&ldquo;{tItem.quote}&rdquo;</p>
-                <div>
-                  <p className="font-semibold text-gray-900">{tItem.author}</p>
-                  <p className="text-sm text-gray-500">{tItem.role}</p>
+                <div className="flex items-center gap-3">
+                  <img
+                    src={tItem.avatar}
+                    alt={tItem.author}
+                    className="h-10 w-10 rounded-full object-cover"
+                    loading="lazy"
+                  />
+                  <div>
+                    <p className="font-semibold text-gray-900">{tItem.author}</p>
+                    <p className="text-sm text-gray-500">{tItem.role}</p>
+                  </div>
                 </div>
               </div>
             ))}

@@ -31,8 +31,14 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
       <Card>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="h-14 w-14 rounded-full bg-emerald-100 flex items-center justify-center">
-              {pet.species === "CAT" ? <Cat className="h-7 w-7 text-emerald-600" /> : <Dog className="h-7 w-7 text-emerald-600" />}
+            <div className="h-14 w-14 rounded-full bg-emerald-100 overflow-hidden flex-shrink-0">
+              {pet.photoUrl ? (
+                <img src={pet.photoUrl} alt={pet.name} className="w-full h-full object-cover" loading="lazy" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  {pet.species === "CAT" ? <Cat className="h-7 w-7 text-emerald-600" /> : <Dog className="h-7 w-7 text-emerald-600" />}
+                </div>
+              )}
             </div>
             <div>
               <CardTitle>{pet.name}</CardTitle>

@@ -51,7 +51,19 @@ export default function WalkerProfilePage() {
     <div className="max-w-lg mx-auto">
       <Card>
         <CardHeader>
-          <CardTitle>{t("walker.profile")}</CardTitle>
+          <div className="flex items-center gap-4">
+            <div className="h-16 w-16 rounded-full overflow-hidden bg-emerald-100 flex-shrink-0">
+              <img
+                src="/images/default-avatar.jpg"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <CardTitle>{t("walker.profile")}</CardTitle>
+              <p className="text-sm text-gray-500">{t("walker.yearsExperience")}</p>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">

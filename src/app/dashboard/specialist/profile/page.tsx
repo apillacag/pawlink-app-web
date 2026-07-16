@@ -50,7 +50,19 @@ export default function SpecialistProfilePage() {
     <div className="max-w-lg mx-auto">
       <Card>
         <CardHeader>
-          <CardTitle>{t("specialistDash.profile")}</CardTitle>
+          <div className="flex items-center gap-4">
+            <div className="h-16 w-16 rounded-full overflow-hidden bg-purple-100 flex-shrink-0">
+              <img
+                src="/images/default-avatar.jpg"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <CardTitle>{t("specialistDash.profile")}</CardTitle>
+              <p className="text-sm text-gray-500">{t("specialistDash.credentials")}</p>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">

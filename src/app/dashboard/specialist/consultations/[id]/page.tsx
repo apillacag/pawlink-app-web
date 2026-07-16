@@ -57,7 +57,15 @@ export default async function ConsultationDetailPage({ params }: { params: Promi
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-center gap-2">
-              <Dog className="h-5 w-5 text-amber-600" />
+              <div className="h-10 w-10 rounded-full bg-amber-100 overflow-hidden flex-shrink-0">
+                {consult.pet?.photoUrl ? (
+                  <img src={consult.pet.photoUrl} alt={consult.pet.name} className="w-full h-full object-cover" loading="lazy" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <Dog className="h-5 w-5 text-amber-600" />
+                  </div>
+                )}
+              </div>
               <span className="font-medium">{consult.pet?.name}</span>
             </div>
             <p className="text-sm text-gray-500">{t("walker.speciesLabel")}: {consult.pet?.species}</p>

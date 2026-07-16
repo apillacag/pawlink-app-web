@@ -7,8 +7,16 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-emerald-50 via-white to-amber-50 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative bg-gradient-to-br from-emerald-50 via-white to-amber-50 py-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <img
+            src="/images/about-pets.jpg"
+            alt=""
+            className="w-full h-full object-cover"
+            aria-hidden="true"
+          />
+        </div>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1.5 text-sm font-medium text-emerald-700 mb-6">
             <Heart className="h-4 w-4" /> {t("about.title")}
           </div>
@@ -26,12 +34,22 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold text-gray-900 mb-6">{t("about.missionTitle")}</h2>
               <p className="text-gray-600 leading-relaxed">{t("about.missionDesc")}</p>
             </div>
-            <div className="bg-emerald-50 rounded-2xl p-8 border border-emerald-100">
-              <div className="flex items-center gap-3 mb-4">
-                <Target className="h-6 w-6 text-emerald-600" />
-                <h3 className="text-xl font-semibold text-gray-900">{t("about.visionTitle")}</h3>
+            <div className="space-y-6">
+              <div className="rounded-2xl overflow-hidden shadow-md">
+                <img
+                  src="/images/about-pets.jpg"
+                  alt="Happy golden retriever"
+                  className="w-full h-56 object-cover"
+                  loading="lazy"
+                />
               </div>
-              <p className="text-gray-600 leading-relaxed">{t("about.visionDesc")}</p>
+              <div className="bg-emerald-50 rounded-2xl p-8 border border-emerald-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <Target className="h-6 w-6 text-emerald-600" />
+                  <h3 className="text-xl font-semibold text-gray-900">{t("about.visionTitle")}</h3>
+                </div>
+                <p className="text-gray-600 leading-relaxed">{t("about.visionDesc")}</p>
+              </div>
             </div>
           </div>
         </div>

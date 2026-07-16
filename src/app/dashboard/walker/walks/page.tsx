@@ -44,7 +44,12 @@ export default async function WalkerWalksPage() {
       {walks.length === 0 ? (
         <Card>
           <CardContent className="p-12 text-center">
-            <CalendarDays className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+            <img
+              src="/images/empty-bookings.jpg"
+              alt="No walks yet"
+              className="w-28 h-28 object-cover rounded-full mx-auto mb-4 shadow-sm"
+              loading="lazy"
+            />
             <p className="text-gray-500">{t("walker.noWalks")}</p>
           </CardContent>
         </Card>
@@ -56,8 +61,14 @@ export default async function WalkerWalksPage() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-2 flex-1">
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-full bg-emerald-100 flex items-center justify-center">
-                        <Dog className="h-5 w-5 text-emerald-600" />
+                      <div className="h-10 w-10 rounded-full bg-emerald-100 overflow-hidden flex-shrink-0">
+                        {walk.pet?.photoUrl ? (
+                          <img src={walk.pet.photoUrl} alt={walk.pet.name} className="w-full h-full object-cover" loading="lazy" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <Dog className="h-5 w-5 text-emerald-600" />
+                          </div>
+                        )}
                       </div>
                       <div>
                         <Link href={`/dashboard/walker/walks/${walk.id}`} className="font-semibold text-gray-900 hover:text-emerald-600 flex items-center gap-1">

@@ -53,7 +53,15 @@ export default async function WalkDetailPage({ params }: { params: Promise<{ id:
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-center gap-2">
-              <Dog className="h-5 w-5 text-emerald-600" />
+              <div className="h-10 w-10 rounded-full bg-emerald-100 overflow-hidden flex-shrink-0">
+                {walk.pet?.photoUrl ? (
+                  <img src={walk.pet.photoUrl} alt={walk.pet.name} className="w-full h-full object-cover" loading="lazy" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <Dog className="h-5 w-5 text-emerald-600" />
+                  </div>
+                )}
+              </div>
               <span className="font-medium">{walk.pet?.name}</span>
             </div>
             <p className="text-sm text-gray-500">{t("walker.speciesLabel")}: {walk.pet?.species}</p>

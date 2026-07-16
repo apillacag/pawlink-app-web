@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils"
-import { getInitials } from "@/lib/utils"
 
 interface AvatarProps {
   src?: string | null
@@ -15,25 +14,12 @@ export function Avatar({ src, name, size = "md", className }: AvatarProps) {
     lg: "h-14 w-14 text-lg",
   }
 
-  if (src) {
-    return (
-      <img
-        src={src}
-        alt={name}
-        className={cn("rounded-full object-cover", sizeClasses[size], className)}
-      />
-    )
-  }
-
   return (
-    <div
-      className={cn(
-        "rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-medium",
-        sizeClasses[size],
-        className
-      )}
-    >
-      {getInitials(name)}
-    </div>
+    <img
+      src={src || "/images/default-avatar.jpg"}
+      alt={name}
+      className={cn("rounded-full object-cover", sizeClasses[size], className)}
+      loading="lazy"
+    />
   )
 }

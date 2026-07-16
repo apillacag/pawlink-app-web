@@ -31,7 +31,12 @@ export default async function WalkersPage() {
         {walkers.length === 0 ? (
           <Card>
             <CardContent className="p-16 text-center">
-              <Search className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+              <img
+                src="/images/empty-pets.jpg"
+                alt="No walkers available"
+                className="w-28 h-28 object-cover rounded-full mx-auto mb-4 shadow-sm"
+                loading="lazy"
+              />
               <h3 className="text-lg font-medium text-gray-900 mb-2">{t("walkers.noWalkersPublic")}</h3>
               <p className="text-gray-500">{t("walkers.checkBack")}</p>
             </CardContent>
@@ -44,8 +49,13 @@ export default async function WalkersPage() {
                 <Card key={walker.id}>
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="h-14 w-14 rounded-full bg-emerald-100 flex items-center justify-center text-xl font-medium text-emerald-700">
-                        {walker.name.charAt(0)}
+                      <div className="h-14 w-14 rounded-full overflow-hidden flex-shrink-0">
+                        <img
+                          src={walker.avatarUrl || "/images/default-avatar.jpg"}
+                          alt={walker.name}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
                       </div>
                       <div>
                         <h3 className="font-semibold text-gray-900">{walker.name}</h3>

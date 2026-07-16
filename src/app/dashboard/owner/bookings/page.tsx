@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
-import { CalendarDays, MapPin, AlertTriangle } from "lucide-react"
+import { CalendarDays, MapPin, AlertTriangle, Dog } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/Button"
 import { PendingPaymentActions } from "@/components/bookings/PendingPaymentActions"
@@ -55,7 +55,12 @@ export default async function OwnerBookingsPage() {
       {sorted.length === 0 ? (
         <Card>
           <CardContent className="p-12 text-center">
-            <CalendarDays className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+            <img
+              src="/images/empty-bookings.jpg"
+              alt="No bookings yet"
+              className="w-28 h-28 object-cover rounded-full mx-auto mb-4 shadow-sm"
+              loading="lazy"
+            />
             <p className="text-gray-500 mb-4">{t("bookings.noBookings")}</p>
             <Link href="/dashboard/owner/walkers">
               <Button>{t("bookings.findWalker")}</Button>
@@ -79,10 +84,19 @@ export default async function OwnerBookingsPage() {
                     <span>{t("bookings.pendingConsultationMessage")}</span>
                   </div>
                 )}
-                <div className="flex items-start justify-between">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-3">
-                      <h3 className="font-semibold text-gray-900">{booking.pet?.name || t("common.pet")}</h3>
+                    <div className="flex items-start justify-between">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-full bg-emerald-100 overflow-hidden flex-shrink-0">
+                            {booking.pet?.photoUrl ? (
+                              <img src={booking.pet.photoUrl} alt={booking.pet.name} className="w-full h-full object-cover" loading="lazy" />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center">
+                                <Dog className="h-5 w-5 text-emerald-600" />
+                              </div>
+                            )}
+                          </div>
+                          <h3 className="font-semibold text-gray-900">{booking.pet?.name || t("common.pet")}</h3>
                       <Badge variant={statusVariant(booking.status)}>
                         {booking.status === "PENDING" && booking.serviceType === "CONSULTATION" ? t("bookings.pendingSpecialistConfirmation") : translateStatus(t, booking.status)}
                       </Badge>

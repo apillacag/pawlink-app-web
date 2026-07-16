@@ -77,6 +77,22 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
+      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-emerald-600 to-emerald-700">
+        <div className="absolute inset-0 opacity-20">
+          <img
+            src="/images/hero-dog-walking.jpg"
+            alt=""
+            className="w-full h-full object-cover"
+            aria-hidden="true"
+          />
+        </div>
+        <div className="relative z-10 px-6 py-8 sm:px-8">
+          <h1 className="text-2xl font-bold text-white">
+            {t("dashboard.welcomeBack")}, {user.name}!
+          </h1>
+          <p className="text-emerald-100 mt-1">{t("dashboard.overview")}</p>
+        </div>
+      </div>
           <div className="grid gap-4 grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label}>
@@ -105,8 +121,14 @@ export default async function DashboardPage() {
               {recentBookings.map((booking) => (
                 <div key={booking.id} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-emerald-100 flex items-center justify-center">
-                      <Dog className="h-5 w-5 text-emerald-600" />
+                    <div className="h-10 w-10 rounded-full bg-emerald-100 overflow-hidden flex-shrink-0">
+                      {booking.pet?.photoUrl ? (
+                        <img src={booking.pet.photoUrl} alt={booking.pet.name} className="w-full h-full object-cover" loading="lazy" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Dog className="h-5 w-5 text-emerald-600" />
+                        </div>
+                      )}
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">
